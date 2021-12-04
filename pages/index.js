@@ -1,6 +1,11 @@
 import Head from 'next/head';
 import Layout from 'components/Layout/Layout';
-import PageTitle from 'components/Home/PageTitle';
+import PageTitle from 'components/Home/PageTitle/PageTitle';
+import CategoryBar from 'components/Home/CategoryBar/CategoryBar';
+import FeaturedWrapper from 'components/Home/Featured/FeaturedWrapper';
+import ProductLinkWrapper from 'components/Home/ProductLink/ProductLinkWrapper';
+import BrandsWrapper from 'components/Home/BrandsWrapper/BrandsWrapper';
+import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
 
 export default function Home() {
 	return (
@@ -12,6 +17,11 @@ export default function Home() {
 			</Head>
 			<Layout>
 				<PageTitle />
+				<CategoryBar />
+				<FeaturedWrapper />
+				<ProductLinkWrapper />
+				<BrandsWrapper />
+				<ProductsRow />
 			</Layout>
 		</>
 	);

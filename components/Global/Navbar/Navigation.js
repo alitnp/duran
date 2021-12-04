@@ -13,13 +13,13 @@ const navItems = () => {
 
 	return (
 		<>
-			<nav className='md:flex items-center list-none hidden'>
+			<nav className='items-center hidden list-none md:flex'>
 				{items.map((item) => {
 					return <NavItem text={item.text} url={item.url} key={item.text} />;
 				})}
 			</nav>
 			<div
-				className={`border border-d-border-gray rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden`}
+				className={`border border-d-border-gray rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2`}
 				onMouseEnter={() => setCollapse(false)}
 				onMouseLeave={() => setCollapse(true)}
 			>
@@ -30,10 +30,10 @@ const navItems = () => {
 					objectFit='contain'
 				/>
 				<nav
-					className='absolute right-0 top-full flex flex-col list-none border bg-d-bg-color rounded-md border-d-border-gray overflow-hidden'
+					className='absolute right-0 flex flex-col overflow-hidden list-none border rounded-md top-full bg-d-bg-color border-d-border-gray'
 					style={{
 						borderWidth: collapse ? '0' : '1px',
-						transition: 'max-height 0.5s ease-out',
+						transition: 'max-height 0.3s ease-out',
 						maxHeight: collapse ? '0rem' : `${40 * items.length}px`,
 						width: collapse ? '0' : 'unset',
 					}}
@@ -42,7 +42,7 @@ const navItems = () => {
 						return (
 							<div
 								key={item.text}
-								className='text-center pr-4  flex items-center py-2 hover:bg-d-gray'
+								className='flex items-center py-2 pr-4 text-center hover:bg-d-gray'
 							>
 								<NavItem text={item.text} url={item.url} />
 							</div>

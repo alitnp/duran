@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Navbar from 'components/Global/Navbar/Navbar.js';
+import GlobalContainer from 'components/Global/GlobalContainer/GlobalContainer';
 
 const Layout = ({ children }) => {
 	return (
 		<>
 			<Head></Head>
 			<Navbar />
-			<main className='mx-auto d-container'>{children}</main>
+			<main>
+				<GlobalContainer>{children}</GlobalContainer>
+			</main>
 		</>
 	);
 };

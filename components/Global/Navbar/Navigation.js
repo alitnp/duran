@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import NavItem from 'components/Global/Navbar/NavItem';
+import style from 'styles/style.module.css';
 
 const navItems = () => {
 	const [collapse, setCollapse] = useState(true);
@@ -19,7 +20,7 @@ const navItems = () => {
 				})}
 			</nav>
 			<div
-				className={`border border-d-border-gray rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2`}
+				className={`border border-d-border-gray rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2 select-none ${style.noSelect}`}
 				onMouseEnter={() => setCollapse(false)}
 				onMouseLeave={() => setCollapse(true)}
 			>

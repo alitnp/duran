@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import style from 'styles/webinput.module.css';
+import style from 'styles/style.module.css';
 
 const Websites = () => {
 	const icons = [
@@ -13,7 +13,7 @@ const Websites = () => {
 
 	return (
 		<div
-			className={`grid grid-cols-3 pt-10 mt-4 border-t gap-y-4 border-d-border-gray w-full ${style.container}`}
+			className={`grid grid-cols-3 pt-10 mt-4 border-t gap-y-4 border-d-border-gray w-full ${style.iconGridContainer}`}
 		>
 			{icons.map((item) => {
 				return (

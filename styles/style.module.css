@@ -1,0 +1,12 @@
+.IconGridContainer :nth-child(3n + 3) {
+	margin-right: auto;
+}
+.IconGridContainer :nth-child(2),
+.IconGridContainer :nth-child(5) {
+	margin: 0 auto;
+}
+
+.noSelect {
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+}

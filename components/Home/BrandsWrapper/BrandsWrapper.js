@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import style from 'styles/webinput.module.css';
+import style from 'styles/style.module.css';
 import useScreenWidth from 'utils/hooks/useScreenWidth';
 
 const brands = [
@@ -20,12 +20,14 @@ const BrandsWrapper = () => {
 				className='absolute top-0 left-0 w-full h-full'
 				style={{ zIndex: -1 }}
 			>
-				<Image
-					src='/image/brands-bg.jpg'
-					layout='fill'
-					objectFit='cover'
-					objectPosition='center center'
-				/>
+				<div className='relative w-full h-full'>
+					<Image
+						src='/image/brands-bg.jpg'
+						layout='fill'
+						objectFit='cover'
+						objectPosition='center center'
+					/>
+				</div>
 			</div>
 			<div className='relative w-10/12 mx-auto text-center md:w-9/12'>
 				<h3 className='text-xl font-bold '>برندهای پرطرفدار</h3>
@@ -35,12 +37,12 @@ const BrandsWrapper = () => {
 			</div>
 			<div
 				className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-12 md:flex md:w-9/12 gap-y-8 ${
-					screenWidth < 768 && style.container
+					screenWidth < 768 && style.IconGridContainer
 				}`}
 			>
 				{brands.map(({ path }) => {
 					return (
-						<div className='relative w-14 h-14'>
+						<div className='relative w-14 h-14' key={path}>
 							<Image
 								src={path}
 								key={path}

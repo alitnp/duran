@@ -4,7 +4,7 @@ import Image from 'next/image';
 const LinkInput = () => {
 	return (
 		<div
-			className='flex flex-col items-center w-full md:pl-4 md:block'
+			className='flex flex-col items-center w-full mx-auto md:mx-0 md:pl-4 md:block'
 			style={{ maxWidth: '400px' }}
 		>
 			<h2 className='text-2xl font-bold text-center md:text-right'>

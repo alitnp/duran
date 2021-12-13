@@ -78,3 +78,33 @@ input::placeholder {
 	margin: 0 auto;
 	max-width: 1400px;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #c5c5c5 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #c5c5c5;
+	border-radius: 10px;
+	border: 3px solid #ffffff;
+}
+
+.horizental-scroll {
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}

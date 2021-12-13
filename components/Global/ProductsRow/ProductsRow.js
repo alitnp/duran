@@ -1,4 +1,5 @@
 import ProductCard from 'components/Global/ProductCard/ProductCard';
+import { useEffect, useRef, useState } from 'react';
 
 const shoes = [
 	{
@@ -49,8 +50,13 @@ const shoes = [
 ];
 
 const ProductsRow = () => {
+	const ref = useRef();
+
 	return (
-		<div className='flex mb-8 overflow-x-auto snap-x '>
+		<div
+			className='flex pb-4 mb-8 overflow-x-auto snap-x horizental-scroll'
+			ref={ref}
+		>
 			{shoes.map((item, idx) => (
 				<ProductCard
 					key={idx}

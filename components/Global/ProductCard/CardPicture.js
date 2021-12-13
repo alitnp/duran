@@ -11,6 +11,7 @@ const CardPicture = ({ firstImage, secondImage }) => {
 							layout='fill'
 							objectFit='cover'
 							objectPosition='center center'
+							draggable='false'
 						/>
 					)}
 				</div>
@@ -23,6 +24,7 @@ const CardPicture = ({ firstImage, secondImage }) => {
 						objectFit='cover'
 						objectPosition='center center'
 						className='border'
+						draggable='false'
 					/>
 				)}
 			</div>

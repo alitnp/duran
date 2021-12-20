@@ -21,7 +21,9 @@ export default function Home() {
 				<FeaturedWrapper />
 				<ProductLinkWrapper />
 				<BrandsWrapper />
-				<ProductsRow />
+				<ProductsRow name='پرطرفدار' />
+				<ProductsRow name='پرطرفدار' />
+				<ProductsRow name='پرطرفدار' />
 			</Layout>
 		</>
 	);

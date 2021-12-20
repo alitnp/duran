@@ -29,14 +29,14 @@ const BrandsWrapper = () => {
 					/>
 				</div>
 			</div>
-			<div className='relative w-10/12 mx-auto text-center md:w-9/12'>
+			<div className='relative w-10/12 mx-auto text-right md:text-center md:w-9/12 border-b border-d-border-gray pb-2'>
 				<h3 className='text-xl font-bold '>برندهای پرطرفدار</h3>
 				<span className='absolute left-0 font-medium transform -translate-y-1/2 top-1/2 text-d-primary'>
 					همه
 				</span>
 			</div>
 			<div
-				className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-12 md:flex md:w-9/12 gap-y-8 ${
+				className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${
 					screenWidth < 768 && style.IconGridContainer
 				}`}
 			>

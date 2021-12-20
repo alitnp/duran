@@ -1,5 +1,7 @@
 import ProductCard from 'components/Global/ProductCard/ProductCard';
 import { useEffect, useRef, useState } from 'react';
+import { MdArrowForwardIos } from 'react-icons/md';
+import style from './style.module.css';
 
 const shoes = [
 	{
@@ -77,48 +79,77 @@ const shoes = [
 ];
 
 const ProductsRow = () => {
-	const [dragging, setDragging] = useState(false);
-	const [startDragingPoint, setStartDragingPoint] = useState();
-	const [currentMousePoint, setCurrentMousePoint] = useState();
-	const [lastMoveAmount, setLastMoveAmount] = useState(0);
+	//states
+	const [noRight, setNoRight] = useState(false);
+	const [noLeft, setNoLeft] = useState(false);
+
+	//hooks
 	const ref = useRef();
 
+	//effects
 	useEffect(() => {
-		const maxScroll = ref.current.scrollWidth - ref.current.clientWidth;
-		const moveAmount = startDragingPoint - currentMousePoint;
+		setArrowKeys();
 
-		if (dragging) {
-			console.log(moveAmount);
-			// console.log(startDragingPoint - currentMousePoint);
-			// console.log(ref.current.scrollLeft);
-			const currentMoveShouldBe = (ref.current.scrollLeft =
-				ref.current.scrollLeft);
-		}
-	});
+		console.log(
+			ref.current.scrollWidth,
+			ref.current.clientWidth,
+			ref.current.scrollLeft
+		);
+	}, []);
+
+	//functions
+	const setArrowKeys = () => {
+		console.log(
+			ref.current.scrollWidth,
+			ref.current.clientWidth,
+			ref.current.scrollLeft
+		);
+		ref.current.scrollLeft > -2 && ref.current.scrollLeft < 2
+			? setNoRight(true)
+			: setNoRight(false);
+		ref.current.scrollLeft * -1 + ref.current.clientWidth >
+		ref.current.scrollWidth - 5
+			? setNoLeft(true)
+			: setNoLeft(false);
+	};
+	const scrollRight = () => {
+		ref.current.scrollLeft += ref.current.clientWidth;
+	};
+	const scrollLeft = () => {
+		ref.current.scrollLeft -= ref.current.clientWidth;
+	};
 
 	return (
-		<div
-			className='flex pb-4 mb-8 overflow-x-auto horizental-scroll '
-			// onScroll={(e) => console.log(ref.current.scrollLeft)}
-			onMouseDown={(e) => {
-				setStartDragingPoint(e.clientX);
-				setDragging(true);
-			}}
-			onMouseUp={() => {
-				setDragging(false);
-				setLastMoveAmount(0);
-			}}
-			onMouseLeave={() => setDragging(false)}
-			onMouseMove={(e) => setCurrentMousePoint(e.clientX)}
-			ref={ref}
-		>
-			{shoes.map((item, idx) => (
-				<ProductCard
-					key={idx}
-					info={item}
-					className={`${idx !== 0 && 'mr-6'} snap-start`}
-				/>
-			))}
+		<div className='relative'>
+			<div
+				className={`flex scroll-smooth mb-8 overflow-x-auto snap-x horizental-scroll  scrol ${style.productsRow}`}
+				ref={ref}
+				onScroll={setArrowKeys}
+			>
+				{shoes.map((item, idx) => (
+					<ProductCard
+						key={idx}
+						info={item}
+						className={`${idx !== 0 && 'mr-6'} snap-start`}
+					/>
+				))}
+				{!noRight && (
+					<div
+						onClick={scrollRight}
+						className='absolute bg-white rounded-full p-2 flex items-center justify-center shadow-md top-1/2 -translate-y-1/2 cursor-pointer right-2'
+					>
+						<MdArrowForwardIos />
+					</div>
+				)}
+				{!noLeft && (
+					<div
+						onClick={scrollLeft}
+						className='absolute bg-white rounded-full p-2 flex items-center justify-center shadow-md top-1/2 -translate-y-1/2 cursor-pointer left-2'
+					>
+						<MdArrowForwardIos className='-scale-100' />
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

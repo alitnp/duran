@@ -1,7 +1,6 @@
 import ProductCard from 'components/Global/ProductCard/ProductCard';
 import { useEffect, useRef, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
-import style from './style.module.css';
 
 const shoes = [
 	{
@@ -120,7 +119,7 @@ const ProductsRow = ({ name }) => {
 			</div>
 			<div className='relative mb-16'>
 				<div
-					className={`flex scroll-smooth mb-8 overflow-x-auto snap-x horizental-scroll  scrol ${style.productsRow}`}
+					className='flex scroll-smooth mb-8 overflow-x-auto snap-x horizental-scroll  scrol hidden-scroll-bar'
 					ref={rowRef}
 					onScroll={() => setArrowKeys(rowRef)}
 				>

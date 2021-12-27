@@ -108,3 +108,12 @@ input::placeholder {
 	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 }
+
+.hidden-scroll-bar::-webkit-scrollbar {
+	display: none;
+}
+
+.hidden-scroll-bar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}

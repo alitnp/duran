@@ -1,7 +1,7 @@
 const Layout = ({ children }) => {
 	return (
 		<main
-			className='relative mx-auto d-container '
+			className='relative h-full mx-auto mb-auto d-container grow-0'
 			// style={{ direction: 'rtl' }}
 		>
 			{children}

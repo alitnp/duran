@@ -6,6 +6,7 @@ import FeaturedWrapper from 'components/Home/Featured/FeaturedWrapper';
 import ProductLinkWrapper from 'components/Home/ProductLink/ProductLinkWrapper';
 import BrandsWrapper from 'components/Home/BrandsWrapper/BrandsWrapper';
 import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
+import Carousel from 'components/Global/Carousel/Carousel';
 
 export default function Home() {
 	return (
@@ -23,6 +24,7 @@ export default function Home() {
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
+				<Carousel />
 			</Layout>
 		</>
 	);

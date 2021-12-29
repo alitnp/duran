@@ -50,7 +50,6 @@ function MyApp({ Component, pageProps }) {
 			</Head>
 			<Navbar />
 			<Component {...pageProps} />
-			<Carousel />
 			<Footer />
 			<Cart />
 		</>

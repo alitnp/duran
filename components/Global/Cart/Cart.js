@@ -1,6 +1,6 @@
 import CartItem from 'components/Global/Cart/CartItem';
 import RedIcon from 'components/Global/Cart/RedIcon';
-import ProductCard from 'components/Global/ProductCard/ProductCard';
+import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import Button from 'components/UI/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';

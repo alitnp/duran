@@ -1,4 +1,4 @@
-import ProductCard from 'components/Global/ProductCard/ProductCard';
+import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import isTouchScreen from 'hooks/isTouchScreen';
 import useScreenWidth from 'hooks/useScreenWidth';
 import { useEffect, useRef, useState } from 'react';
@@ -15,8 +15,17 @@ const shoes = [
 		price: 2200000,
 	},
 	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
+		firstImage: '/image/shoes/shoe1-1.jpg',
+		secondImage: '/image/shoes/shoe1-2.jpg',
+		persianName: 'نایکی - جردن ۱ رترو',
+		englishName: 'NIKE - Jordan 1 Retro',
+		sizes: ['39', '40', '41', '42'],
+		categories: 'مردانه',
+		price: 2200000,
+	},
+	{
+		firstImage: '/image/shoes/shoe2-1.jpg',
+		secondImage: '/image/shoes/shoe2-2.jpg',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
 		sizes: ['39', '40', '41', '42'],
@@ -33,8 +42,17 @@ const shoes = [
 		price: 2200000,
 	},
 	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
+		firstImage: '/image/shoes/shoe1-1.jpg',
+		secondImage: '/image/shoes/shoe1-2.jpg',
+		persianName: 'نایکی - جردن ۱ رترو',
+		englishName: 'NIKE - Jordan 1 Retro',
+		sizes: ['39', '40', '41', '42'],
+		categories: 'مردانه',
+		price: 2200000,
+	},
+	{
+		firstImage: '/image/shoes/shoe2-1.jpg',
+		secondImage: '/image/shoes/shoe2-2.jpg',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
 		sizes: ['39', '40', '41', '42'],
@@ -51,8 +69,8 @@ const shoes = [
 		price: 2200000,
 	},
 	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
+		firstImage: '/image/shoes/shoe1-1.jpg',
+		secondImage: '/image/shoes/shoe1-2.jpg',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
 		sizes: ['39', '40', '41', '42'],
@@ -60,17 +78,8 @@ const shoes = [
 		price: 2200000,
 	},
 	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
+		firstImage: '/image/shoes/shoe2-1.jpg',
+		secondImage: '/image/shoes/shoe2-2.jpg',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
 		sizes: ['39', '40', '41', '42'],
@@ -132,7 +141,7 @@ const ProductsRow = ({ name }) => {
 					onScroll={() => setArrowKeys(rowRef)}
 				>
 					{shoes.map((item, idx) => (
-						<ProductCard
+						<ProductCardRow
 							key={idx}
 							info={item}
 							className={`${idx !== 0 && 'mr-6'} snap-start`}

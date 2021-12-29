@@ -3,7 +3,7 @@ import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { persianNum, Separator } from '../../../helpers/persianTools';
 
-const ProductCard = ({ info, className, noSize, noCategory }) => {
+const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 	return (
 		<div
 			className={`relative overflow-hidden group shrink-0 select-none ${className}`}
@@ -39,4 +39,4 @@ const ProductCard = ({ info, className, noSize, noCategory }) => {
 	);
 };
 
-export default ProductCard;
+export default ProductCardRow;

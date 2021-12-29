@@ -8,8 +8,8 @@ const navItems = () => {
 
 	const items = [
 		{ url: '/', text: 'خانه' },
-		{ url: '/new', text: 'تازه رسیده ها' },
-		{ url: '/brands', text: 'برند ها' },
+		{ url: '/results', text: 'تازه رسیده ها' },
+		{ url: '/results', text: 'برند ها' },
 	];
 
 	return (

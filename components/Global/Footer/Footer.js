@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Footer = () => {
 	return (
-		<div className='py-10 bg-d-text text-d-gray'>
+		<footer className='py-10 bg-d-text text-d-gray'>
 			<div className='flex flex-col items-center justify-between w-full md:items-start gap-y-8 md:flex-row d-container'>
 				<div className=' w-fit'>
 					<div className=' w-fit'>
@@ -61,7 +61,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</footer>
 	);
 };
 

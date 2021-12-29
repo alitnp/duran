@@ -1,5 +1,9 @@
 import '../styles/globals.css';
 import Head from 'next/dist/shared/lib/head';
+import Navbar from 'components/Global/Navbar/Navbar';
+import Carousel from 'components/Global/Carousel/Carousel';
+import Footer from 'components/Global/Footer/Footer';
+import Cart from 'components/Global/Cart/Cart';
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -42,8 +46,13 @@ function MyApp({ Component, pageProps }) {
 					as='font'
 					crossOrigin=''
 				/>
+				<link rel='icon' href='/favicon.ico' />
 			</Head>
+			<Navbar />
 			<Component {...pageProps} />
+			<Carousel />
+			<Footer />
+			<Cart />
 		</>
 	);
 }

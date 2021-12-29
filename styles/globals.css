@@ -80,6 +80,10 @@ input::placeholder {
 	font-size: 0.868rem;
 	color: var(--d-faded-text);
 }
+input[type='checkbox']:focus {
+	outline: 0;
+	box-shadow: none;
+}
 
 .d-container {
 	width: 95%;

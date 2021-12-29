@@ -56,7 +56,7 @@ const shoes = [
 
 const Cart = () => {
 	//states
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	//functions
 	const toggleCart = () => setOpen(!open);

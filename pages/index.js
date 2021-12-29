@@ -7,6 +7,8 @@ import ProductLinkWrapper from 'components/Home/ProductLink/ProductLinkWrapper';
 import BrandsWrapper from 'components/Home/BrandsWrapper/BrandsWrapper';
 import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
 import Carousel from 'components/Global/Carousel/Carousel';
+import Footer from 'components/Global/Footer/Footer';
+import Cart from 'components/Global/Cart/Cart';
 
 export default function Home() {
 	return (
@@ -18,7 +20,6 @@ export default function Home() {
 			</Head>
 			<Layout>
 				<PageTitle />
-				<Carousel />
 				<CategoryBar />
 				<FeaturedWrapper />
 				<ProductLinkWrapper />
@@ -26,7 +27,10 @@ export default function Home() {
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
+				<Carousel />
+				<Cart />
 			</Layout>
+			<Footer />
 		</>
 	);
 }

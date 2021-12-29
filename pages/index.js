@@ -27,10 +27,7 @@ export default function Home() {
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
 				<ProductsRow name='پرطرفدار' />
-				<Carousel />
-				<Cart />
 			</Layout>
-			<Footer />
 		</>
 	);
 }

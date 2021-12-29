@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
 
-const style = 'flex items-center justify-center w-full snap-center shrink-0';
+const style =
+	'flex items-center justify-center w-full snap-center shrink-0 h-full w-full relative';
 const array = ['/image/slides/slide1.png', '/image/slides/slide2.png'];
 const handleSlides = (slide) => {
 	return [
@@ -16,6 +17,7 @@ const Carousel = () => {
 	const [slide, setSlide] = useState(0);
 	const [renderSlides, setRenderSlides] = useState(handleSlides(slide));
 	const [disabled, setDisabled] = useState(false);
+	const [ticker, setTicker] = useState(0);
 
 	//hooks
 	const ref = useRef();
@@ -26,6 +28,18 @@ const Carousel = () => {
 			moveScrollToMiddle(ref);
 		}
 	}, [ref]);
+	useEffect(() => {
+		const sliderTime = setInterval(() => {
+			setTicker(ticker + 1);
+		}, 1000);
+
+		return () => {
+			clearInterval(sliderTime);
+		};
+	}, [ticker]);
+	useEffect(() => {
+		if (ticker % 5 === 0) handleRight();
+	}, [ticker]);
 
 	//functions
 	const moveScrollToMiddle = (ref) => {
@@ -34,17 +48,21 @@ const Carousel = () => {
 		ref.current.className = ref.current.className + ' scroll-smooth';
 	};
 	const handleRight = () => {
+		setTicker(0);
 		if (disabled) return;
 		setDisabled(true);
 		ref.current.scrollLeft = 0;
 		setTimeout(() => {
 			setDisabled(false);
-			setSlide(slide === 0 ? array.length - 1 : slide - 1);
+			setSlide((prevSlide) =>
+				prevSlide === 0 ? array.length - 1 : prevSlide - 1
+			);
 			setRenderSlides(handleSlides(slide === 0 ? array.length - 1 : slide - 1));
 			moveScrollToMiddle(ref);
 		}, 700);
 	};
 	const handleLeft = () => {
+		setTicker(0);
 		if (disabled) return;
 		setDisabled(true);
 		ref.current.scrollLeft = ref.current.scrollWidth * -1;
@@ -60,13 +78,13 @@ const Carousel = () => {
 		<div className=' no-scrollbar'>
 			<div className='relative '>
 				<div
-					className={` flex w-full  snap-x  overflow-auto no-scrollbar`}
+					className={` flex w-full  snap-x  overflow-auto no-scrollbar h-48`}
 					ref={ref}
 					onScroll={(e) => {}}
 				>
 					{renderSlides.map((item, index) => (
 						<div className={style} key={index}>
-							<img src={item} className='object-cover' />
+							<img src={item} className='object-cover w-full h-full' />
 						</div>
 					))}
 				</div>

@@ -2,10 +2,8 @@ import CardPicture from './CardPicture';
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { persianNum, Separator } from '../../../helpers/persianTools';
-import isTouchScreen from '../../../hooks/isTouchScreen';
 
 const ProductCard = ({ info, className, noSize, noCategory }) => {
-	const isTouch = isTouchScreen();
 	return (
 		<div
 			className={`relative overflow-hidden group shrink-0 select-none ${className}`}

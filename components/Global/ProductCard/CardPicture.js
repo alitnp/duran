@@ -4,26 +4,25 @@ const CardPicture = ({ firstImage, secondImage }) => {
 	return (
 		<div className='relative '>
 			<div className='absolute top-0 right-0 opacity-100 '>
-				<div className='relative border w-52 h-72'>
+				<div className='relative '>
 					{secondImage && (
 						<Image
 							src={secondImage}
-							layout='fill'
+							width='180px'
+							height='270px'
 							objectFit='cover'
-							objectPosition='center center'
 							draggable='false'
 						/>
 					)}
 				</div>
 			</div>
-			<div className='relative transition-opacity duration-500 bg-red-400 opacity-100 w-52 h-72 group-hover:opacity-0 '>
+			<div className='relative transition-opacity duration-500 opacity-100 group-hover:opacity-0 '>
 				{firstImage && (
 					<Image
 						src={firstImage}
-						layout='fill'
+						width='180px'
+						height='270px'
 						objectFit='cover'
-						objectPosition='center center'
-						className='border'
 						draggable='false'
 					/>
 				)}

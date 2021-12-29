@@ -1,4 +1,6 @@
 import ProductCard from 'components/Global/ProductCard/ProductCard';
+import isTouchScreen from 'hooks/isTouchScreen';
+import useScreenWidth from 'hooks/useScreenWidth';
 import { useEffect, useRef, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
 
@@ -81,14 +83,20 @@ const ProductsRow = ({ name }) => {
 	//states
 	const [noRight, setNoRight] = useState(false);
 	const [noLeft, setNoLeft] = useState(false);
+	const [hideArrows, setHideArrows] = useState(false);
 
 	//hooks
 	const rowRef = useRef();
+	const isTouch = isTouchScreen();
+	const screenWidth = useScreenWidth();
 
 	//effects
 	useEffect(() => {
 		setArrowKeys(rowRef);
 	}, []);
+	useEffect(() => {
+		if (isTouch && screenWidth < 768) setHideArrows(true);
+	}, [isTouch, screenWidth]);
 
 	//functions
 	const setArrowKeys = (ref) => {
@@ -109,17 +117,17 @@ const ProductsRow = ({ name }) => {
 
 	return (
 		<>
-			<div className='mb-2 flex'>
+			<div className='flex mb-2'>
 				<h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px]'>
 					{name}
 				</h4>
-				<div className='border-b border-d-border-gray w-full text-left text-d-primary'>
+				<div className='w-full text-left border-b border-d-border-gray text-d-primary'>
 					همه
 				</div>
 			</div>
 			<div className='relative mb-16'>
 				<div
-					className='flex scroll-smooth mb-8 overflow-x-auto snap-x horizental-scroll  scrol hidden-scroll-bar'
+					className='flex mb-8 overflow-x-auto scroll-smooth snap-x horizental-scroll scrol hidden-scroll-bar'
 					ref={rowRef}
 					onScroll={() => setArrowKeys(rowRef)}
 				>
@@ -130,18 +138,18 @@ const ProductsRow = ({ name }) => {
 							className={`${idx !== 0 && 'mr-6'} snap-start`}
 						/>
 					))}
-					{!noRight && (
+					{!noRight && !hideArrows && (
 						<div
 							onClick={scrollRight}
-							className='absolute bg-white rounded-full p-2 flex items-center justify-center shadow-md top-1/2 -translate-y-1/2 cursor-pointer right-2'
+							className='absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 right-2'
 						>
 							<MdArrowForwardIos />
 						</div>
 					)}
-					{!noLeft && (
+					{!noLeft && !hideArrows && (
 						<div
 							onClick={scrollLeft}
-							className='absolute bg-white rounded-full p-2 flex items-center justify-center shadow-md top-1/2 -translate-y-1/2 cursor-pointer left-2'
+							className='absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 left-2'
 						>
 							<MdArrowForwardIos className='-scale-100' />
 						</div>

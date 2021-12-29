@@ -1,4 +1,3 @@
-import GlobalContainer from 'components/Global/GlobalContainer/GlobalContainer';
 import Navigation from 'components/Global/Navbar/Navigation';
 import Image from 'next/image';
 import Link from 'next/link';

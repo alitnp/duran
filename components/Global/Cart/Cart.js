@@ -1,3 +1,4 @@
+import CartItem from 'components/Global/Cart/CartItem';
 import RedIcon from 'components/Global/Cart/RedIcon';
 import ProductCard from 'components/Global/ProductCard/ProductCard';
 import Button from 'components/UI/Button/Button';
@@ -11,7 +12,7 @@ const shoes = [
 		secondImage: '/image/shoes/jordan-1.webp',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
+		sizes: '40',
 		categories: 'مردانه',
 		price: 2200000,
 	},
@@ -20,7 +21,7 @@ const shoes = [
 		secondImage: '/image/shoes/jordan-1.webp',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
+		sizes: '40',
 		categories: 'مردانه',
 		price: 2200000,
 	},
@@ -29,7 +30,25 @@ const shoes = [
 		secondImage: '/image/shoes/jordan-1.webp',
 		persianName: 'نایکی - جردن ۱ رترو',
 		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
+		sizes: '40',
+		categories: 'مردانه',
+		price: 2200000,
+	},
+	{
+		firstImage: '/image/shoes/jordan-2.jpg',
+		secondImage: '/image/shoes/jordan-1.webp',
+		persianName: 'نایکی - جردن ۱ رترو',
+		englishName: 'NIKE - Jordan 1 Retro',
+		sizes: '40',
+		categories: 'مردانه',
+		price: 2200000,
+	},
+	{
+		firstImage: '/image/shoes/jordan-2.jpg',
+		secondImage: '/image/shoes/jordan-1.webp',
+		persianName: 'نایکی - جردن ۱ رترو',
+		englishName: 'NIKE - Jordan 1 Retro',
+		sizes: '40',
 		categories: 'مردانه',
 		price: 2200000,
 	},
@@ -37,7 +56,7 @@ const shoes = [
 
 const Cart = () => {
 	//states
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	//functions
 	const toggleCart = () => setOpen(!open);
@@ -54,8 +73,8 @@ const Cart = () => {
 				}`}
 				onClick={toggleCart}
 			/>
-			<div className='relative w-full h-full pt-8 px-[5%] bg-zinc-700/80 backdrop-blur-md'>
-				<div className=''>
+			<div className='relative flex w-full h-full pt-8 px-[5%] bg-zinc-700/80 backdrop-blur-md '>
+				<div className='flex flex-col w-full mb-4 '>
 					<div className='mb-4 text-3xl'>
 						<RiCloseLine onClick={toggleCart} className='cursor-pointer' />
 					</div>
@@ -67,16 +86,10 @@ const Cart = () => {
 						<p>۳ محصول در سبد</p>
 						<p>۴،۱۵۰،۰۰۰ تومان</p>
 					</div>
-					<div className='flex mt-6 text-d-gray'>
-						{/* {shoes.map((item, idx) => (
-							<ProductCard
-								key={idx}
-								info={item}
-								className={`${idx !== 0 && 'mr-6'} snap-start`}
-								noSize
-								noCategory
-							/>
-						))} */}
+					<div className='flex flex-wrap mt-6 overflow-y-auto gap-y-6 text-d-gray no-scrollbar'>
+						{shoes.map((item, idx) => (
+							<CartItem key={idx} info={item} />
+						))}
 					</div>
 				</div>
 				<RedIcon onClick={toggleCart} />

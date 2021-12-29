@@ -37,7 +37,7 @@ const shoes = [
 
 const Cart = () => {
 	//states
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	//functions
 	const toggleCart = () => setOpen(!open);
@@ -68,7 +68,7 @@ const Cart = () => {
 						<p>۴،۱۵۰،۰۰۰ تومان</p>
 					</div>
 					<div className='flex mt-6 text-d-gray'>
-						{shoes.map((item, idx) => (
+						{/* {shoes.map((item, idx) => (
 							<ProductCard
 								key={idx}
 								info={item}
@@ -76,7 +76,7 @@ const Cart = () => {
 								noSize
 								noCategory
 							/>
-						))}
+						))} */}
 					</div>
 				</div>
 				<RedIcon onClick={toggleCart} />

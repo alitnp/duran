@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 	//states
-	const [liked, setLiked] = useState(true);
+	const [liked, setLiked] = useState(false);
 	return (
 		<div
 			className={`relative overflow-hidden group shrink-0 select-none ${className}`}

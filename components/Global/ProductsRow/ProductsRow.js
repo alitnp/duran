@@ -88,7 +88,7 @@ const shoes = [
 	},
 ];
 
-const ProductsRow = ({ name }) => {
+const ProductsRow = ({ name, className }) => {
 	//states
 	const [noRight, setNoRight] = useState(false);
 	const [noLeft, setNoLeft] = useState(false);
@@ -126,8 +126,8 @@ const ProductsRow = ({ name }) => {
 
 	return (
 		<>
-			<div className='flex mb-2'>
-				<h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px]'>
+			<div className={`flex mb-2 ${className}`}>
+				<h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px] whitespace-nowrap'>
 					{name}
 				</h4>
 				<div className='w-full text-left border-b border-d-border-gray text-d-primary'>

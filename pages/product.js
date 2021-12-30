@@ -4,6 +4,7 @@ import Specifications from 'components/Product/Specifications';
 import Comments from 'components/Product/Comments';
 import ProductImages from 'components/Product/ProductImages';
 import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
+import useScreenWidth from 'utils/hooks/useScreenWidth';
 
 const info = {
 	productId: 1,
@@ -47,6 +48,7 @@ const info = {
 	],
 	similars: [
 		{
+			id: 2,
 			firstImage: '/image/shoes/jordan-2.jpg',
 			secondImage: '/image/shoes/jordan-1.webp',
 			persianName: 'نایکی - جردن ۱ رترو',
@@ -56,6 +58,7 @@ const info = {
 			price: 2200000,
 		},
 		{
+			id: 3,
 			firstImage: '/image/shoes/shoe1-1.jpg',
 			secondImage: '/image/shoes/shoe1-2.jpg',
 			persianName: 'نایکی - جردن ۱ رترو',
@@ -65,6 +68,7 @@ const info = {
 			price: 2200000,
 		},
 		{
+			id: 4,
 			firstImage: '/image/shoes/shoe2-1.jpg',
 			secondImage: '/image/shoes/shoe2-2.jpg',
 			persianName: 'نایکی - جردن ۱ رترو',
@@ -77,14 +81,19 @@ const info = {
 };
 
 const Product = () => {
+	//hookes
+	const screenWidth = useScreenWidth();
+
 	return (
 		<Layout>
 			<div className='flex md:flex-row-reverse flex-col mb-6 mt-6 gap-x-10'>
 				<div className='flex flex-col grow'>
 					<ProductImages images={info.images} />
-					<div className='md:grid grid-cols-1 hidden'>
-						<ProductsRow name={'محصولات مشابه'} className='mt-10' />
-					</div>
+					{screenWidth >= 768 && (
+						<div className='md:grid grid-cols-1 hidden'>
+							<ProductsRow key={2} name={'محصولات مشابه'} className='mt-10' />
+						</div>
+					)}
 				</div>
 				<div className='flex flex-col md:max-w-[260px] '>
 					<BuyBox
@@ -106,6 +115,11 @@ const Product = () => {
 						total={info.comments.totalComments}
 					/>
 				</div>
+				{screenWidth < 768 && (
+					<div className='md:hidden grid-cols-1 grid'>
+						<ProductsRow key={1} name={'محصولات مشابه'} className='mt-10' />
+					</div>
+				)}
 			</div>
 		</Layout>
 	);

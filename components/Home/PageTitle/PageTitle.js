@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-const PageTitle = () => {
+const PageTitle = ({ className }) => {
 	return (
-		<div className='relative mt-4 ' style={{ height: '500px' }}>
+		<div className={`relative  ${className}`}>
 			<Image
 				src='/image/page-title-image.png'
 				layout='fill'

@@ -4,16 +4,43 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { persianNum, Separator } from '../../../helpers/persianTools';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import {
+	addItemToCart,
+	isInCart,
+} from 'redux/reducers/cartReducer/cartReducer';
+import { useSelector } from 'react-redux';
 
 const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 	//states
 	const [liked, setLiked] = useState(false);
+	const [showAnimation, setShowAnimation] = useState();
+	const { items } = useSelector((state) => state.cart);
+
+	//hooks
+	const dispatch = useDispatch();
+
+	//functions
+	const addToCart = (e) => {
+		console.log(e);
+		setShowAnimation({ x: e.clientX, y: e.clientY });
+		setTimeout(() => {
+			setShowAnimation(null);
+		}, 1200);
+		dispatch(addItemToCart({ ...info, quantity: 1 }));
+	};
+	const isInCart = () => items.some((shoe) => shoe.id === info.id);
+
 	return (
 		<div
 			className={`relative overflow-hidden group shrink-0 select-none ${className}`}
 		>
 			<div className='absolute z-10 flex w-1/2 px-2 py-1 text-lg transition-all duration-300 -translate-x-1/2 bg-white rounded-md shadow-md justify-evenly group-hover:top-2 -top-8 left-1/2 text-d-text'>
-				<FiShoppingCart className='cursor-pointer ' />
+				{!isInCart() ? (
+					<FiShoppingCart className='cursor-pointer ' onClick={addToCart} />
+				) : (
+					<FiShoppingCart className='cursor-pointer fill-d-secondary' />
+				)}
 				{!liked && (
 					<AiOutlineHeart
 						className='cursor-pointer '
@@ -26,7 +53,7 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 						onClick={() => setLiked(false)}
 					/>
 				)}
-				<FiSearch className='cursor-pointer' />
+				{/* <FiSearch className='cursor-pointer' /> */}
 			</div>
 			<CardPicture
 				firstImage={info.firstImage}
@@ -54,10 +81,18 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 						})}
 					</p>
 				)}
-				<p className='mt-2  font-medium text-center'>
+				<p className='mt-2 font-medium text-center'>
 					{Separator(persianNum(info.price)) + ' تومان'}
 				</p>
 			</div>
+			{showAnimation && (
+				<div
+					className='fixed z-50 p-2 text-xl rounded-full shadow-xl bg-d-secondary add-item-to-cart'
+					style={{ top: showAnimation.y, left: showAnimation.x }}
+				>
+					<FiShoppingCart />
+				</div>
+			)}
 		</div>
 	);
 };

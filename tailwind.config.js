@@ -15,6 +15,7 @@ module.exports = {
 				'd-primary': 'var(--d-primary)',
 				'd-secondary': 'var(--d-secondary)',
 				'd-bg-color': 'var(--d-bg-color)',
+				'd-input-color': 'var(--d-input-Color)',
 			},
 		},
 	},

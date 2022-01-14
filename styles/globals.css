@@ -48,6 +48,7 @@
 	--d-primary: #c9192e;
 	--d-secondary: #f8d000;
 	--d-bg-color: #ffffff;
+	--d-input-Color: #6180bb;
 }
 
 html,
@@ -144,4 +145,29 @@ input[type='checkbox']:focus {
 	background-color: #c5c5c500;
 	border-radius: 0;
 	border: 0px solid #ffffff00;
+}
+
+@keyframes add-cart-animation {
+	60% {
+		transform: scale(1);
+	}
+	100% {
+		left: 100%;
+		transform: translateX(-100%) translateY(-50%) scale(0.1);
+		top: 75%;
+	}
+}
+
+.add-item-to-cart {
+	animation: add-cart-animation 1s ease-in-out forwards;
+}
+
+@keyframes input-error-message-animation {
+	100% {
+		top: 0;
+	}
+}
+
+.input-error-message {
+	animation: input-error-message-animation 0.5s ease-in-out forwards;
 }

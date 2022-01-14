@@ -1,9 +1,12 @@
 import '../styles/globals.css';
 import Head from 'next/dist/shared/lib/head';
 import Navbar from 'components/Global/Navbar/Navbar';
-import Carousel from 'components/Global/Carousel/Carousel';
 import Footer from 'components/Global/Footer/Footer';
 import Cart from 'components/Global/Cart/Cart';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -48,10 +51,13 @@ function MyApp({ Component, pageProps }) {
 				/>
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<Navbar />
-			<Component {...pageProps} />
-			<Footer />
-			<Cart />
+			<Provider store={store}>
+				<Navbar />
+				<Component {...pageProps} />
+				<Footer />
+				<Cart />
+				<ToastContainer rtl position='top-right' pauseOnFocusLoss={false} />
+			</Provider>
 		</>
 	);
 }

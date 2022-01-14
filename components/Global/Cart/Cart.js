@@ -2,64 +2,24 @@ import CartItem from 'components/Global/Cart/CartItem';
 import RedIcon from 'components/Global/Cart/RedIcon';
 import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import Button from 'components/UI/Button/Button';
+import { persianNum, Separator } from 'helpers/persianTools';
 import Image from 'next/image';
 import { useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
-
-const shoes = [
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: '40',
-		categories: 'مردانه',
-		price: 2200000,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: '40',
-		categories: 'مردانه',
-		price: 2200000,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: '40',
-		categories: 'مردانه',
-		price: 2200000,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: '40',
-		categories: 'مردانه',
-		price: 2200000,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: '40',
-		categories: 'مردانه',
-		price: 2200000,
-	},
-];
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
 	//states
 	const [open, setOpen] = useState(false);
+	const { items } = useSelector((state) => state.cart);
 
 	//functions
 	const toggleCart = () => setOpen(!open);
+
+	//constants
+	const totalPrice = items.reduce((prev, curr) => {
+		return prev + curr.price * curr.quantity;
+	}, 0);
 
 	return (
 		<div
@@ -83,16 +43,16 @@ const Cart = () => {
 						<Button text='پرداخت' className='text-black bg-d-secondary' />
 					</div>
 					<div className='flex justify-between mt-1 text-sm font-light'>
-						<p>۳ محصول در سبد</p>
-						<p>۴،۱۵۰،۰۰۰ تومان</p>
+						<p>{`${persianNum(items.length)} محصول در سبد`}</p>
+						<p>{`${Separator(persianNum(totalPrice))} تومان`}</p>
 					</div>
 					<div className='flex flex-wrap mt-6 overflow-y-auto gap-y-6 text-d-gray no-scrollbar'>
-						{shoes.map((item, idx) => (
-							<CartItem key={idx} info={item} />
+						{items.map((item, index) => (
+							<CartItem key={index} info={item} index={index} />
 						))}
 					</div>
 				</div>
-				<RedIcon onClick={toggleCart} />
+				<RedIcon onClick={toggleCart} count={items.length} />
 			</div>
 		</div>
 	);

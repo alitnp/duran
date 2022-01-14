@@ -1,11 +1,31 @@
-const Button = ({ className, text, props }) => {
+import LoadingSpin from 'components/UI/LoadingSpin/LoadingSpin';
+
+const Button = ({
+	className,
+	text,
+	primary,
+	secondary,
+	disabled,
+	loading,
+	...props
+}) => {
 	return (
-		<div
+		<button
+			className={`  cursor-pointer transition-all duration-500 ease-out   ${className} ${
+				primary && 'bg-d-primary text-d-bg-color'
+			} ${secondary && 'bg-d-secondary text-d-text'} ${
+				!primary && !secondary && 'bg-d-text text-d-bg-color'
+			} ${disabled && 'text-d-border-gray bg-d-text cursor-not-allowed'}${
+				loading && ' cursor-not-allowed'
+			}`}
 			{...props}
-			className={`cursor-pointer bg-d-primary px-10 py-[5px] text-center text-d-bg-color ${className}`}
+			disabled={disabled || loading}
 		>
-			{text}
-		</div>
+			<div className='w-full h-full bg-white/0 hover:bg-white/10 transition-all duration-500 ease-out px-10 py-2 flex items-center justify-center active:bg-white/20'>
+				{loading && <LoadingSpin className='ml-2 text-xl' />}
+				{text}
+			</div>
+		</button>
 	);
 };
 

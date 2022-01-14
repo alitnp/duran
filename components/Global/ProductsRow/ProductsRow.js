@@ -13,6 +13,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 11,
 	},
 	{
 		firstImage: '/image/shoes/shoe1-1.jpg',
@@ -22,6 +23,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 12,
 	},
 	{
 		firstImage: '/image/shoes/shoe2-1.jpg',
@@ -31,6 +33,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 13,
 	},
 	{
 		firstImage: '/image/shoes/jordan-2.jpg',
@@ -40,6 +43,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 14,
 	},
 	{
 		firstImage: '/image/shoes/shoe1-1.jpg',
@@ -49,6 +53,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 15,
 	},
 	{
 		firstImage: '/image/shoes/shoe2-1.jpg',
@@ -58,6 +63,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 16,
 	},
 	{
 		firstImage: '/image/shoes/jordan-2.jpg',
@@ -67,6 +73,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 17,
 	},
 	{
 		firstImage: '/image/shoes/shoe1-1.jpg',
@@ -76,6 +83,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 18,
 	},
 	{
 		firstImage: '/image/shoes/shoe2-1.jpg',
@@ -85,6 +93,7 @@ const shoes = [
 		sizes: ['39', '40', '41', '42'],
 		categories: 'مردانه',
 		price: 2200000,
+		id: 19,
 	},
 ];
 

@@ -12,17 +12,18 @@ const Navbar = () => {
 					<h3 className='fixed text-lg font-bold transform -translate-x-1/2 left-1/2 top-5'>
 						DURAN
 					</h3>
-					<div className='flex items-center '>
-						<Link href='/'>
+					<Link href='/login'>
+						<div className='flex items-center cursor-pointer'>
 							<span className='ml-2'>ورود</span>
-						</Link>
-						<Image
-							src='/icons/profile.svg'
-							width='20px'
-							height='20px'
-							objectFit='contain'
-						/>
-					</div>
+
+							<Image
+								src='/icons/profile.svg'
+								width='20px'
+								height='20px'
+								objectFit='contain'
+							/>
+						</div>
+					</Link>
 				</div>
 			</div>
 		</>

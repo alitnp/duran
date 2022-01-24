@@ -97,7 +97,7 @@ const shoes = [
 	},
 ];
 
-const ProductsRow = ({ name, className }) => {
+const ProductsRow = ({ name, className, list }) => {
 	//states
 	const [noRight, setNoRight] = useState(false);
 	const [noLeft, setNoLeft] = useState(false);
@@ -136,7 +136,7 @@ const ProductsRow = ({ name, className }) => {
 	return (
 		<>
 			<div className={`flex mb-2 ${className}`}>
-				<h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px] whitespace-nowrap'>
+				<h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px] whitespace-nowrap mb-0'>
 					{name}
 				</h4>
 				<div className='w-full text-left border-b border-d-border-gray text-d-primary'>
@@ -149,13 +149,14 @@ const ProductsRow = ({ name, className }) => {
 					ref={rowRef}
 					onScroll={() => setArrowKeys(rowRef)}
 				>
-					{shoes.map((item, idx) => (
-						<ProductCardRow
-							key={idx}
-							info={item}
-							className={`${idx !== 0 && 'mr-6'} snap-start`}
-						/>
-					))}
+					{list &&
+						list.map((item, idx) => (
+							<ProductCardRow
+								key={idx}
+								info={item}
+								className={`${idx !== 0 && 'mr-6'} snap-start`}
+							/>
+						))}
 					{!noRight && !hideArrows && (
 						<div
 							onClick={scrollRight}

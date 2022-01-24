@@ -54,11 +54,14 @@
 html,
 body,
 * {
+	direction: rtl !important;
 	padding: 0;
 	margin: 0;
 	font-family: IRANSans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
 		Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	box-sizing: border-box;
+	text-align: right;
+	scroll-behavior: smooth;
 }
 body {
 	color: var(--d-text);
@@ -85,6 +88,13 @@ input::placeholder {
 input[type='checkbox']:focus {
 	outline: 0;
 	box-shadow: none;
+}
+
+/* ant design */
+.rtl-grid,
+.ant-form-rtl .ant-form-item-label {
+	direction: rtl !important;
+	text-align: right !important;
 }
 
 .d-container {
@@ -166,8 +176,4 @@ input[type='checkbox']:focus {
 	100% {
 		top: 0;
 	}
-}
-
-.input-error-message {
-	animation: input-error-message-animation 0.5s ease-in-out forwards;
 }

@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import 'antd/dist/antd.css';
 import Head from 'next/dist/shared/lib/head';
 import Navbar from 'components/Global/Navbar/Navbar';
 import Footer from 'components/Global/Footer/Footer';
@@ -7,6 +8,8 @@ import { Provider } from 'react-redux';
 import { store } from 'redux/store';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ConfigProvider } from 'antd';
+import faIR from 'antd/lib/locale/fa_IR';
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -52,10 +55,12 @@ function MyApp({ Component, pageProps }) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Provider store={store}>
-				<Navbar />
-				<Component {...pageProps} />
-				<Footer />
-				<Cart />
+				<ConfigProvider local={faIR} direction='rtl'>
+					<Navbar />
+					<Component {...pageProps} />
+					<Footer />
+					<Cart />
+				</ConfigProvider>
 				<ToastContainer rtl position='top-right' pauseOnFocusLoss={false} />
 			</Provider>
 		</>

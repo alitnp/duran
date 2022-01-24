@@ -17,9 +17,11 @@ const CategoryBar = () => {
 				</Link>
 			</div>
 			<div className='items-center hidden md:flex '>
-				<p className='ml-2 text-xs text-d-faded-text'>کفشت رو پیدا نکردی؟</p>
+				<p className='mb-0 ml-2 text-xs text-d-faded-text'>
+					کفشت رو پیدا نکردی؟
+				</p>
 				<Link href='/'>
-					<p className='text-d-primary'>سفارش کفش</p>
+					<p className='mb-0 text-d-primary'>سفارش کفش</p>
 				</Link>
 			</div>
 		</div>

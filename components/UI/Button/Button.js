@@ -7,6 +7,7 @@ const Button = ({
 	secondary,
 	disabled,
 	loading,
+	back,
 	...props
 }) => {
 	return (
@@ -17,11 +18,14 @@ const Button = ({
 				!primary && !secondary && 'bg-d-text text-d-bg-color'
 			} ${disabled && 'text-d-border-gray bg-d-text cursor-not-allowed'}${
 				loading && ' cursor-not-allowed'
+			}${
+				back &&
+				' text-d-text bg-gray-50/0 border border-gray-500 hover:bg-gray-100'
 			}`}
 			{...props}
 			disabled={disabled || loading}
 		>
-			<div className='w-full h-full bg-white/0 hover:bg-white/10 transition-all duration-500 ease-out px-10 py-2 flex items-center justify-center active:bg-white/20'>
+			<div className='flex items-center justify-center w-full h-full px-10 py-2 transition-all duration-500 ease-out bg-white/0 hover:bg-white/10 active:bg-white/20'>
 				{loading && <LoadingSpin className='ml-2 text-xl' />}
 				{text}
 			</div>

@@ -1,5 +1,5 @@
 import Checkbox from 'components/UI/Checkbox/Checkbox';
-import Input from 'components/UI/Input/Input';
+import DInput from 'components/UI/DInput/DInput';
 import { IoIosArrowDown } from 'react-icons/io';
 import { BiFilterAlt } from 'react-icons/bi';
 import { persianNum } from 'helpers/persianTools';
@@ -50,8 +50,8 @@ const FilterVertical = () => {
 				<IoIosArrowDown />
 			</div>
 			<div>
-				<Input label='از :' className='flex-wrap' inputClassName='mr-0' />
-				<Input label='تا :' className='flex-wrap' inputClassName='mr-0' />
+				<DInput label='از :' className='flex-wrap' inputClassName='mr-0' />
+				<DInput label='تا :' className='flex-wrap' inputClassName='mr-0' />
 			</div>
 		</div>
 	);

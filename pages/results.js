@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { BiFilterAlt } from 'react-icons/bi';
 import Checkbox from 'components/UI/Checkbox/Checkbox';
 import { persianNum } from 'helpers/persianTools';
-import Input from 'components/UI/Input/Input';
+import DInput from 'components/UI/DInput/DInput';
 import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import ProductGrid from 'components/Global/ProductGrid/ProductGrid';
 import FilterVertical from 'components/Results/FilterVertical';

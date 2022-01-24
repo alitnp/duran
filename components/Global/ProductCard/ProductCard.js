@@ -10,6 +10,7 @@ import {
 	isInCart,
 } from 'redux/reducers/cartReducer/cartReducer';
 import { useSelector } from 'react-redux';
+import endpointUrls from 'utils/constants/enpointUrls';
 
 const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 	//states
@@ -33,7 +34,7 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 
 	return (
 		<div
-			className={`relative overflow-hidden group shrink-0 select-none ${className}`}
+			className={`relative overflow-hidden group shrink-0 select-none ${className} `}
 		>
 			<div className='absolute z-10 flex w-1/2 px-2 py-1 text-lg transition-all duration-300 -translate-x-1/2 bg-white rounded-md shadow-md justify-evenly group-hover:top-2 -top-8 left-1/2 text-d-text'>
 				{!isInCart() ? (
@@ -56,33 +57,41 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 				{/* <FiSearch className='cursor-pointer' /> */}
 			</div>
 			<CardPicture
-				firstImage={info.firstImage}
-				secondImage={info.secondImage}
+				firstImage={
+					info?.DefaultPictureModel.ImageUrl &&
+					endpointUrls.baseUrl + info?.DefaultPictureModel.ImageUrl
+				}
+				alt={info?.DefaultPictureModel.AlternateText}
+				secondImage={
+					info?.SecondPictureModel.ImageUrl &&
+					endpointUrls.baseUrl + info?.SecondPictureModel.ImageUrl
+				}
 			/>
 			<div>
 				<Link href={`/product?id=${info?.id}`}>
 					<div className='cursor-pointer group'>
-						<p className='mt-1 font-medium group-hover:underline'>
-							{info.persianName}
+						<p className='mt-1 font-medium text-center group-hover:underline'>
+							{info?.Name}
 						</p>
-						<p className='font-medium group-hover:underline'>
-							{info.englishName}
+						<p className='font-medium text-center group-hover:underline'>
+							{info?.SeName}
 						</p>
 					</div>
 				</Link>
 				{!noCategory && (
-					<p className='mt-2 text-xs text-d-faded-text'>{info.categories}</p>
+					<p className='mt-2 text-xs text-d-faded-text'>{info?.categories}</p>
 				)}
 				{!noSize && (
 					<p className='text-xs text-d-faded-text'>
-						{info.sizes.map((item, index) => {
-							if (index === 0) return persianNum(item);
-							return ' - ' + persianNum(item);
-						})}
+						{info?.sizes &&
+							info?.sizes.map((item, index) => {
+								if (index === 0) return persianNum(item);
+								return ' - ' + persianNum(item);
+							})}
 					</p>
 				)}
 				<p className='mt-2 font-medium text-center'>
-					{Separator(persianNum(info.price)) + ' تومان'}
+					{Separator(persianNum(info?.ProductPrice?.PriceValue)) + ' تومان'}
 				</p>
 			</div>
 			{showAnimation && (

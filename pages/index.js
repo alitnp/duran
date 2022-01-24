@@ -6,10 +6,23 @@ import FeaturedWrapper from 'components/Home/Featured/FeaturedWrapper';
 import ProductLinkWrapper from 'components/Home/ProductLink/ProductLinkWrapper';
 import BrandsWrapper from 'components/Home/BrandsWrapper/BrandsWrapper';
 import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
-import Carousel from 'components/Global/Carousel/Carousel';
-import { FiShoppingCart } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getNewProducts } from 'redux/middlewares/home/getNewProducts';
 
 export default function Home() {
+	//states
+	const { newProducts } = useSelector((state) => state.home);
+	console.log(newProducts);
+	//hooks
+	const dispatch = useDispatch();
+
+	//effects
+	useEffect(() => {
+		!newProducts && dispatch(getNewProducts());
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -22,10 +35,8 @@ export default function Home() {
 				<FeaturedWrapper />
 				<ProductLinkWrapper />
 				<BrandsWrapper />
-				<ProductsRow name='پرطرفدار' />
-				<ProductsRow name='پرطرفدار' />
-				<ProductsRow name='پرطرفدار' />
-				<Carousel />
+				<ProductsRow name='جدیدترین' list={newProducts || []} />
+				{/* <Slider /> */}
 			</Layout>
 		</>
 	);

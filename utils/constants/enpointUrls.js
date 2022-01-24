@@ -5,6 +5,11 @@ const endpointUrls = {
 	//user
 	login: '/Token/Login',
 	register: '/Account/Register',
+	verifyOtp: '/Account/AccountActivationByPhone',
+	resendOtp: '/Account/ResendOtpCode',
+
+	//home
+	getNewProducts: '/Product/NewProducts',
 };
 
 export default endpointUrls;

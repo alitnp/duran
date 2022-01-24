@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-const CardPicture = ({ firstImage, secondImage }) => {
+const CardPicture = ({ firstImage, secondImage, alt }) => {
 	return (
-		<div className='relative '>
+		<div className='relative border'>
 			<div className='absolute top-0 right-0 opacity-100 '>
 				<div className='relative '>
 					{secondImage && (
@@ -12,11 +12,16 @@ const CardPicture = ({ firstImage, secondImage }) => {
 							height='270px'
 							objectFit='cover'
 							draggable='false'
+							alt={alt}
 						/>
 					)}
 				</div>
 			</div>
-			<div className='relative transition-opacity duration-500 opacity-100 group-hover:opacity-0 '>
+			<div
+				className={`relative bg-d-bg-color transition-opacity duration-500 opacity-100 ${
+					secondImage && 'group-hover:opacity-0'
+				}`}
+			>
 				{firstImage && (
 					<Image
 						src={firstImage}
@@ -24,6 +29,7 @@ const CardPicture = ({ firstImage, secondImage }) => {
 						height='270px'
 						objectFit='cover'
 						draggable='false'
+						alt={alt}
 					/>
 				)}
 			</div>

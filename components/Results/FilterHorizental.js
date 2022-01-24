@@ -1,5 +1,5 @@
 import Checkbox from 'components/UI/Checkbox/Checkbox';
-import Input from 'components/UI/Input/Input';
+import DInput from 'components/UI/DInput/DInput';
 import { persianNum } from 'helpers/persianTools';
 import { useState } from 'react';
 import { BiFilterAlt } from 'react-icons/bi';
@@ -20,7 +20,7 @@ const FilterHorizen = () => {
 				}`}
 			>
 				<div
-					className='flex justify-between items-center hover:bg-gray-100 cursor-pointer'
+					className='flex items-center justify-between cursor-pointer hover:bg-gray-100'
 					onClick={toggleOpen}
 				>
 					<div className='flex items-center'>
@@ -55,7 +55,7 @@ const FilterHorizen = () => {
 					<p>رنگ ها</p>
 					<IoIosArrowDown />
 				</div>
-				<div className='grid grid-cols-6 sm:grid-cols-8 mt-2 gap-y-2'>
+				<div className='grid grid-cols-6 mt-2 sm:grid-cols-8 gap-y-2'>
 					<div className='w-6 h-6 border border-gray-400 rounded-full cursor-pointer bg-sky-600'></div>
 					<div className='w-6 h-6 bg-teal-600 border border-gray-400 rounded-full cursor-pointer'></div>
 					<div className='w-6 h-6 bg-indigo-600 border border-gray-400 rounded-full cursor-pointer'></div>
@@ -68,8 +68,8 @@ const FilterHorizen = () => {
 					<IoIosArrowDown />
 				</div>
 				<div>
-					<Input label='از :' className='flex-wrap' inputClassName='mr-0' />
-					<Input label='تا :' className='flex-wrap' inputClassName='mr-0' />
+					<DInput label='از :' className='flex-wrap' inputClassName='mr-0' />
+					<DInput label='تا :' className='flex-wrap' inputClassName='mr-0' />
 				</div>
 			</div>
 		</div>

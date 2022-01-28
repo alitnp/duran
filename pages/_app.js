@@ -1,13 +1,13 @@
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/dist/shared/lib/head';
 import Navbar from 'components/Global/Navbar/Navbar';
 import Footer from 'components/Global/Footer/Footer';
 import Cart from 'components/Global/Cart/Cart';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { ConfigProvider } from 'antd';
 import faIR from 'antd/lib/locale/fa_IR';
 

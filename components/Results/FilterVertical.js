@@ -2,7 +2,6 @@ import Checkbox from 'components/UI/Checkbox/Checkbox';
 import DInput from 'components/UI/DInput/DInput';
 import { IoIosArrowDown } from 'react-icons/io';
 import { BiFilterAlt } from 'react-icons/bi';
-import { persianNum } from 'helpers/persianTools';
 
 const FilterVertical = () => {
 	return (
@@ -24,11 +23,12 @@ const FilterVertical = () => {
 				{[...Array(6).keys()].map((item, index) => {
 					return (
 						<div
+							key={index}
 							className={`flex cursor-pointer items-center justify-center py-1 text-sm border ${
 								item === 2 && 'bg-d-text text-white'
 							}`}
 						>
-							{persianNum(index + 37)}
+							{index + 37}
 						</div>
 					);
 				})}

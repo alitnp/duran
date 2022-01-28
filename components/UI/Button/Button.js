@@ -22,10 +22,10 @@ const Button = ({
 				back &&
 				' text-d-text bg-gray-50/0 border border-gray-500 hover:bg-gray-100'
 			}`}
-			{...props}
 			disabled={disabled || loading}
+			{...props}
 		>
-			<div className='flex items-center justify-center w-full h-full px-10 py-2 transition-all duration-500 ease-out bg-white/0 hover:bg-white/10 active:bg-white/20'>
+			<div className='flex items-center justify-center w-full h-full px-10 py-2 transition-all duration-500 ease-out bg-white/0 hover:bg-white/10 active:bg-white/20 whitespace-nowrap'>
 				{loading && <LoadingSpin className='ml-2 text-xl' />}
 				{text}
 			</div>

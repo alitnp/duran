@@ -1,4 +1,4 @@
-import { persianNum, Separator } from 'helpers/persianTools';
+import { Separator } from 'utils/helpers/persianTools';
 import Image from 'next/image';
 import { HiPlus, HiMinus } from 'react-icons/hi';
 import { FiTrash2 } from 'react-icons/fi';
@@ -32,8 +32,8 @@ const CartItem = ({ info, index }) => {
 			<div className='flex flex-col'>
 				<p>{info.persianName}</p>
 				<p>{info.englishName}</p>
-				{/* <p>سایز : {persianNum(info.sizes)}</p> */}
-				<p>قیمت : {Separator(persianNum(info.price))}</p>
+				{/* <p>سایز : {info.sizes}</p> */}
+				<p>قیمت : {Separator(info.price)}</p>
 				<div className='flex items-center mt-auto select-none'>
 					<div className='flex items-center ml-auto '>
 						<div
@@ -42,7 +42,7 @@ const CartItem = ({ info, index }) => {
 						>
 							<HiPlus />
 						</div>
-						<p className='text-lg '>{persianNum(info.quantity)}</p>
+						<p className='text-lg '>{info.quantity}</p>
 						<div
 							className='mr-2 transition-all duration-500 ease-out rounded cursor-pointer bg-gray-200/70 hover:bg-gray-200 text-d-text'
 							onClick={handleDecrease}

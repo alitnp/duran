@@ -5,6 +5,15 @@ import Comments from 'components/Product/Comments';
 import ProductImages from 'components/Product/ProductImages';
 import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
 import useScreenWidth from 'utils/hooks/useScreenWidth';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getProductDetail } from 'redux/middlewares/global/getProductDetail';
+import LoadingSpin from 'components/UI/LoadingSpin/LoadingSpin';
+import LoadingCover from 'components/UI/LoadingSpin/LoadingCover';
+import ProductBreadCrumb from 'components/Product/ProductBreadCrumb';
+import { Skeleton } from 'antd';
+import SendComment from 'pages/SendComment';
 
 const info = {
 	productId: 1,
@@ -81,46 +90,106 @@ const info = {
 };
 
 const Product = () => {
+	//states
+	const [productId, setProductId] = useState();
+	const [productDetail, setProductDetail] = useState(null);
+	const [notFound, setNotFound] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [showSendComment, setShowSendComment] = useState(false);
+	console.log(productDetail);
+
 	//hookes
 	const screenWidth = useScreenWidth();
+	const { query } = useRouter();
+
+	//effects
+	useEffect(() => {
+		if (query.id) setProductId(query.id);
+		setTimeout(() => {
+			!productId && setNotFound(true);
+		}, 1000);
+	}, [query]);
+	useEffect(() => {
+		!!productId && getProduct();
+	}, [productId]);
+
+	const getProduct = async () => {
+		setProductDetail(
+			await getProductDetail(productId, setLoading, setNotFound)
+		);
+	};
 
 	return (
 		<Layout>
-			<div className='flex md:flex-row-reverse flex-col mb-6 mt-6 gap-x-10'>
+			<ProductBreadCrumb list={productDetail?.Breadcrumb?.CategoryBreadcrumb} />
+
+			<div className='flex flex-col mt-3 mb-6 lg:flex-row-reverse gap-x-10'>
 				<div className='flex flex-col grow'>
-					<ProductImages images={info.images} />
-					{screenWidth >= 768 && (
-						<div className='md:grid grid-cols-1 hidden'>
+					{productDetail?.PictureModels && (
+						<ProductImages images={productDetail?.PictureModels} />
+					)}
+					{screenWidth >= 1024 && (
+						<div className='hidden grid-cols-1 lg:grid'>
+							<Specifications
+								desc={productDetail?.FullDescription}
+								category={info.category}
+								model={info.model}
+								color={info.color}
+								madeIn={info.madeIn}
+								material={info.material}
+							/>
+							<Comments
+								comments={info.comments.items}
+								total={info.comments.totalComments}
+								overView={productDetail?.ProductReviewOverview}
+								sendComment={() => setShowSendComment(true)}
+							/>
 							<ProductsRow key={2} name={'محصولات مشابه'} className='mt-10' />
 						</div>
 					)}
 				</div>
-				<div className='flex flex-col md:max-w-[260px] '>
+				<div className='flex flex-col lg:min-w-[350px]'>
 					<BuyBox
-						persianName={info.persianName}
-						englishName={info.englishName}
-						sizes={info.sizes}
-						price={info.price}
-					/>
-					<Specifications
-						desc={info.desc}
-						category={info.category}
-						model={info.model}
-						color={info.color}
-						madeIn={info.madeIn}
-						material={info.material}
-					/>
-					<Comments
-						comments={info.comments.items}
-						total={info.comments.totalComments}
+						persianBrand={productDetail?.BrandModel?.Name}
+						englishBrand={productDetail?.BrandModel?.SeName}
+						persianName={productDetail?.Name}
+						englishName={productDetail?.SeName}
+						sizes={productDetail?.ProductAttributes?.find(
+							(item) => item.Name === 'Size'
+						)}
+						colors={productDetail?.ProductAttributes?.find(
+							(item) => item.Name === 'Color'
+						)}
+						price={productDetail?.ProductPrice?.PriceValue}
 					/>
 				</div>
-				{screenWidth < 768 && (
-					<div className='md:hidden grid-cols-1 grid'>
+				{screenWidth < 1024 && (
+					<div className='grid grid-cols-1 lg:hidden'>
+						<Specifications
+							desc={productDetail?.FullDescription}
+							category={info.category}
+							model={info.model}
+							color={info.color}
+							madeIn={info.madeIn}
+							material={info.material}
+						/>
+						<Comments
+							comments={info.comments.items}
+							total={info.comments.totalComments}
+							overView={productDetail?.ProductReviewOverview}
+							sendComment={() => setShowSendComment(true)}
+						/>
 						<ProductsRow key={1} name={'محصولات مشابه'} className='mt-10' />
 					</div>
 				)}
 			</div>
+			<SendComment
+				show={showSendComment}
+				close={() => setShowSendComment(false)}
+				id={productDetail?.Id}
+				getProduct={getProduct}
+			/>
+			{loading && <LoadingCover />}
 		</Layout>
 	);
 };

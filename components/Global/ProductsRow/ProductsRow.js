@@ -1,107 +1,15 @@
 import ProductCardRow from 'components/Global/ProductCard/ProductCard';
-import isTouchScreen from 'hooks/isTouchScreen';
-import useScreenWidth from 'hooks/useScreenWidth';
+import isTouchScreen from 'utils/hooks/isTouchScreen';
+import useScreenWidth from 'utils/hooks/useScreenWidth';
 import { useEffect, useRef, useState } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
-
-const shoes = [
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 11,
-	},
-	{
-		firstImage: '/image/shoes/shoe1-1.jpg',
-		secondImage: '/image/shoes/shoe1-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 12,
-	},
-	{
-		firstImage: '/image/shoes/shoe2-1.jpg',
-		secondImage: '/image/shoes/shoe2-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 13,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 14,
-	},
-	{
-		firstImage: '/image/shoes/shoe1-1.jpg',
-		secondImage: '/image/shoes/shoe1-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 15,
-	},
-	{
-		firstImage: '/image/shoes/shoe2-1.jpg',
-		secondImage: '/image/shoes/shoe2-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 16,
-	},
-	{
-		firstImage: '/image/shoes/jordan-2.jpg',
-		secondImage: '/image/shoes/jordan-1.webp',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 17,
-	},
-	{
-		firstImage: '/image/shoes/shoe1-1.jpg',
-		secondImage: '/image/shoes/shoe1-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 18,
-	},
-	{
-		firstImage: '/image/shoes/shoe2-1.jpg',
-		secondImage: '/image/shoes/shoe2-2.jpg',
-		persianName: 'نایکی - جردن ۱ رترو',
-		englishName: 'NIKE - Jordan 1 Retro',
-		sizes: ['39', '40', '41', '42'],
-		categories: 'مردانه',
-		price: 2200000,
-		id: 19,
-	},
-];
 
 const ProductsRow = ({ name, className, list }) => {
 	//states
 	const [noRight, setNoRight] = useState(false);
 	const [noLeft, setNoLeft] = useState(false);
 	const [hideArrows, setHideArrows] = useState(false);
+	console.log(list);
 
 	//hooks
 	const rowRef = useRef();

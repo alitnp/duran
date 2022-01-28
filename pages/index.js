@@ -10,10 +10,11 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNewProducts } from 'redux/middlewares/home/getNewProducts';
+import { getHomeBestSelleres } from 'redux/middlewares/home/getHomeBestSellers';
 
 export default function Home() {
 	//states
-	const { newProducts } = useSelector((state) => state.home);
+	const { newProducts, bestSellers } = useSelector((state) => state.home);
 	console.log(newProducts);
 	//hooks
 	const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function Home() {
 	//effects
 	useEffect(() => {
 		!newProducts && dispatch(getNewProducts());
+		!bestSellers && dispatch(getHomeBestSelleres());
 	}, []);
 
 	return (
@@ -36,6 +38,7 @@ export default function Home() {
 				<ProductLinkWrapper />
 				<BrandsWrapper />
 				<ProductsRow name='جدیدترین' list={newProducts || []} />
+				<ProductsRow name='پرفروش ها' list={bestSellers || []} />
 				{/* <Slider /> */}
 			</Layout>
 		</>

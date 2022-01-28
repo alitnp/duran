@@ -1,55 +1,63 @@
 import { useEffect, useRef, useState } from 'react';
-import { BackgroundColorTheif } from 'helpers/background-color-theif';
+import { BackgroundColorTheif } from 'utils/helpers/background-color-theif';
 import Image from 'next/image';
+import endpointUrls from 'utils/constants/enpointUrls';
 
 const ProductImages = ({ images }) => {
 	//states
 	const [rgb, setRgb] = useState([]);
 	const [slide, setSlide] = useState(0);
 
+	//ref
 	const imageRef = useRef();
 
+	//effects
+	useEffect(() => {
+		if (imageRef?.current?.naturalHeight !== 0) getColor();
+	}, [imageRef.current?.naturalHeight]);
+
+	//functions
 	const getColor = () => {
+		return;
 		if (!imageRef?.current?.complete) return;
 		const backgroundColorTheif = new BackgroundColorTheif();
 		setRgb(backgroundColorTheif.getBackGroundColor(imageRef.current));
 	};
 
-	useEffect(() => {
-		if (imageRef.current.naturalHeight !== 0) getColor();
-	}, [imageRef.current?.naturalHeight]);
 	return (
 		<>
 			<div
-				className='w-full h-96 relative border '
+				className={`relative w-full border h-96 ${!rgb.length && 'bg-d-gray'}`}
 				style={{ backgroundColor: `rgb(${rgb[0]},${rgb[1]},${rgb[2]})` }}
 			>
 				<img
-					src={images[slide]}
+					src={endpointUrls.baseUrl + images[slide].ImageUrl}
 					alt=''
 					ref={imageRef}
-					className='w-full h-full object-contain'
+					className='object-contain w-full h-full'
 					onLoad={(e) => {
 						e?.type === 'load' && getColor();
 					}}
 				/>
 			</div>
-			<div className=' h-20 w-full gap-x-4 flex justify-center mb-10'>
+			<div className='flex justify-center w-full h-20 mb-10 gap-x-4'>
 				{images.map((image, index) => {
 					return (
-						<div className='cursor-pointer' onClick={() => setSlide(index)}>
+						<div
+							className='cursor-pointer '
+							onClick={() => setSlide(index)}
+							key={index}
+						>
 							<div
 								className={` rounded-full  w-1/2 mx-auto relative -top-[2px] mb-1 ${
 									slide === index ? 'h-1 bg-d-text' : 'h-[2px] bg-d-faded-text'
 								}`}
 							></div>
-							<div>
-								<Image
-									src={image}
-									layout='intrinsic'
-									width='80px'
-									height='80px'
-									objectFit='contain'
+							<div className='w-full h-full border'>
+								<img
+									src={endpointUrls.baseUrl + image.ThumbImageUrl}
+									alt={image.AlternateText}
+									className='w-full h-full'
 								/>
 							</div>
 						</div>

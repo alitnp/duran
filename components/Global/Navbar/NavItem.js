@@ -5,13 +5,15 @@ const NavLi = ({ text, url }) => {
 	const { pathname } = useRouter();
 
 	return (
-		<li
-			className={`ml-6 whitespace-nowrap hover:text-d-text ${
-				pathname !== url && 'text-d-faded-text'
-			}`}
-		>
-			<Link href={url}>{text}</Link>
-		</li>
+		<Link href={url}>
+			<li
+				className={`ml-6 whitespace-nowrap hover:text-d-text cursor-pointer font-medium ${
+					pathname !== url && 'text-d-faded-text font-normal'
+				}`}
+			>
+				{text}
+			</li>
+		</Link>
 	);
 };
 

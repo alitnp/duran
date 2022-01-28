@@ -12,7 +12,7 @@ export const handleLogin =
 		});
 		!!setLoading && setLoading(false);
 		if (!result.isSuccess) return;
-		console.log(result);
+
 		localStorage.setItem('accessToken', result.data.Data.AccessToken);
 		localStorage.setItem('refreshToken', result.data.Data.RefreshToken);
 		dispatch(setLoggedIn(true));

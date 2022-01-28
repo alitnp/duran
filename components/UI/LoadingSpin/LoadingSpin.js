@@ -1,4 +1,3 @@
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { CgSpinner } from 'react-icons/cg';
 
 const LoadingSpin = ({ className }) => {

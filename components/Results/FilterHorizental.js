@@ -1,6 +1,5 @@
 import Checkbox from 'components/UI/Checkbox/Checkbox';
 import DInput from 'components/UI/DInput/DInput';
-import { persianNum } from 'helpers/persianTools';
 import { useState } from 'react';
 import { BiFilterAlt } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -42,11 +41,12 @@ const FilterHorizen = () => {
 					{[...Array(6).keys()].map((item, index) => {
 						return (
 							<div
+								key={index}
 								className={`flex cursor-pointer items-center justify-center py-1 text-sm border ${
 									item === 2 && 'bg-d-text text-white'
 								}`}
 							>
-								{persianNum(index + 37)}
+								{index + 37}
 							</div>
 						);
 					})}

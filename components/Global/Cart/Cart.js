@@ -1,9 +1,7 @@
 import CartItem from 'components/Global/Cart/CartItem';
 import RedIcon from 'components/Global/Cart/RedIcon';
-import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import Button from 'components/UI/Button/Button';
-import { persianNum, Separator } from 'helpers/persianTools';
-import Image from 'next/image';
+import { Separator } from 'utils/helpers/persianTools';
 import { useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
@@ -43,8 +41,8 @@ const Cart = () => {
 						<Button text='پرداخت' className='text-black bg-d-secondary' />
 					</div>
 					<div className='flex justify-between mt-1 text-sm font-light'>
-						<p>{`${persianNum(items.length)} محصول در سبد`}</p>
-						<p>{`${Separator(persianNum(totalPrice))} تومان`}</p>
+						<p>{`${items.length} محصول در سبد`}</p>
+						<p>{`${Separator(totalPrice)} تومان`}</p>
 					</div>
 					<div className='flex flex-wrap mt-6 overflow-y-auto gap-y-6 text-d-gray no-scrollbar'>
 						{items.map((item, index) => (

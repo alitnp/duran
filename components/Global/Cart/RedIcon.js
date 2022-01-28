@@ -1,5 +1,3 @@
-import { persianNum } from 'helpers/persianTools';
-import Image from 'next/image';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const RedIcon = ({ onClick, count }) => {
@@ -18,7 +16,7 @@ const RedIcon = ({ onClick, count }) => {
 						count ? 'scale-100' : 'scale-0'
 					}`}
 				>
-					{persianNum(count)}
+					{count}
 				</div>
 			</div>
 		</div>

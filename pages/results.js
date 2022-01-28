@@ -1,12 +1,7 @@
-import Footer from 'components/Global/Footer/Footer';
 import Layout from 'components/Layout/Layout';
 import Head from 'next/head';
 import { FaSortAmountDownAlt } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
-import { BiFilterAlt } from 'react-icons/bi';
-import Checkbox from 'components/UI/Checkbox/Checkbox';
-import { persianNum } from 'helpers/persianTools';
-import DInput from 'components/UI/DInput/DInput';
 import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import ProductGrid from 'components/Global/ProductGrid/ProductGrid';
 import FilterVertical from 'components/Results/FilterVertical';

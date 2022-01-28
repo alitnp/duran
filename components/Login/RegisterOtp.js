@@ -37,7 +37,6 @@ const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
 		});
 		setLoading(false);
 		if (!result.isSuccess) return;
-		console.log(result.data);
 	};
 	const resendOtp = async () => {
 		if (timeLeft > 0) return;

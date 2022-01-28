@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import endpointUrls from 'utils/constants/enpointUrls';
+import { store } from 'redux/store';
+import { handleLogout } from 'redux/middlewares/user/handleLogout';
 
 const baseUrl = endpointUrls.baseUrl;
 
@@ -8,8 +10,8 @@ const defaultHeaders = () => {
 	const headers = {
 		'Content-Type': 'application/json',
 	};
-	const token = localStorage.getItem('token');
-	if (token) headers.Authorization = `Bearer ${token}`;
+	const token = localStorage.getItem('accessToken');
+	if (token) headers.Authorization = token;
 	return headers;
 };
 
@@ -18,6 +20,8 @@ const handleError = (error) => {
 	if (error?.message) return toast.warning(error.message);
 	toast.warning('عملیات با مشکل مواجه شد. دوباره سعی کنید.');
 };
+
+const logout = () => store.dispatch(handleLogout());
 
 const get = async (url, params, optionalHeaders) => {
 	let isSuccess = true;
@@ -28,7 +32,7 @@ const get = async (url, params, optionalHeaders) => {
 	await axios
 		.get(baseUrl + url, {
 			params,
-			headers: optionalHeaders ? optionalHeaders : { ...defaultHeaders() },
+			headers: { ...defaultHeaders(), ...optionalHeaders },
 		})
 		.then((res) => {
 			data = res.data;
@@ -38,6 +42,7 @@ const get = async (url, params, optionalHeaders) => {
 			isSuccess = false;
 			error = err.response?.data;
 			handleError(error);
+			err?.response?.status === 401 && logout();
 		});
 
 	return { isSuccess, data, error, status };
@@ -51,7 +56,7 @@ const post = async (url, params, optionalHeaders) => {
 
 	await axios
 		.post(baseUrl + url, params, {
-			headers: optionalHeaders ? optionalHeaders : { ...defaultHeaders() },
+			headers: { ...defaultHeaders(), ...optionalHeaders },
 		})
 		.then((res) => {
 			data = res.data;
@@ -61,6 +66,8 @@ const post = async (url, params, optionalHeaders) => {
 			isSuccess = false;
 			error = err.response?.data;
 			handleError(error);
+			err?.response?.status === 401 && logout();
+			console.log(err.response?.status);
 		});
 
 	return { isSuccess, data, error, status };
@@ -74,7 +81,7 @@ const put = async (url, params, optionalHeaders) => {
 
 	await axios
 		.put(baseUrl + url, params, {
-			headers: optionalHeaders ? optionalHeaders : { ...defaultHeaders() },
+			headers: { ...defaultHeaders(), ...optionalHeaders },
 		})
 		.then((res) => {
 			data = res.data;
@@ -84,6 +91,7 @@ const put = async (url, params, optionalHeaders) => {
 			isSuccess = false;
 			error = err.response?.data;
 			handleError(error);
+			err?.response?.status === 401 && logout();
 		});
 
 	return { isSuccess, data, error, status };
@@ -99,7 +107,7 @@ const remove = async (url, params, optionalHeaders) => {
 		.delete(baseUrl + url, {
 			params,
 			data: params,
-			headers: optionalHeaders ? optionalHeaders : { ...defaultHeaders() },
+			headers: { ...defaultHeaders(), ...optionalHeaders },
 		})
 		.then((res) => {
 			data = res.data;
@@ -109,6 +117,7 @@ const remove = async (url, params, optionalHeaders) => {
 			isSuccess = false;
 			error = err.response?.data;
 			handleError(error);
+			err?.response?.status === 401 && logout();
 		});
 
 	return { isSuccess, data, error, status };

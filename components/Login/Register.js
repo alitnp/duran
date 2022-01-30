@@ -5,7 +5,7 @@ import RegisterOtp from 'components/Login/RegisterOtp';
 
 const Register = () => {
 	//states
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 	const [showOtp, setShowOtp] = useState('');
 	const [tempPass, setTempPass] = useState('');
 

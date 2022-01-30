@@ -38,7 +38,7 @@ const Navbar = () => {
 					<h3 className='fixed text-lg font-bold transform -translate-x-1/2 left-1/2 top-5'>
 						DURAN
 					</h3>
-					<Link href={routes.dashboard.path}>
+					<Link href={loggedIn ? routes.dashboard.path:routes.login.path}>
 						<div className='flex items-center cursor-pointer'>
 							{!loggedIn && <span className='ml-2'>ورود</span>}
 

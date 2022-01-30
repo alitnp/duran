@@ -18,6 +18,7 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 	const [showAnimation, setShowAnimation] = useState();
 	const { items } = useSelector((state) => state.cart);
 	const [showAddToCartDialog, ShowAddToCartDialog] = useState(true);
+	const [selectedSize, setSelectedSize] = useState();
 
 	//hooks
 	const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 		dispatch(addItemToCart({ ...info, quantity: 1 }));
 	};
 	const isInCart = () => items.some((shoe) => shoe.id === info.id);
+	const getAttributes = (attribureName) =>
+		info.ProductAttributeModels.find((item) => item.Name === attribureName);
 
 	return (
 		<div
@@ -58,8 +61,15 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 					)}
 					{/* <FiSearch className='cursor-pointer' /> */}
 					{showAddToCartDialog && (
-						<div className='absolute hidden p-2 text-sm rounded-md shadow-md bg-d-bg-color top-8'>
-							asdfsaf
+						<div className='absolute p-2 text-sm rounded-md shadow-md w-28 bg-d-bg-color top-8'>
+							<div className=''>
+								<p className='text-xs'>انتخاب سایز:</p>
+								<div className="grid grid-cols-3 gap-x-1 gap-y-1">
+									{getAttributes('Size') && getAttributes("Size").Values.map((item) => {
+										return <div key={item.Id} className={`border w-6 h-6 flex items-center justify-center cursor-pointer ${selectedSize?.Id === item.Id && "border-2 border-d-text font-bold"}`} onClick={() => setSelectedSize(item)}>{item.Name}</div>;
+									})}
+								</div>
+							</div>
 						</div>
 					)}
 				</div>
@@ -79,10 +89,10 @@ const ProductCardRow = ({ info, className, noSize, noCategory }) => {
 				<Link href={`/product?id=${info?.Id}`}>
 					<div className='cursor-pointer group'>
 						<p className='mt-1 font-medium text-center group-hover:underline'>
-							{info?.Name}
+							{info?.NameFa}
 						</p>
 						<p className='font-medium text-center group-hover:underline'>
-							{info?.SeName}
+							{info?.NameEn}
 						</p>
 					</div>
 				</Link>

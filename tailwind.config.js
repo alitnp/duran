@@ -6,6 +6,9 @@ module.exports = {
 	// or 'media' or 'class'
 	theme: {
 		extend: {
+			screens: {
+				'xs': '480px',
+			  },
 			colors: {
 				'd-text': 'var(--d-text)',
 				'd-body-text': 'var(--d-body-text)',

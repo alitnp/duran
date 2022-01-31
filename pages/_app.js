@@ -10,6 +10,7 @@ import { store } from 'redux/store';
 import { ToastContainer } from 'react-toastify';
 import { ConfigProvider } from 'antd';
 import faIR from 'antd/lib/locale/fa_IR';
+import AddToCartModal from 'components/Global/AddToCartModal/AddToCartModal';
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -60,6 +61,7 @@ function MyApp({ Component, pageProps }) {
 					<Component {...pageProps} />
 					<Footer />
 					<Cart />
+					<AddToCartModal/>
 				</ConfigProvider>
 				<ToastContainer rtl position='top-right' pauseOnFocusLoss={false} />
 			</Provider>

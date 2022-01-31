@@ -1,14 +1,14 @@
 const Specifications = ({ desc, category, model, color, madeIn, material }) => {
-	return (
-		<div className='pb-2 mb-2 border-b border-d-border-gray'>
-			<div className=''>
-				<span className='font-semibold'>توضیحات</span>
-				<div
-					className='text-sm'
-					dangerouslySetInnerHTML={{ __html: desc }}
-				></div>
-			</div>
-			{/* <div className=''>
+  return (
+    <div className='pb-2 mt-6 mb-2 border-b border-d-border-gray'>
+      <div className=''>
+        <p className='font-semibold '>توضیحات</p>
+        <div
+          className='text-sm'
+          dangerouslySetInnerHTML={{ __html: desc }}
+        ></div>
+      </div>
+      {/* <div className=''>
 				<span className='font-semibold'>مشخصات</span>
 				<div className='group '>
 					<div className='flex justify-between px-1 py-1 text-sm bg-gray-100'>
@@ -33,8 +33,8 @@ const Specifications = ({ desc, category, model, color, madeIn, material }) => {
 					</div>
 				</div>
 			</div> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Specifications;

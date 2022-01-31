@@ -9,7 +9,6 @@ const ProductsRow = ({ name, className, list }) => {
 	const [noRight, setNoRight] = useState(false);
 	const [noLeft, setNoLeft] = useState(false);
 	const [hideArrows, setHideArrows] = useState(false);
-	console.log(list);
 
 	//hooks
 	const rowRef = useRef();

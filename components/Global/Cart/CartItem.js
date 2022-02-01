@@ -8,8 +8,8 @@ import {
   increaseCartItemQuantity,
   removeItemFromCart,
 } from 'redux/reducers/cartReducer/cartReducer';
-import Tooltip from 'components/UI/Tooltip/Tooltip';
-import endpointUrls from 'utils/constants/enpointUrls';
+import Tooltip2 from 'components/UI/Tooltip/Tooltip';
+import endpointUrls from 'utils/constants/endpointUrls';
 
 const CartItem = ({ info, index }) => {
   //hooks
@@ -21,7 +21,7 @@ const CartItem = ({ info, index }) => {
   const handleDecrease = () => dispatch(decreaseCartItemQuantity(index));
 
   return (
-    <div className='flex flex-col items-center p-2 ml-6 text-sm border rounded-md xs:flex-row h-fit border-d-border-gray'>
+    <div className='flex flex-col items-center p-2 ml-6 mr-1 text-sm border rounded-md xs:flex-row h-fit border-d-border-gray '>
       <div className='relative ml-2 '>
         <Image
           src={endpointUrls.baseUrl + info.DefaultPictureModel.ImageUrl}
@@ -33,6 +33,14 @@ const CartItem = ({ info, index }) => {
       <div className='flex flex-col mx-auto '>
         <p>{info.NameFa}</p>
         <p>{info.NameEn}</p>
+        <div className='flex gap-x-2'>
+          <p className='flex items-center justify-center w-6 h-6 border'>
+            {info.selectedSize && info.selectedSize.Name}
+          </p>
+          <p className='flex items-center justify-center px-3 border'>
+            {info.selectedColor && info.selectedColor.Name}
+          </p>
+        </div>
         {/* <p>سایز : {info.sizes}</p> */}
         <p>قیمت : {Separator(info?.ProductPrice?.PriceValue)}</p>
         <div className='flex items-center mt-auto select-none'>
@@ -55,9 +63,9 @@ const CartItem = ({ info, index }) => {
             className='text-lg cursor-pointer hover:text-red-300'
             onClick={handleDelete}
           >
-            <Tooltip title='حذف این مورد'>
+            <Tooltip2 title='حذف این مورد'>
               <FiTrash2 />
-            </Tooltip>
+            </Tooltip2>
           </div>
         </div>
       </div>

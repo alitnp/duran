@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { BackgroundColorTheif } from 'utils/helpers/background-color-theif';
 import Image from 'next/image';
-import endpointUrls from 'utils/constants/enpointUrls';
+import endpointUrls from 'utils/constants/endpointUrls';
 
 const ProductImages = ({ images }) => {
   //states

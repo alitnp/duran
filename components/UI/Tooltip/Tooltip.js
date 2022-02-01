@@ -1,12 +1,11 @@
-const Tooltip = ({ children, title }) => {
-	return (
-		<div className='relative group'>
-			{children}
-			<div className='absolute hidden p-2 mb-2 text-xs text-white -translate-x-1/2 rounded-md shadow-xl group-hover:block bottom-full left-1/2 whitespace-nowrap bg-slate-800'>
-				{title}
-			</div>
-		</div>
-	);
+import { Tooltip as AntTooltip } from 'antd';
+
+const Tooltip = ({ children, title, ...props }) => {
+  return (
+    <AntTooltip title={title} {...props}>
+      {children}
+    </AntTooltip>
+  );
 };
 
 export default Tooltip;

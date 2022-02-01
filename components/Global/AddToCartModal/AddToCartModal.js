@@ -10,7 +10,7 @@ import {
   setCartNeedAnimation,
   setCartTempAddToCart,
 } from 'redux/reducers/cartReducer/cartReducer';
-import endpointUrls from 'utils/constants/enpointUrls';
+import endpointUrls from 'utils/constants/endpointUrls';
 
 const AddToCartModal = () => {
   //states
@@ -48,7 +48,6 @@ const AddToCartModal = () => {
   //effects
   useEffect(() => {
     if (tempAddToCart) {
-      console.log(tempAddToCart);
       getAttributes('Size') && setSelectedSize(getAttributes('Size').Values[0]);
       getAttributes('Color') &&
         setSelectedColor(getAttributes('Color').Values[0]);

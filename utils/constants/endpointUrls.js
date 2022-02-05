@@ -27,6 +27,9 @@ const endpointUrls = {
 
   //search
   searchProducts: '/catalog/search',
+
+  //brands
+  getAllBrands: '/Catalog/BrandAll',
 };
 
 export default endpointUrls;

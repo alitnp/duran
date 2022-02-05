@@ -63,7 +63,7 @@ const BuyBox = ({
                   key={item.Id}
                   onClick={() => setSelectedSize(item)}
                   className={`flex items-center justify-center w-8 h-8 border border-d-border-gray cursor-pointer ${
-                    item.Id === selectedSize?.Id && ' border-d-text underline'
+                    item.Id === selectedSize?.Id && ' border-d-text '
                   }
 `}
                 >
@@ -83,7 +83,7 @@ const BuyBox = ({
                   key={item.Id}
                   onClick={() => setSelectedColor(item)}
                   className={`flex items-center justify-center border border-d-border-gray cursor-pointer whitespace-nowrap p-2 ${
-                    item.Id === selectedColor?.Id && ' border-d-text underline'
+                    item.Id === selectedColor?.Id && ' border-d-text '
                   }
 `}
                 >

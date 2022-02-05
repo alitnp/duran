@@ -6,6 +6,7 @@ const routes = {
   dashboardEdit: { path: '/dashboard/edit', isProtected: false },
   dashboardOrders: { path: '/dashboard/orders', isProtected: false },
   result: { path: '/result', isProtected: false },
+  brands: { path: '/brands', isProtected: false },
 };
 
 export default routes;

@@ -10,5 +10,5 @@ export const getBrandsList = () => async (dispatch) => {
   const result = await apiServices.get(endpointUrls.getAllBrands);
   dispatch(setBrandsLoading(false));
   if (!result.isSuccess) return;
-  dispatch(setBrandsList(result.data));
+  dispatch(setBrandsList(result.data.Data));
 };

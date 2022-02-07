@@ -30,6 +30,7 @@ const endpointUrls = {
 
   //brands
   getAllBrands: '/Catalog/BrandAll',
+  getBrandProduct: '/Catalog/Brand',
 };
 
 export default endpointUrls;

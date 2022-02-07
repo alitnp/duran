@@ -1,6 +1,6 @@
 const Specifications = ({ desc, category, model, color, madeIn, material }) => {
   return (
-    <div className='pb-2 mt-6 mb-2 border-b border-d-border-gray'>
+    <div className='px-4 pt-4 mt-3 mb-2 border-d-border-gray bg-d-gray'>
       <div className=''>
         <p className='font-semibold '>توضیحات</p>
         <div

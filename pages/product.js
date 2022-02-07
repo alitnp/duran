@@ -123,13 +123,13 @@ const Product = () => {
     <Layout>
       <ProductBreadCrumb list={productDetail?.Breadcrumb?.CategoryBreadcrumb} />
 
-      <div className='flex flex-col mt-3 mb-6 lg:flex-row-reverse gap-x-10'>
+      <div className='flex flex-col mt-3 mb-6 md:flex-row-reverse gap-x-10'>
         <div className='flex flex-col grow'>
           {productDetail?.PictureModels && (
             <ProductImages images={productDetail?.PictureModels} />
           )}
-          {screenWidth >= 1024 && (
-            <div className='hidden grid-cols-1 lg:grid'>
+          {screenWidth >= 768 && (
+            <div className='hidden grid-cols-1 md:grid'>
               <Specifications
                 desc={productDetail?.FullDescription}
                 category={info.category}
@@ -138,22 +138,17 @@ const Product = () => {
                 madeIn={info.madeIn}
                 material={info.material}
               />
-              <Comments
-                comments={info.comments.items}
-                total={info.comments.totalComments}
-                overView={productDetail?.ProductReviewOverview}
-                sendComment={() => setShowSendComment(true)}
-              />
+
               <ProductsRow key={2} name={'محصولات مشابه'} className='mt-10' />
             </div>
           )}
         </div>
-        <div className='flex flex-col lg:min-w-[350px]'>
+        <div className='flex flex-col'>
           <BuyBox
-            persianBrand={productDetail?.BrandModel?.Name}
-            englishBrand={productDetail?.BrandModel?.SeName}
-            persianName={productDetail?.Name}
-            englishName={productDetail?.SeName}
+            persianBrand={productDetail?.BrandModel?.NameFa}
+            englishBrand={productDetail?.BrandModel?.NameEn}
+            persianName={productDetail?.NameFa}
+            englishName={productDetail?.NameEn}
             sizes={productDetail?.ProductAttributes?.find(
               (item) => item.Name === 'Size'
             )}
@@ -162,9 +157,18 @@ const Product = () => {
             )}
             price={productDetail?.ProductPrice?.PriceValue}
           />
+          {screenWidth >= 768 && (
+            <Comments
+              comments={info.comments.items}
+              total={info.comments.totalComments}
+              overView={productDetail?.ProductReviewOverview}
+              reviews={productDetail?.ProductReviews}
+              sendComment={() => setShowSendComment(true)}
+            />
+          )}
         </div>
-        {screenWidth < 1024 && (
-          <div className='grid grid-cols-1 lg:hidden'>
+        {screenWidth < 768 && (
+          <div className='grid grid-cols-1 md:hidden'>
             <Specifications
               desc={productDetail?.FullDescription}
               category={info.category}
@@ -177,6 +181,7 @@ const Product = () => {
               comments={info.comments.items}
               total={info.comments.totalComments}
               overView={productDetail?.ProductReviewOverview}
+              reviews={productDetail?.ProductReviews}
               sendComment={() => setShowSendComment(true)}
             />
             <ProductsRow key={1} name={'محصولات مشابه'} className='mt-10' />

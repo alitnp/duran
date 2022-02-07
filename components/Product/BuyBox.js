@@ -28,9 +28,9 @@ const BuyBox = ({
   }, [colors]);
 
   return (
-    <div className='sticky flex flex-col w-full pb-4 mb-4 border-b lg:min-h-[24rem] top-20 border-d-border-gray border p-2 rounded-md '>
+    <div className=' flex flex-col w-full pb-4 mb-4 border-b lg:min-h-[24rem]  border-d-border-gray border p-2 rounded-md '>
       <div className='pb-2 mb-2 border-b'>
-        <h1 className='mb-2 text-lg font-bold'>
+        <h1 className='mb-2 text-base font-bold'>
           <Link href={routes.home.path} passHref>
             <span className='cursor-pointer hover:underline'>
               {persianBrand}
@@ -39,7 +39,7 @@ const BuyBox = ({
           {' - '}
           {persianName}
         </h1>
-        <h1 className='text-lg font-bold'>
+        <h1 className='text-base font-bold'>
           <Link href={routes.home.path} passHref>
             <span className='cursor-pointer hover:underline'>
               {englishBrand}

@@ -3,10 +3,18 @@ import Image from 'next/image';
 import NavItem from 'components/Global/Navbar/NavItem';
 import style from 'styles/style.module.css';
 import routes from 'utils/constants/routes';
+import { Drawer } from 'antd';
 
-const navItems = () => {
-  const [collapse, setCollapse] = useState(true);
+const Navigation = () => {
+  //states
+  const [openMenu, setOpenMenu] = useState(false);
+  console.log(openMenu);
 
+  //functions
+  const onClose = () => setOpenMenu((prevState) => !prevState);
+  const onOpen = () => setOpenMenu(true);
+
+  //constants
   const items = [
     { url: '/', text: 'خانه' },
     { url: '/results', text: 'تازه رسیده ها' },
@@ -21,9 +29,8 @@ const navItems = () => {
         })}
       </nav>
       <div
-        className={`border border-d-border-gray rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2 select-none ${style.noSelect}`}
-        onMouseEnter={() => setCollapse(false)}
-        onMouseLeave={() => setCollapse(true)}
+        className={` rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2 select-none ${style.noSelect}`}
+        onClick={onOpen}
       >
         <Image
           src='/icons/menu.svg'
@@ -31,29 +38,26 @@ const navItems = () => {
           height='20px'
           objectFit='contain'
         />
-        <nav
-          className='absolute right-0 flex flex-col overflow-hidden list-none border rounded-md top-full bg-d-bg-color border-d-border-gray'
-          style={{
-            borderWidth: collapse ? '0' : '1px',
-            transition: 'max-height 0.3s ease-out',
-            maxHeight: collapse ? '0rem' : `${40 * items.length}px`,
-            width: collapse ? '0' : 'unset',
-          }}
-        >
-          {items.map((item) => {
-            return (
-              <div
-                key={item.text}
-                className='flex items-center py-2 pr-4 text-center hover:bg-d-gray'
-              >
-                <NavItem text={item.text} url={item.url} />
-              </div>
-            );
-          })}
-        </nav>
       </div>
+      <Drawer
+        title='فروشگاه دوران'
+        placement='right'
+        onClose={onClose}
+        visible={openMenu}
+      >
+        {items.map((item) => {
+          return (
+            <div
+              key={item.text}
+              className='flex items-center py-2 pr-4 text-center hover:bg-d-gray'
+            >
+              <NavItem text={item.text} url={item.url} />
+            </div>
+          );
+        })}
+      </Drawer>
     </>
   );
 };
 
-export default navItems;
+export default Navigation;

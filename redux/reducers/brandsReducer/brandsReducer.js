@@ -12,8 +12,13 @@ export const brandsReducer = createSlice({
     setBrandsList: (state, { payload }) => {
       state.brandsList = payload;
     },
+    addProductsToBrand: (state, { payload }) => {
+      const { index, products } = payload;
+      state.brandsList[index].Products = products;
+    },
   },
 });
 
-export const { setBrandsLoading, setBrandsList } = brandsReducer.actions;
+export const { setBrandsLoading, setBrandsList, addProductsToBrand } =
+  brandsReducer.actions;
 export default brandsReducer.reducer;

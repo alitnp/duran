@@ -25,14 +25,14 @@ const ResultFilterColors = ({ options }) => {
     <>
       <div className='flex items-center justify-between mt-6 border-b'>
         <p className='mb-0'>رنگ ها</p>
-        <IoIosArrowDown />
+        {/* <IoIosArrowDown /> */}
       </div>
       <div className='flex flex-wrap mt-2 gap-x-2 gap-y-2'>
         {filteredColors.map((item) => {
           const value = getValue(item.FilterUrl);
           return (
             <div
-              className={`cursor-pointer border flex items-center gap-x-2  px-2 text-xs hover:bg-slate-50 border-d-border-gray`}
+              className={`cursor-pointer border flex items-center gap-x-2 px-2 text-xs hover:bg-slate-50 border-d-border-gray`}
               key={value}
               onClick={() =>
                 router.push({

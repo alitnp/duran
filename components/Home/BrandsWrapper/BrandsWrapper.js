@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHomeBrands } from 'redux/middlewares/home/getHomeBrands';
 import style from 'styles/style.module.css';
+import routes from 'utils/constants/routes';
 import useScreenWidth from 'utils/hooks/useScreenWidth';
 
 const brandsTemp = [
@@ -44,9 +46,11 @@ const BrandsWrapper = () => {
       </div>
       <div className='relative w-10/12 pb-2 mx-auto text-right border-b md:text-center md:w-9/12 border-d-border-gray'>
         <h3 className='text-xl font-bold '>برندهای پرطرفدار</h3>
-        <span className='absolute left-0 font-medium transform -translate-y-1/2 top-1/2 text-d-primary'>
-          همه
-        </span>
+        <Link href={routes.brands.path}>
+          <span className='absolute left-0 font-medium transform -translate-y-1/2 cursor-pointer top-1/2 text-d-primary'>
+            همه
+          </span>
+        </Link>
       </div>
       <div
         className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${

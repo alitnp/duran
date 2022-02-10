@@ -3,33 +3,33 @@ import Image from 'next/image';
 
 const CardPicture = ({ firstImage, secondImage, alt, loading }) => {
   return (
-    <div className='relative '>
-      <div className='absolute top-0 right-0 opacity-100 '>
-        <div className='relative p-2 bg-d-gray'>
+    <div className='relative flex justify-center h-[270px] min-w-[180px]'>
+      <div className='absolute top-0 right-0 flex justify-center w-full h-full opacity-100'>
+        <div className='relative flex justify-center w-full h-full mx-auto transition-all duration-500 opacity-0 group-hover:opacity-100'>
           {secondImage && (
             <Image
               src={secondImage}
-              width='180px'
-              height='270px'
-              objectFit='cover'
+              layout='fill'
+              objectFit='contain'
               draggable='false'
+              objectPosition='center center'
               alt={alt}
             />
           )}
         </div>
       </div>
       <div
-        className={`relative bg-d-gray p-2 transition-opacity duration-500 opacity-100 ${
+        className={`relative  transition-opacity flex w-full h-full justify-center  duration-500 opacity-100  ${
           secondImage && 'group-hover:opacity-0'
         }`}
       >
         {firstImage && (
           <Image
             src={firstImage}
-            width='180px'
-            height='270px'
-            objectFit='cover'
+            layout='fill'
+            objectFit='contain'
             draggable='false'
+            objectPosition='center center'
             alt={alt}
           />
         )}

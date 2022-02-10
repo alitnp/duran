@@ -30,21 +30,23 @@ const ProductCardRow = ({ info, className }) => {
 
   return (
     <div
-      className={`relative overflow-hidden group shrink-0 select-none ${className} `}
+      className={`relative overflow-hidden group shrink-0  select-none ${className} `}
     >
       <ProductCardHoverMenu info={info} setLoading={setLoading} />
-      <CardPicture
-        loading={loading}
-        firstImage={
-          info?.DefaultPictureModel.ImageUrl &&
-          endpointUrls.baseUrl + info?.DefaultPictureModel.ImageUrl
-        }
-        alt={info?.DefaultPictureModel.AlternateText}
-        secondImage={
-          info?.SecondPictureModel.ImageUrl &&
-          endpointUrls.baseUrl + info?.SecondPictureModel.ImageUrl
-        }
-      />
+      <div className='border'>
+        <CardPicture
+          loading={loading}
+          firstImage={
+            info?.DefaultPictureModel.ImageUrl &&
+            endpointUrls.baseUrl + info?.DefaultPictureModel.ImageUrl
+          }
+          alt={info?.DefaultPictureModel.AlternateText}
+          secondImage={
+            info?.SecondPictureModel.ImageUrl &&
+            endpointUrls.baseUrl + info?.SecondPictureModel.ImageUrl
+          }
+        />
+      </div>
       <ProductCardInfo info={info} />
       <ProductCardAnimation showAnimation={showAnimation} />
     </div>

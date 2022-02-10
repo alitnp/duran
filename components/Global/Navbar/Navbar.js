@@ -14,7 +14,7 @@ import routes from 'utils/constants/routes';
 
 const Navbar = () => {
   //states
-  const { loggedIn } = useSelector((state) => state.user);
+  const { loggedIn, userDetail } = useSelector((state) => state.user);
   //hookes
   const dispatch = useDispatch();
   const router = useRouter();
@@ -33,9 +33,9 @@ const Navbar = () => {
       }
     });
   }, [router.route]);
-  // useEffect(() => {
-  //   loggedIn && dispatch(getUserDetail());
-  // }, [loggedIn]);
+  useEffect(() => {
+    loggedIn && !userDetail && dispatch(getUserDetail());
+  }, [loggedIn, userDetail]);
 
   return (
     <>

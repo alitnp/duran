@@ -62,6 +62,7 @@ body,
 	box-sizing: border-box;
 	text-align: right;
 	scroll-behavior: smooth;
+	/* transition: all 0.5s ease-in-out; */
 }
 body {
 	color: var(--d-text);

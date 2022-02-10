@@ -4,9 +4,23 @@ import Layout from 'components/Layout/Layout';
 import Button from 'components/UI/Button/Button';
 import Empty from 'components/UI/Empty/Empty';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getUserWishlist } from 'redux/middlewares/user/getUserWishlist';
 import routes from 'utils/constants/routes';
 
 const wishlistPage = () => {
+  const { userWishlist } = useSelector((state) => state.user);
+
+  //hooks
+  const dispatch = useDispatch();
+
+  //effects
+  useEffect(() => {
+    userWishlist?.length === 0 && dispatch(getUserWishlist());
+  }, []);
+
   return (
     <Layout>
       <Breadcrumb style={{ marginTop: '0.75rem' }}>

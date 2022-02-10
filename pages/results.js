@@ -15,6 +15,9 @@ import LoadingCover from 'components/UI/LoadingSpin/LoadingCover';
 import DSelect from 'components/UI/DSelect/DSelect';
 import DOption from 'components/UI/DOption/DOption';
 import ResultsOrderBy from 'components/Results/ResultsOrderBy';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import Link from 'next/link';
+import routes from 'utils/constants/routes';
 
 const Results = () => {
   //states
@@ -31,6 +34,9 @@ const Results = () => {
     dispatch(getProductSearchResults(query));
   }, [query]);
 
+  //functions
+  const isFiltered = () => Object.values(query).some((item) => !!item);
+
   return (
     <>
       <Head>
@@ -40,11 +46,19 @@ const Results = () => {
       <Layout>
         <div className='flex mt-6 mb-10' style={{ minHeight: '80vh' }}>
           <FilterVertical />
-          <div className='w-full mx-auto'>
+          <div className='flex-grow-0 w-full mx-auto'>
             <FilterHorizen />
-            <div className='flex items-center justify-between w-full mb-2 border-b'>
-              <p className='mb-0'>{shoes?.Products?.length} محصول</p>
-
+            <div className='flex items-center justify-between w-full pb-2 mb-2 border-b sm:pb-0'>
+              <div className='flex flex-col sm:flex-row sm:items-center gap-x-2'>
+                <p className='mb-0'>{shoes?.Products?.length} محصول</p>
+                {isFiltered() && (
+                  <Link href={routes.result.path}>
+                    <p className='flex items-center px-3 mb-0 text-xs bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 gap-x-1'>
+                      حذف فیلترها <AiOutlineCloseCircle />
+                    </p>
+                  </Link>
+                )}
+              </div>
               <ResultsOrderBy
                 options={shoes?.PagingFilteringContext?.AvailableSortOptions}
               />

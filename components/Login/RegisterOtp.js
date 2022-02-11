@@ -3,10 +3,12 @@ import DInputNumber from 'components/UI/DInputNumber/DInputNumber';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { handleLogin } from 'redux/middlewares/user/handleLogin';
 import endpointUrls from 'utils/constants/endpointUrls';
+import routes from 'utils/constants/routes';
 import apiServices from 'utils/services/apiServices';
 
 const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
@@ -14,6 +16,7 @@ const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
   const [otp, setOtp] = useState('');
   const [timeLeft, setTimeLeft] = useState(3);
   const [loading, setLoading] = useState(false);
+  const { needRedirect } = useSelector(state => state.home);
 
   //hooks
   const dispatch = useDispatch();
@@ -37,6 +40,14 @@ const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
     });
     setLoading(false);
     if (!result.isSuccess) return;
+    dispatch(
+      handleLogin(
+        Phone,
+        Buffer.from(password).toString('base64'),
+        setLoading,
+        () => router.push(needRedirect ? needRedirect : routes.home.path)
+      )
+    );
   };
   const resendOtp = async () => {
     if (timeLeft > 0) return;
@@ -45,10 +56,8 @@ const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
     setLoading(false);
     if (!result.isSuccess) return;
     setTimeLeft(60);
-    login();
   };
-  const login = () =>
-    dispatch(handleLogin(Phone, password, setLoading, () => router.push('/')));
+
 
   return (
     <div className='w-full'>
@@ -68,11 +77,10 @@ const RegisterOtp = ({ phoneNumber: Phone, back, password }) => {
       <div className='flex'>
         <p>کدی دریافت نکردید؟</p>
         <p
-          className={`mr-2 ${
-            !timeLeft
-              ? 'text-sky-600 cursor-pointer hover:underline'
-              : 'text-gray-400'
-          }`}
+          className={`mr-2 ${!timeLeft
+            ? 'text-sky-600 cursor-pointer hover:underline'
+            : 'text-gray-400'
+            }`}
           onClick={resendOtp}
         >
           ارسال دوباره {`${timeLeft > 0 ? timeLeft : ''}`}

@@ -47,13 +47,17 @@ const ProductsRow = ({ name, className, list, allLink }) => {
         <h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px] whitespace-nowrap mb-0'>
           {name}
         </h4>
-        {allLink && (
-          <Link href={allLink}>
-            <div className='w-full text-left border-b cursor-pointer border-d-border-gray text-d-primary'>
-              همه
-            </div>
-          </Link>
-        )}
+        <div className='w-full text-left border-b cursor-pointer border-d-border-gray text-d-primary'>
+          {allLink && (
+            <Link href={allLink} passHref>
+              <a >
+                <span className='text-d-primary'>
+                  همه
+                </span>
+              </a>
+            </Link>
+          )}
+        </div>
       </div>
       <div className='relative mb-16'>
         <div

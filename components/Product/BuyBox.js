@@ -1,12 +1,15 @@
 import Button from 'components/UI/Button/Button';
 import { Separator } from 'utils/helpers/persianTools';
 import { useEffect, useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShoppingCart } from 'react-icons/fi';
 import Link from 'next/link';
 import routes from 'utils/constants/routes';
+import { addProductToWishlist } from 'redux/middlewares/global/addProductToWishlist';
+import { useDispatch } from 'react-redux';
 
 const BuyBox = ({
+  id,
   englishBrand,
   persianBrand,
   persianName,
@@ -16,10 +19,13 @@ const BuyBox = ({
   colors,
 }) => {
   //states
-  const [liked, setLiked] = useState(false);
   const [selectedSize, setSelectedSize] = useState();
   const [selectedColor, setSelectedColor] = useState();
 
+  //hooks
+  const dispatch = useDispatch()
+
+  //effects
   useEffect(() => {
     sizes && setSelectedSize(sizes.Values[0]);
   }, [sizes]);
@@ -27,23 +33,28 @@ const BuyBox = ({
     colors && setSelectedColor(colors.Values[0]);
   }, [colors]);
 
+  //functions
+  const addToWishlist = () => {
+    dispatch(addProductToWishlist(id));
+  };
+
   return (
     <div className=' flex flex-col w-full pb-4 mb-4 border-b lg:min-h-[24rem]  border-d-border-gray border p-2 rounded-md '>
       <div className='pb-2 mb-2 border-b'>
         <h1 className='mb-2 text-base font-bold'>
           <Link href={routes.home.path} passHref>
-            <span className='cursor-pointer hover:underline'>
+            <a className='cursor-pointer hover:underline'>
               {persianBrand}
-            </span>
+            </a>
           </Link>
           {' - '}
           {persianName}
         </h1>
         <h1 className='text-base font-bold'>
           <Link href={routes.home.path} passHref>
-            <span className='cursor-pointer hover:underline'>
+            <a className='cursor-pointer hover:underline'>
               {englishBrand}
-            </span>
+            </a>
           </Link>
           {' - '}
           {englishName}
@@ -62,9 +73,8 @@ const BuyBox = ({
                 <div
                   key={item.Id}
                   onClick={() => setSelectedSize(item)}
-                  className={`flex items-center justify-center w-8 h-8 border border-d-border-gray cursor-pointer ${
-                    item.Id === selectedSize?.Id && ' border-d-text '
-                  }
+                  className={`flex items-center justify-center w-8 h-8 border border-d-border-gray cursor-pointer ${item.Id === selectedSize?.Id && ' border-d-text '
+                    }
 `}
                 >
                   {item.Name}
@@ -82,9 +92,8 @@ const BuyBox = ({
                 <div
                   key={item.Id}
                   onClick={() => setSelectedColor(item)}
-                  className={`flex items-center justify-center border border-d-border-gray cursor-pointer whitespace-nowrap p-2 ${
-                    item.Id === selectedColor?.Id && ' border-d-text '
-                  }
+                  className={`flex items-center justify-center border border-d-border-gray cursor-pointer whitespace-nowrap p-2 ${item.Id === selectedColor?.Id && ' border-d-text '
+                    }
 `}
                 >
                   {item.Name}
@@ -97,18 +106,16 @@ const BuyBox = ({
         <Button text='خرید محصول' />
         <div className='flex items-center text-2xl'>
           <FiShoppingCart className='ml-2' />
-          {!liked && (
+          {/* {liked && (
             <AiOutlineHeart
               className='cursor-pointer '
               onClick={() => setLiked(true)}
             />
-          )}
-          {liked && (
-            <AiFillHeart
-              className='cursor-pointer fill-red-600'
-              onClick={() => setLiked(false)}
-            />
-          )}
+          )} */}
+          <AiOutlineHeart
+            className='cursor-pointer fill-red-600'
+            onClick={addToWishlist}
+          />
         </div>
       </div>
     </div>

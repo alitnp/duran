@@ -1,6 +1,7 @@
 import SocialLink from 'components/Global/Footer/SocialLink';
 import Layout from 'components/Layout/Layout';
 import Image from 'next/image';
+import { FiFacebook, FiInstagram } from 'react-icons/fi';
 
 const Footer = () => {
 	return (
@@ -53,9 +54,9 @@ const Footer = () => {
 				</div>
 				<div className=''>
 					<div className='flex'>
-						<SocialLink image='/icons/facebook.png' to='https://facebook.com' />
+						<SocialLink icon={<FiFacebook />} to='https://facebook.com' />
 						<SocialLink
-							image='/icons/instagram.png'
+							icon={<FiInstagram />}
 							to='https://instagram.com'
 						/>
 					</div>

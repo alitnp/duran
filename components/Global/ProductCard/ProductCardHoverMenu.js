@@ -30,6 +30,7 @@ const ProductCardHoverMenu = ({ info, setLoading }) => {
   };
   const isInWishlist = () => {
     if (!userWishlist) return false;
+    return false;
     return userWishlist.some((item) => item.Id === info.Id);
   };
 

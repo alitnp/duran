@@ -11,7 +11,7 @@ const defaultHeaders = () => {
     'Content-Type': 'application/json',
   };
   const token = localStorage.getItem('accessToken');
-  if (token) headers.Authorization = token;
+  if (token) headers.Authorization = "Bearer " + token;
   return headers;
 };
 

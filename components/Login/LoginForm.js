@@ -7,11 +7,14 @@ import DFormItem from 'components/UI/DFormItem/DFormItem';
 import { Form } from 'antd';
 import DInputPassword from 'components/UI/DInputPassword/DInputPassword';
 import { handleLogin } from 'redux/middlewares/user/handleLogin';
+import routes from 'utils/constants/routes';
+import { useSelector } from 'react-redux';
 
 const LoginForm = () => {
   //states
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const { needRedirect } = useSelector(state => state.home);
 
   // console.log(Buffer.from('سلام').toString('base64'));
 
@@ -26,15 +29,15 @@ const LoginForm = () => {
         values.Phone,
         Buffer.from(values.Password).toString('base64'),
         setLoading,
-        () => router.push('/')
+        () => router.push(needRedirect ? needRedirect : routes.home.path)
       )
     );
   };
 
   return (
-    <>
+    <div >
       <div className='w-full text-center mb-7'>
-        <h3 className='text-2xl font-bold '>ورود به حساب</h3>
+        <h3 className='text-2xl font-bold text-center'>ورود به حساب</h3>
       </div>
       <Form form={form} requiredMark={false} onFinish={handleSubmit}>
         <DFormItem
@@ -59,7 +62,7 @@ const LoginForm = () => {
           type='sbmit'
         />
       </Form>
-    </>
+    </div>
   );
 };
 

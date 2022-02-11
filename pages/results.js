@@ -1,7 +1,6 @@
 import Layout from 'components/Layout/Layout';
 import Head from 'next/head';
 import { FaSortAmountDownAlt } from 'react-icons/fa';
-import { IoIosArrowDown } from 'react-icons/io';
 import ProductCardRow from 'components/Global/ProductCard/ProductCard';
 import ProductGrid from 'components/Global/ProductGrid/ProductGrid';
 import FilterVertical from 'components/Results/FilterVertical';
@@ -52,10 +51,10 @@ const Results = () => {
               <div className='flex flex-col sm:flex-row sm:items-center gap-x-2'>
                 <p className='mb-0'>{shoes?.Products?.length} محصول</p>
                 {isFiltered() && (
-                  <Link href={routes.result.path}>
-                    <p className='flex items-center px-3 mb-0 text-xs bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 gap-x-1'>
+                  <Link href={routes.result.path} passHref>
+                    <a className='flex items-center px-3 mb-0 text-xs bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 gap-x-1'>
                       حذف فیلترها <AiOutlineCloseCircle />
-                    </p>
+                    </a>
                   </Link>
                 )}
               </div>
@@ -66,7 +65,7 @@ const Results = () => {
             <ProductGrid>
               {shoes?.Products.map((item, index) => {
                 return (
-                  <div className='w-full '>
+                  <div className='w-full ' key={index}>
                     <ProductCardRow key={index} info={item} />
                   </div>
                 );

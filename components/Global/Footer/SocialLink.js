@@ -1,19 +1,14 @@
-import Image from 'next/image';
 
-const SocialLink = ({ image, to }) => {
+
+const SocialLink = ({ icon, to }) => {
 	return (
 		<a
-			className='flex items-center justify-center w-10 h-10 mx-1 rounded-full cursor-pointer bg-zinc-700 hover:bg-zinc-500'
+			className='flex items-center justify-center w-10 h-10 mx-1 text-xl rounded-full cursor-pointer bg-zinc-700 hover:bg-zinc-500'
 			href={to}
 			target='_blank'
+			rel="noreferrer"
 		>
-			<Image
-				src={image}
-				width='18px'
-				height='18px'
-				objectFit='contain'
-				objectPosition='center'
-			/>
+			{icon}
 		</a>
 	);
 };

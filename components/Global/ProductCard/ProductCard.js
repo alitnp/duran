@@ -42,7 +42,7 @@ const ProductCardRow = ({ info, className }) => {
           }
           alt={info?.DefaultPictureModel.AlternateText}
           secondImage={
-            info?.SecondPictureModel.ImageUrl &&
+            info?.SecondPictureModel.ImageUrl && !info.SecondPictureModel.IsFeaturePicture &&
             endpointUrls.baseUrl + info?.SecondPictureModel.ImageUrl
           }
         />

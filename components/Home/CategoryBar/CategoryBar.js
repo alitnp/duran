@@ -27,10 +27,10 @@ const CategoryBar = () => {
                 {index !== 0 && (
                   <div className='w-1.5 h-1.5 mx-3 rounded-full bg-d-text' />
                 )}
-                <Link href={routes.result.path + '?cid=' + category.Id}>
-                  <span className='cursor-pointer hover:underline'>
+                <Link href={routes.result.path + '?cid=' + category.Id} passHref>
+                  <a className='cursor-pointer hover:underline'>
                     {category.Name}
-                  </span>
+                  </a>
                 </Link>
               </div>
             );
@@ -40,8 +40,8 @@ const CategoryBar = () => {
         <p className='mb-0 ml-2 text-xs text-d-faded-text'>
           کفشت رو پیدا نکردی؟
         </p>
-        <Link href='/'>
-          <p className='mb-0 text-d-primary'>سفارش کفش</p>
+        <Link href={routes.request.path} passHref>
+          <a ><span className='mb-0 text-d-primary'>سفارش کفش</span></a>
         </Link>
       </div>
     </div>

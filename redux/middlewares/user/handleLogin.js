@@ -1,3 +1,4 @@
+import { setNeedRedirect } from 'redux/reducers/homeReducer/homeReducer';
 import { setLoggedIn } from 'redux/reducers/userReducer/userReducer';
 import endpointUrls from 'utils/constants/endpointUrls';
 import apiServices from 'utils/services/apiServices';
@@ -16,5 +17,6 @@ export const handleLogin =
     localStorage.setItem('accessToken', result.data.Data.AccessToken);
     localStorage.setItem('refreshToken', result.data.Data.RefreshToken);
     dispatch(setLoggedIn(true));
+    dispatch(setNeedRedirect(null));
     pushToHome();
   };

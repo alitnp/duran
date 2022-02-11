@@ -1,28 +1,25 @@
 import Featured from 'components/Home/Featured/Featured';
+import { useSelector } from 'react-redux';
+import endpointUrls from 'utils/constants/endpointUrls';
 
 const FeaturedWrapper = () => {
+	//states
+	const { featured } = useSelector(state => state.home)
+
+	//functions
+	const getFeaturedPicture = (product) => {
+		if (product.DefaultPictureModel.IsFeaturePicture) return product.DefaultPictureModel.ImageUrl
+		if (product.SecondPictureModel.IsFeaturePicture) return product.SecondPictureModel.ImageUrl
+		return product.SecondPictureModel.ImageUrl
+	}
+
+
 	return (
 		<div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-			<Featured
-				image='/image/featured-1.jpg'
-				english='Nike - Adopt Smart'
-				persian='نایکی - اداپت اسمارت'
-			/>
-			<Featured
-				image='/image/featured-3.jpg'
-				english='Adidas - Clima Cool'
-				persian='نایکی - اداپت اسمارت'
-			/>
-			<Featured
-				image='/image/featured-2.jpg'
-				english='Adidas - Spring Blade'
-				persian='آدیداس - اسپرینگ بلید'
-			/>
-			<Featured
-				image='/image/featured-4.jpg'
-				english='Jordan - B430'
-				persian='جردن - بی۴۳۰ '
-			/>
+			{featured && featured?.map(item => {
+				return <Featured image={endpointUrls.baseUrl + getFeaturedPicture(item)} key={item.Id} english={item.NameEn} persian={item.NameFa} id={item.Id} />
+			})}
+
 		</div>
 	);
 };

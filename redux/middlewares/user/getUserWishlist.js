@@ -13,5 +13,5 @@ export const getUserWishlist = () => async (dispatch) => {
   );
   dispatch(setUserLoading(false));
   console.log(result);
-  if (result.isSuccess) dispatch(setUserWishlist(result.data));
+  if (result.isSuccess) dispatch(setUserWishlist(result.data.Data));
 };

@@ -2,6 +2,8 @@ import LinkInput from 'components/Home/ProductLink/LinkInput';
 import Image from 'next/image';
 
 const ProductLinkWrapper = () => {
+
+
 	return (
 		<div className='flex items-center py-28 '>
 			<LinkInput />

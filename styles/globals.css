@@ -76,7 +76,7 @@ div {
 }
 
 a {
-	color: inherit;
+	color: inherit !important;
 	text-decoration: none;
 	cursor: pointer;
 }

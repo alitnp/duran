@@ -9,8 +9,10 @@ import routes from 'utils/constants/routes';
 
 const items = [
   { name: 'اطلاعات حساب', route: routes.dashboard.path },
+  { name: 'خرید های من', route: routes.dashboardOrders.path },
+  { name: 'سفارش های من', route: routes.dashboardRequests.path },
+  { name: 'محصولات من', route: routes.wishlist.path },
   { name: 'ویرایش اطلاعات', route: routes.dashboardEdit.path },
-  { name: 'سفارش های من', route: routes.dashboardOrders.path },
 ];
 
 const DashboardLayout = ({ children }) => {
@@ -30,16 +32,17 @@ const DashboardLayout = ({ children }) => {
   const navItems = () => (
     <>
       {items.map((item) => (
-        <Link href={item.route} key={item.name}>
-          <p
-            className={` ${
-              route === item.route
+        <Link href={item.route} key={item.name} passHref>
+          <a >
+            <div
+              className={` ${route === item.route
                 ? 'text-d-bg-color bg-white/20'
                 : 'text-d-border-gray'
-            } hover:text-white transition-all cursor-pointer mx-2 rounded-md whitespace-nowrap px-3 text-center py-1 my-1 `}
-          >
-            {item.name}
-          </p>
+                } hover:text-white transition-all cursor-pointer mx-2 rounded-md whitespace-nowrap px-3 text-center py-1 my-1 `}
+            >
+              {item.name}
+            </div>
+          </a>
         </Link>
       ))}
       <p
@@ -53,15 +56,14 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <Layout>
-      <div className='flex w-full '>
+      <div className='flex w-full min-h-[80vh]'>
         <aside className='flex-col hidden w-32 py-2 my-4 ml-4 rounded-md md:flex bg-d-text'>
           {navItems()}
         </aside>
-        <div className='w-full'>
+        <div className='w-full '>
           <div
-            className={`md:hidden py-2 mt-4 rounded-md bg-d-text transition-all overflow-hidden ${
-              open ? 'max-h-[500px]' : 'max-h-[50px]'
-            }`}
+            className={`md:hidden py-2 mt-4 rounded-md bg-d-text transition-all overflow-hidden ${open ? 'max-h-[500px]' : 'max-h-[50px]'
+              }`}
           >
             <p
               className='px-3 py-1 mx-2 my-1 mb-3 text-center rounded-md cursor-pointer text-d-bg-color hover:text-white whitespace-nowrap'
@@ -69,14 +71,13 @@ const DashboardLayout = ({ children }) => {
             >
               گزینه ها{' '}
               <CaretDownOutlined
-                className={`mr-3 transition-all bottom-1 relative ${
-                  open && 'rotate-180'
-                }`}
+                className={`mr-3 transition-all bottom-1 relative ${open && 'rotate-180'
+                  }`}
               />
             </p>
             {navItems()}
           </div>
-          <div className='w-full p-4 my-4 border rounded-md shadow-md'>
+          <div className='w-full min-h-[80vh] p-4 my-4 border rounded-md shadow-md'>
             {children}
           </div>
         </div>

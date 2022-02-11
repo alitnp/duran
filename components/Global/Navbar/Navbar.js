@@ -7,6 +7,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { getUserAddresses } from 'redux/middlewares/user/getUserAddresses';
 import { getUserDetail } from 'redux/middlewares/user/getUSerDetail';
 import { handleLogout } from 'redux/middlewares/user/handleLogout';
 import { setLoggedIn } from 'redux/reducers/userReducer/userReducer';
@@ -14,7 +15,7 @@ import routes from 'utils/constants/routes';
 
 const Navbar = () => {
   //states
-  const { loggedIn, userDetail } = useSelector((state) => state.user);
+  const { loggedIn, userDetail, userAddresses } = useSelector((state) => state.user);
   //hookes
   const dispatch = useDispatch();
   const router = useRouter();
@@ -35,6 +36,7 @@ const Navbar = () => {
   }, [router.route]);
   useEffect(() => {
     loggedIn && !userDetail && dispatch(getUserDetail());
+    loggedIn && !userAddresses && dispatch(getUserAddresses());
   }, [loggedIn, userDetail]);
 
   return (
@@ -48,10 +50,10 @@ const Navbar = () => {
           </h3>
           <div className='flex items-center'>
             {loggedIn && (
-              <Link href={routes.wishlist.path}>
-                <span className='ml-4 text-lg'>
+              <Link href={routes.wishlist.path} passHref>
+                <a className='ml-4 text-lg'>
                   <AiOutlineHeart className='cursor-pointer ' />
-                </span>
+                </a>
               </Link>
             )}
             <Link href={loggedIn ? routes.dashboard.path : routes.login.path}>

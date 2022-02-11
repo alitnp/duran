@@ -11,10 +11,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getNewProducts } from 'redux/middlewares/home/getNewProducts';
 import { getHomeBestSelleres } from 'redux/middlewares/home/getHomeBestSellers';
+import { getHomeFeatured } from 'redux/middlewares/home/getHomeFeatured';
 
 export default function Home() {
   //states
-  const { newProducts, bestSellers } = useSelector((state) => state.home);
+  const { newProducts, bestSellers, featured } = useSelector((state) => state.home);
 
   //hooks
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Home() {
   useEffect(() => {
     !newProducts && dispatch(getNewProducts());
     !bestSellers && dispatch(getHomeBestSelleres());
+    !featured && dispatch(getHomeFeatured());
   }, []);
 
   return (

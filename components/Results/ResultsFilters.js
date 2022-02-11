@@ -1,5 +1,3 @@
-import DInput from 'components/UI/DInput/DInput';
-import { BiFilterAlt } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import DSelect from 'components/UI/DSelect/DSelect';
 import DOption from 'components/UI/DOption/DOption';

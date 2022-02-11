@@ -8,9 +8,18 @@ const endpointUrls = {
   verifyOtp: '/Account/AccountActivationByPhone',
   resendOtp: '/Account/ResendOtpCode',
   getUserDetail: '/Account/Info',
+  getUserAddresses: '/Account/Addresses',
+  addNewAddress: '/Account/Addresses',
+  editUserInfo: '/Account/Info',
+
+  //requestProduct
+  sendProductRequest: '/ProductRequest/Create',
+  getProductRequestsList: '/ProductRequest/List',
+  addNoteToProductRequest: '/ProductRequest/AddNote',
+
 
   //wishlist
-  getUserWishlist: '/Whishlist/Index',
+  getUserWishlist: '/Wishlist/Index',
   deleteItemFromWishlist: 'Wishlist/DeleteItemFromWhishlist',
 
   //home
@@ -19,6 +28,7 @@ const endpointUrls = {
   getHomeCategories: '/Component/Index/HomePageCategories',
   getHomeBrands: '/Component/Index/HomePageBrands',
   getHomeBestSelleres: '/Component/Index/HomePageBestSellers',
+  getHomeFeatured: '/Component/Index/CollectionFeaturedProducts',
 
   //product
   getproductDetail: '/Product/ProductDetails',

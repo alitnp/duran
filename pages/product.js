@@ -7,12 +7,9 @@ import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
 import useScreenWidth from 'utils/hooks/useScreenWidth';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { getProductDetail } from 'redux/middlewares/global/getProductDetail';
-import LoadingSpin from 'components/UI/LoadingSpin/LoadingSpin';
 import LoadingCover from 'components/UI/LoadingSpin/LoadingCover';
 import ProductBreadCrumb from 'components/Product/ProductBreadCrumb';
-import { Skeleton } from 'antd';
 import SendComment from 'pages/SendComment';
 
 const info = {
@@ -145,6 +142,7 @@ const Product = () => {
         </div>
         <div className='flex flex-col'>
           <BuyBox
+            id={productDetail?.Id}
             persianBrand={productDetail?.BrandModel?.NameFa}
             englishBrand={productDetail?.BrandModel?.NameEn}
             persianName={productDetail?.NameFa}

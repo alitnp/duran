@@ -1,12 +1,11 @@
 import { Descriptions } from 'antd';
+import DashboardPageTitle from 'components/Dashboard/DashboardPageTitle';
 import DashboardLayout from 'components/Dashboard/DashbordLayout';
 
 const DashboardOrders = () => {
 	return (
 		<DashboardLayout>
-			<h1 className='pb-2 text-xl border-b border-d-border-gray'>
-				سفارش های من
-			</h1>
+			<DashboardPageTitle title="خرید های من" />
 			<Descriptions
 				layout='vertical'
 				bordered

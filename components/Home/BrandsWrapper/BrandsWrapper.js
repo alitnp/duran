@@ -19,7 +19,7 @@ const brandsTemp = [
 const BrandsWrapper = () => {
   //states
   const { brands } = useSelector((state) => state.home);
-  console.log(brands);
+
   //hooks
   const dispatch = useDispatch();
   const screenWidth = useScreenWidth();
@@ -46,16 +46,17 @@ const BrandsWrapper = () => {
       </div>
       <div className='relative w-10/12 pb-2 mx-auto text-right border-b md:text-center md:w-9/12 border-d-border-gray'>
         <h3 className='text-xl font-bold '>برندهای پرطرفدار</h3>
-        <Link href={routes.brands.path}>
-          <span className='absolute left-0 font-medium transform -translate-y-1/2 cursor-pointer top-1/2 text-d-primary'>
-            همه
-          </span>
+        <Link href={routes.brands.path} passHref>
+          <a className='absolute left-0 font-medium transform -translate-y-1/2 cursor-pointer top-1/2 text-d-primary'>
+            <span className='text-d-primary'>
+              همه
+            </span>
+          </a>
         </Link>
       </div>
       <div
-        className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${
-          screenWidth < 768 && style.IconGridContainer
-        }`}
+        className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${screenWidth < 768 && style.IconGridContainer
+          }`}
       >
         {brandsTemp.map(({ path }) => {
           return (

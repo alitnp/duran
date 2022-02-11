@@ -6,11 +6,11 @@ import routes from 'utils/constants/routes';
 import { Drawer } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { MdMenu } from 'react-icons/md';
 
 const Navigation = () => {
   //states
   const [openMenu, setOpenMenu] = useState(false);
-  console.log(openMenu);
 
   //hooks
   const router = useRouter();
@@ -39,15 +39,10 @@ const Navigation = () => {
         })}
       </nav>
       <div
-        className={` rounded-md flex items-center justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2 select-none ${style.noSelect}`}
+        className={` rounded-md flex items-center text-2xl justify-center p-1 cursor-pointer relative overflow-visible md:hidden h-8 mt-2 select-none ${style.noSelect}`}
         onClick={onOpen}
       >
-        <Image
-          src='/icons/menu.svg'
-          width='20px'
-          height='20px'
-          objectFit='contain'
-        />
+        <MdMenu />
       </div>
       <Drawer
         title='فروشگاه دوران'

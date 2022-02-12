@@ -21,7 +21,8 @@
     "react-icons": "^4.3.1",
     "react-multi-date-picker": "^3.3.0",
     "react-redux": "^7.2.6",
-    "react-toastify": "^8.1.0"
+    "react-toastify": "^8.1.0",
+    "swiper": "^8.0.5"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.0",

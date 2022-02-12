@@ -1,47 +1,50 @@
-import { Carousel } from 'antd';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const slides = ['/image/slides/slide1.png', '/image/slides/slide2.png'];
-const contentStyle = {
-	height: '160px',
-	width: '100%',
-	color: '#000',
-	lineHeight: '160px',
-	textAlign: 'center',
-	background: '#364d79',
-	border: '1px solid black',
-};
-const Slider = () => {
-	return (
-		<div className='bg-red-500'>
-			<Carousel autoplay effect='fade'>
-				<div className='w-20 h-20 bg-sky-500'>
-					<h3 style={contentStyle} className='w-20 h-20 bg-sky-500'>
-						asdfasdfa 1
-					</h3>
-				</div>
-				<div className='w-20 h-20 bg-sky-500'>
-					<h3 style={contentStyle} className='w-20 h-20 bg-sky-500'>
-						asdfasdf 2
-					</h3>
-				</div>
-				<div className='w-20 h-20 bg-sky-500'>
-					asdfasdf
-					<h3 style={contentStyle} className='w-20 h-20 bg-sky-500'>
-						3
-					</h3>
-				</div>
-				<div className='w-20 h-20 bg-sky-500'>
-					asdfasdf
-					<h3 style={contentStyle} className='w-20 h-20 bg-sky-500'>
-						4
-					</h3>
-				</div>
-			</Carousel>
-		</div>
-	);
-};
+// import required modules
+import { Autoplay, Pagination } from "swiper";
+import Image from "next/image";
+import { useSelector } from "react-redux";
 
-export default Slider;
+export default function Slider() {
+  //states
+  const { slides } = useSelector((state) => state.home);
+  console.log(slides);
+
+  return (
+    <>
+      <Swiper
+        dir="rtl"
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 3500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={false}
+        modules={[Autoplay, Pagination]}
+        className="h-72"
+      >
+        <SwiperSlide className="relative flex items-center justify-center">
+          <Image
+            src="/image/slides/slide1.png"
+            layout="fill"
+            objectFit="cover"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="relative flex items-center justify-center">
+          <Image
+            src="/image/slides/slide2.png"
+            layout="fill"
+            objectFit="cover"
+          />
+        </SwiperSlide>
+      </Swiper>
+    </>
+  );
+}

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
@@ -7,11 +7,12 @@ const initialState = {
   featured: null,
   categories: null,
   brands: null,
-  needRedirect: null
+  needRedirect: null,
+  slides: null,
 };
 
 export const homeReducer = createSlice({
-  name: 'home',
+  name: "home",
   initialState,
   reducers: {
     setUserLoading: (state, { payload }) => {
@@ -34,7 +35,10 @@ export const homeReducer = createSlice({
     },
     setNeedRedirect: (state, { payload }) => {
       state.needRedirect = payload;
-    }
+    },
+    setHomeSlides: (state, { payload }) => {
+      state.slides = payload;
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const {
   setHomeBrands,
   setHomeBestSellers,
   setHomeFeatured,
-  setNeedRedirect
+  setNeedRedirect,
+  setHomeSlides,
 } = homeReducer.actions;
 export default homeReducer.reducer;

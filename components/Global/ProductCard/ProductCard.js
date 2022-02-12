@@ -1,12 +1,12 @@
-import CardPicture from './CardPicture';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCartNeedAnimation } from 'redux/reducers/cartReducer/cartReducer';
-import { useSelector } from 'react-redux';
-import endpointUrls from 'utils/constants/endpointUrls';
-import ProductCardInfo from 'components/Global/ProductCard/ProductCardInfo';
-import ProductCardAnimation from 'components/Global/ProductCard/ProductCardAnimation';
-import ProductCardHoverMenu from 'components/Global/ProductCard/ProductCardHoverMenu';
+import CardPicture from "./CardPicture";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCartNeedAnimation } from "redux/reducers/cartReducer/cartReducer";
+import { useSelector } from "react-redux";
+import endpointUrls from "utils/constants/endpointUrls";
+import ProductCardInfo from "components/Global/ProductCard/ProductCardInfo";
+import ProductCardAnimation from "components/Global/ProductCard/ProductCardAnimation";
+import ProductCardHoverMenu from "components/Global/ProductCard/ProductCardHoverMenu";
 
 const ProductCardRow = ({ info, className }) => {
   //states
@@ -33,7 +33,7 @@ const ProductCardRow = ({ info, className }) => {
       className={`relative overflow-hidden group shrink-0  select-none ${className} `}
     >
       <ProductCardHoverMenu info={info} setLoading={setLoading} />
-      <div className='border'>
+      <div className="bg-d-gray">
         <CardPicture
           loading={loading}
           firstImage={
@@ -42,7 +42,8 @@ const ProductCardRow = ({ info, className }) => {
           }
           alt={info?.DefaultPictureModel.AlternateText}
           secondImage={
-            info?.SecondPictureModel.ImageUrl && !info.SecondPictureModel.IsFeaturePicture &&
+            info?.SecondPictureModel.ImageUrl &&
+            !info.SecondPictureModel.IsFeaturePicture &&
             endpointUrls.baseUrl + info?.SecondPictureModel.ImageUrl
           }
         />

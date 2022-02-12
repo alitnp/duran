@@ -1,19 +1,19 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getHomeBrands } from 'redux/middlewares/home/getHomeBrands';
-import style from 'styles/style.module.css';
-import routes from 'utils/constants/routes';
-import useScreenWidth from 'utils/hooks/useScreenWidth';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomeBrands } from "redux/middlewares/home/getHomeBrands";
+import style from "styles/style.module.css";
+import routes from "utils/constants/routes";
+import useScreenWidth from "utils/hooks/useScreenWidth";
 
 const brandsTemp = [
-  { path: '/icons/brand1.svg' },
-  { path: '/icons/brand2.svg' },
-  { path: '/icons/brand3.svg' },
-  { path: '/icons/brand4.svg' },
-  { path: '/icons/brand5.svg' },
-  { path: '/icons/brand6.svg' },
+  { path: "/icons/brand1.svg" },
+  { path: "/icons/brand2.svg" },
+  { path: "/icons/brand3.svg" },
+  { path: "/icons/brand4.svg" },
+  { path: "/icons/brand5.svg" },
+  { path: "/icons/brand6.svg" },
 ];
 
 const BrandsWrapper = () => {
@@ -30,43 +30,42 @@ const BrandsWrapper = () => {
   }, []);
 
   return (
-    <div className='relative py-16 mb-20'>
+    <div className="relative py-20 mb-20">
       <div
-        className='absolute top-0 left-0 w-full h-full'
+        className="absolute top-0 left-0 w-full h-full"
         style={{ zIndex: -1 }}
       >
-        <div className='relative w-full h-full'>
+        <div className="relative w-full h-full">
           <Image
-            src='/image/brands-bg.jpg'
-            layout='fill'
-            objectFit='cover'
-            objectPosition='center center'
+            src="/image/brands-bg.jpg"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center center"
           />
         </div>
       </div>
-      <div className='relative w-10/12 pb-2 mx-auto text-right border-b md:text-center md:w-9/12 border-d-border-gray'>
-        <h3 className='text-xl font-bold '>برندهای پرطرفدار</h3>
+      <div className="relative w-10/12 pb-2 mx-auto text-right border-b md:text-center md:w-9/12 border-d-border-gray">
+        <h3 className="text-xl font-bold ">برندهای پرطرفدار</h3>
         <Link href={routes.brands.path} passHref>
-          <a className='absolute left-0 font-medium transform -translate-y-1/2 cursor-pointer top-1/2 text-d-primary'>
-            <span className='text-d-primary'>
-              همه
-            </span>
+          <a className="absolute left-0 font-medium transform -translate-y-1/2 cursor-pointer top-1/2 text-d-primary">
+            <span className="text-d-primary">همه</span>
           </a>
         </Link>
       </div>
       <div
-        className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${screenWidth < 768 && style.IconGridContainer
-          }`}
+        className={`grid justify-between w-10/12 grid-cols-3 mx-auto mt-8 md:flex md:w-9/12 gap-y-8 ${
+          screenWidth < 768 && style.IconGridContainer
+        }`}
       >
         {brandsTemp.map(({ path }) => {
           return (
-            <div className='relative w-14 h-14' key={path}>
+            <div className="relative w-14 h-14" key={path}>
               <Image
                 src={path}
                 key={path}
-                layout='fill'
-                objectFit='contain'
-                objectPosition='center center'
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center center"
               />
             </div>
           );

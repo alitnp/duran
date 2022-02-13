@@ -9,6 +9,7 @@ const initialState = {
   brands: null,
   needRedirect: null,
   slides: null,
+  provinceList: null,
 };
 
 export const homeReducer = createSlice({
@@ -39,6 +40,9 @@ export const homeReducer = createSlice({
     setHomeSlides: (state, { payload }) => {
       state.slides = payload;
     },
+    setHomeProvineList: (state, { payload }) => {
+      state.provinceList = payload;
+    },
   },
 });
 
@@ -51,5 +55,6 @@ export const {
   setHomeFeatured,
   setNeedRedirect,
   setHomeSlides,
+  setHomeProvineList,
 } = homeReducer.actions;
 export default homeReducer.reducer;

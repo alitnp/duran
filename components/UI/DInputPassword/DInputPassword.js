@@ -1,7 +1,7 @@
-import { Input } from 'antd';
+import { Input } from "antd";
 
 const DInputPassword = ({ ...props }) => {
-	return <Input.Password {...props} />;
+  return <Input.Password {...props} />;
 };
 
 export default DInputPassword;

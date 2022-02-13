@@ -9,7 +9,8 @@ const endpointUrls = {
   resendOtp: "/Account/ResendOtpCode",
   getUserDetail: "/Account/Info",
   getUserAddresses: "/Account/Addresses",
-  addNewAddress: "/Account/Addresses",
+  addNewAddress: "/Account/AddressAdd",
+  deleteAddress: "/Account/AdderessDelete",
   editUserInfo: "/Account/Info",
 
   //requestProduct
@@ -29,6 +30,8 @@ const endpointUrls = {
   getHomeBrands: "/Component/Index/HomePageBrands",
   getHomeBestSelleres: "/Component/Index/HomePageBestSellers",
   getHomeFeatured: "/Component/Index/CollectionFeaturedProducts",
+  getHomeProvinceList:
+    "/Country/GetStatesByCountryId?countryId=61dc6d9e2e7daa9231e32c2c",
 
   //product
   getproductDetail: "/Product/ProductDetails",

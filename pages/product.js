@@ -1,28 +1,28 @@
-import Layout from 'components/Layout/Layout';
-import BuyBox from 'components/Product/BuyBox';
-import Specifications from 'components/Product/Specifications';
-import Comments from 'components/Product/Comments';
-import ProductImages from 'components/Product/ProductImages';
-import ProductsRow from 'components/Global/ProductsRow/ProductsRow';
-import useScreenWidth from 'utils/hooks/useScreenWidth';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { getProductDetail } from 'redux/middlewares/global/getProductDetail';
-import LoadingCover from 'components/UI/LoadingSpin/LoadingCover';
-import ProductBreadCrumb from 'components/Product/ProductBreadCrumb';
-import SendComment from 'pages/SendComment';
+import Layout from "components/Layout/Layout";
+import BuyBox from "components/Product/BuyBox";
+import Specifications from "components/Product/Specifications";
+import Comments from "components/Product/Comments";
+import ProductImages from "components/Product/ProductImages";
+import ProductsRow from "components/Global/ProductsRow/ProductsRow";
+import useScreenWidth from "utils/hooks/useScreenWidth";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { getProductDetail } from "redux/middlewares/global/getProductDetail";
+import LoadingCover from "components/UI/LoadingSpin/LoadingCover";
+import ProductBreadCrumb from "components/Product/ProductBreadCrumb";
+import SendComment from "pages/SendComment";
 
 const info = {
   productId: 1,
-  persianName: 'آدیداس - ریسپانس سوپر',
-  englishName: 'Adidas - Response Super',
-  price: '1700000',
-  sizes: ['40', '41', '42'],
-  category: 'مردانه',
-  model: 'باشگاهی - دویدن',
-  color: 'مشکی - سفید',
-  madeIn: 'ویتنام',
-  material: '',
+  persianName: "آدیداس - ریسپانس سوپر",
+  englishName: "Adidas - Response Super",
+  price: "1700000",
+  sizes: ["40", "41", "42"],
+  category: "مردانه",
+  model: "باشگاهی - دویدن",
+  color: "مشکی - سفید",
+  madeIn: "ویتنام",
+  material: "",
   desc: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
 	طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
 	سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
@@ -31,11 +31,11 @@ const info = {
   comments: {
     items: [
       {
-        sender: 'میثاق امیرفجر',
+        sender: "میثاق امیرفجر",
         message: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است`,
       },
       {
-        sender: 'یاسین حجازی',
+        sender: "یاسین حجازی",
         message: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است`,
       },
     ],
@@ -45,42 +45,42 @@ const info = {
   },
 
   images: [
-    '/image/shoes/product/1-1.jpg',
-    '/image/shoes/product/1-2.jpg',
-    '/image/shoes/product/1-3.jpg',
-    '/image/shoes/product/1-4.jpg',
-    '/image/shoes/product/1-5.jpg',
-    '/image/shoes/product/1-6.jpg',
+    "/image/shoes/product/1-1.jpg",
+    "/image/shoes/product/1-2.jpg",
+    "/image/shoes/product/1-3.jpg",
+    "/image/shoes/product/1-4.jpg",
+    "/image/shoes/product/1-5.jpg",
+    "/image/shoes/product/1-6.jpg",
   ],
   similars: [
     {
       id: 2,
-      firstImage: '/image/shoes/jordan-2.jpg',
-      secondImage: '/image/shoes/jordan-1.webp',
-      persianName: 'نایکی - جردن ۱ رترو',
-      englishName: 'NIKE - Jordan 1 Retro',
-      sizes: ['39', '40', '41', '42'],
-      categories: 'مردانه',
+      firstImage: "/image/shoes/jordan-2.jpg",
+      secondImage: "/image/shoes/jordan-1.webp",
+      persianName: "نایکی - جردن ۱ رترو",
+      englishName: "NIKE - Jordan 1 Retro",
+      sizes: ["39", "40", "41", "42"],
+      categories: "مردانه",
       price: 2200000,
     },
     {
       id: 3,
-      firstImage: '/image/shoes/shoe1-1.jpg',
-      secondImage: '/image/shoes/shoe1-2.jpg',
-      persianName: 'نایکی - جردن ۱ رترو',
-      englishName: 'NIKE - Jordan 1 Retro',
-      sizes: ['39', '40', '41', '42'],
-      categories: 'مردانه',
+      firstImage: "/image/shoes/shoe1-1.jpg",
+      secondImage: "/image/shoes/shoe1-2.jpg",
+      persianName: "نایکی - جردن ۱ رترو",
+      englishName: "NIKE - Jordan 1 Retro",
+      sizes: ["39", "40", "41", "42"],
+      categories: "مردانه",
       price: 2200000,
     },
     {
       id: 4,
-      firstImage: '/image/shoes/shoe2-1.jpg',
-      secondImage: '/image/shoes/shoe2-2.jpg',
-      persianName: 'نایکی - جردن ۱ رترو',
-      englishName: 'NIKE - Jordan 1 Retro',
-      sizes: ['39', '40', '41', '42'],
-      categories: 'مردانه',
+      firstImage: "/image/shoes/shoe2-1.jpg",
+      secondImage: "/image/shoes/shoe2-2.jpg",
+      persianName: "نایکی - جردن ۱ رترو",
+      englishName: "NIKE - Jordan 1 Retro",
+      sizes: ["39", "40", "41", "42"],
+      categories: "مردانه",
       price: 2200000,
     },
   ],
@@ -120,13 +120,13 @@ const Product = () => {
     <Layout>
       <ProductBreadCrumb list={productDetail?.Breadcrumb?.CategoryBreadcrumb} />
 
-      <div className='flex flex-col mt-3 mb-6 md:flex-row-reverse gap-x-10'>
-        <div className='flex flex-col grow'>
+      <div className="flex flex-col mt-3 mb-6 md:flex-row-reverse gap-x-6">
+        <div className="flex flex-col grow">
           {productDetail?.PictureModels && (
             <ProductImages images={productDetail?.PictureModels} />
           )}
           {screenWidth >= 768 && (
-            <div className='hidden grid-cols-1 md:grid'>
+            <div className="hidden grid-cols-1 md:grid">
               <Specifications
                 desc={productDetail?.FullDescription}
                 category={info.category}
@@ -136,11 +136,11 @@ const Product = () => {
                 material={info.material}
               />
 
-              <ProductsRow key={2} name={'محصولات مشابه'} className='mt-10' />
+              <ProductsRow key={2} name={"محصولات مشابه"} className="mt-10" />
             </div>
           )}
         </div>
-        <div className='flex flex-col'>
+        <div className="flex flex-col">
           <BuyBox
             id={productDetail?.Id}
             persianBrand={productDetail?.BrandModel?.NameFa}
@@ -148,10 +148,10 @@ const Product = () => {
             persianName={productDetail?.NameFa}
             englishName={productDetail?.NameEn}
             sizes={productDetail?.ProductAttributes?.find(
-              (item) => item.Name === 'Size'
+              (item) => item.Name === "Size"
             )}
             colors={productDetail?.ProductAttributes?.find(
-              (item) => item.Name === 'Color'
+              (item) => item.Name === "Color"
             )}
             price={productDetail?.ProductPrice?.PriceValue}
           />
@@ -166,7 +166,7 @@ const Product = () => {
           )}
         </div>
         {screenWidth < 768 && (
-          <div className='grid grid-cols-1 md:hidden'>
+          <div className="grid grid-cols-1 md:hidden">
             <Specifications
               desc={productDetail?.FullDescription}
               category={info.category}
@@ -182,7 +182,7 @@ const Product = () => {
               reviews={productDetail?.ProductReviews}
               sendComment={() => setShowSendComment(true)}
             />
-            <ProductsRow key={1} name={'محصولات مشابه'} className='mt-10' />
+            <ProductsRow key={1} name={"محصولات مشابه"} className="mt-10" />
           </div>
         )}
       </div>

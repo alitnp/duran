@@ -1,74 +1,80 @@
-import { Alert, Form, Modal } from "antd";
+import { Form, Modal } from "antd";
 import Button from "components/UI/Button/Button";
 import DFormItem from "components/UI/DFormItem/DFormItem";
+import DInput from "components/UI/DInput/DInput";
 import DOption from "components/UI/DOption/DOption";
 import DSelect from "components/UI/DSelect/DSelect";
 import DTextArea from "components/UI/DTextArea/DTextArea";
 import { useEffect } from "react";
 import { useState } from "react";
-import cities from 'utils/constants/cities.json';
-
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getHomeProvinceList } from "redux/middlewares/home/getHomeProvinceList";
+import { getUserAddresses } from "redux/middlewares/user/getUserAddresses";
+import endpointUrls from "utils/constants/endpointUrls";
+import apiServices from "utils/services/apiServices";
 
 const AddNewAddress = ({ show, close }) => {
-    //states
-    const [selectedProvince, setSelectedProvince] = useState(null);
-    const [selectedCities, setSelectedCities] = useState(null);
-    const [address, setAddress] = useState("");
-    const [warning, setWarning] = useState([]);
+  //states
+  const [warning, setWarning] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { provinceList } = useSelector((state) => state.home);
 
-    //effects
-    useEffect(() => {
-        !selectedProvince && setSelectedCities(null);
-    }, [selectedProvince]);
+  //hooks
+  const dispatch = useDispatch();
 
-    //functions
-    const handleSubmit = () => {
-        const tempWarning = [];
-        if (!selectedCities) tempWarning.push('شهر انتخاب نشده');
-        if (!selectedProvince) tempWarning.push('استان انتخاب نشده');
-        if (!address) tempWarning.push('آدرس وارد نشده');
-        if (tempWarning.length > 0) return setWarning(tempWarning);
+  //effects
+  useEffect(() => {
+    !provinceList && dispatch(getHomeProvinceList());
+  }, []);
 
+  //functions
+  const handleSubmit = async (values) => {
+    const result = await apiServices.post(endpointUrls.addNewAddress, {
+      ...values,
+      CountryId: "61dc6d9e2e7daa9231e32c2c",
+    });
+    if (!result.isSuccess) return;
+    dispatch(getUserAddresses());
+    close();
+  };
 
-    };
-
-    return <Modal visible={show} footer={false} title="آدرس جدید" onCancel={close}>
-        <Form onFinish={handleSubmit} >
-            <DFormItem label="استان" rules={[{ required: true, message: 'استان تعیین نشده' }]}>
-                <DSelect allowClear placeholder="انتخاب استان" name="province" value={selectedProvince} onChange={e => {
-                    setWarning([]);
-                    setSelectedProvince(e);
-                }} >
-                    {cities.map(item => <DOption key={item.province} value={item.province}>{item.province}</DOption>)}
-                </DSelect>
-            </DFormItem>
-            <DFormItem label="شهر"  >
-                <DSelect allowClear placeholder="انتخاب شهر" name="city" value={selectedCities} onChange={e => {
-                    setWarning([]);
-                    setSelectedCities(e);
-                }}>
-                    {selectedProvince && cities.map(item => {
-                        if (item.province === selectedProvince) return item.cities.map(city => <DOption key={city} value={city}>{city}</DOption>);
-                    })}
-                </DSelect>
-            </DFormItem>
-            <DFormItem label="آدرس"  >
-                <DTextArea value={address} placeholder="آدرس دقیق" onChange={e => {
-                    setWarning([]);
-                    setAddress(e.target.value);
-                }} />
-            </DFormItem>
-            {warning.length > 0 && <DFormItem label=" " colon={false}>
-                <Alert message={warning.map(item => <p key={item}>{item}</p>)} type="warning" />
-            </DFormItem>}
-            <div className="flex justify-end">
-                <Button text="ثبت" type="submit" />
-            </div>
-        </Form>
-    </Modal>;
+  return (
+    <Modal visible={show} footer={false} title="آدرس جدید" onCancel={close}>
+      <Form onFinish={handleSubmit} requiredMark={false}>
+        <DFormItem
+          label="استان"
+          name="StateProvinceId"
+          rules={[{ required: true, message: "استان تعیین نشده" }]}
+        >
+          <DSelect allowClear placeholder="انتخاب استان" disabled={loading}>
+            {provinceList?.map((item) => (
+              <DOption key={item.id} value={item.id}>
+                {item.name}
+              </DOption>
+            ))}
+          </DSelect>
+        </DFormItem>
+        <DFormItem
+          label="شهر"
+          name="City"
+          rules={[{ required: true, message: "نام شهر را وارد کنید" }]}
+        >
+          <DInput disabled={loading} />
+        </DFormItem>
+        <DFormItem
+          label="آدرس"
+          name="Address1"
+          rules={[{ required: true, message: "آدرس را وارد کنید" }]}
+        >
+          <DTextArea placeholder="آدرس دقیق" disabled={loading} />
+        </DFormItem>
+        <div className="flex justify-end">
+          <Button text="ثبت" type="submit" loading={loading} />
+        </div>
+      </Form>
+    </Modal>
+  );
 };
 
 export default AddNewAddress;
-
-
-

@@ -1,15 +1,15 @@
-import DInput from 'components/UI/DInput/DInput';
-import { BiFilterAlt } from 'react-icons/bi';
-import { useSelector } from 'react-redux';
-import DSelect from 'components/UI/DSelect/DSelect';
-import DOption from 'components/UI/DOption/DOption';
-import { useRouter } from 'next/router';
-import routes from 'utils/constants/routes';
-import ResultFilterColors from 'components/Results/ResultFilerColors';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getBrandsList } from 'redux/middlewares/brands/getBrandsList';
-import ResultsFilters from 'components/Results/ResultsFilters';
+import DInput from "components/UI/DInput/DInput";
+import { BiFilterAlt } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import DSelect from "components/UI/DSelect/DSelect";
+import DOption from "components/UI/DOption/DOption";
+import { useRouter } from "next/router";
+import routes from "utils/constants/routes";
+import ResultFilterColors from "components/Results/ResultFilerColors";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getBrandsList } from "redux/middlewares/brands/getBrandsList";
+import ResultsFilters from "components/Results/ResultsFilters";
 
 const FilterVertical = () => {
   //states
@@ -26,8 +26,8 @@ const FilterVertical = () => {
   }, []);
 
   return (
-    <div className='flex-grow-0 hidden w-40 ml-6 lg:block'>
-      <div className='flex h-[34px] items-center border-b'>
+    <div className="sticky flex-grow-0 hidden w-40 h-full ml-6 top-16 lg:block">
+      <div className="flex h-[34px] items-center border-b ">
         <BiFilterAlt />
         فیلترها
       </div>

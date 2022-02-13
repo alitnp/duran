@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { BackgroundColorTheif } from 'utils/helpers/background-color-theif';
-import Image from 'next/image';
-import endpointUrls from 'utils/constants/endpointUrls';
+import { useEffect, useRef, useState } from "react";
+import { BackgroundColorTheif } from "utils/helpers/background-color-theif";
+import Image from "next/image";
+import endpointUrls from "utils/constants/endpointUrls";
 
 const ProductImages = ({ images }) => {
   //states
@@ -27,37 +27,37 @@ const ProductImages = ({ images }) => {
   return (
     <>
       <div
-        className={`relative w-full border h-96 ${!rgb.length && 'bg-d-gray'}`}
+        className={`relative w-full h-96 ${!rgb.length && "bg-d-gray"}`}
         style={{ backgroundColor: `rgb(${rgb[0]},${rgb[1]},${rgb[2]})` }}
       >
         <img
           src={endpointUrls.baseUrl + images[slide].ImageUrl}
-          alt=''
+          alt=""
           ref={imageRef}
-          className='object-contain w-full h-full'
+          className="object-contain w-full h-full "
           onLoad={(e) => {
-            e?.type === 'load' && getColor();
+            e?.type === "load" && getColor();
           }}
         />
       </div>
-      <div className='flex justify-center w-full h-20 mb-4 gap-x-4'>
+      <div className="flex justify-center w-full h-16 border-t border-gray-300 gap-x-4 bg-d-gray">
         {images.map((image, index) => {
+          if (image.IsFeaturePicture) return null;
           return (
             <div
-              className='cursor-pointer '
+              className="cursor-pointer "
               onClick={() => setSlide(index)}
               key={index}
             >
               <div
-                className={` rounded-full  w-1/2 mx-auto relative -top-[2px] mb-1 ${
-                  slide === index ? 'h-1 bg-d-text' : 'h-[2px] bg-d-faded-text'
+                className={`w-full h-full border ${
+                  slide === index && "border-d-border-gray bg-d-bg-color"
                 }`}
-              ></div>
-              <div className='w-full h-full border'>
+              >
                 <img
                   src={endpointUrls.baseUrl + image.ThumbImageUrl}
                   alt={image.AlternateText}
-                  className='w-full h-full'
+                  className="w-full h-full"
                 />
               </div>
             </div>

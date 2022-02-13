@@ -1,9 +1,9 @@
-import "antd/dist/antd.css";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "styles/globals.css";
+import "antd/dist/antd.css";
 import Head from "next/dist/shared/lib/head";
 import Navbar from "components/Global/Navbar/Navbar";
 import Footer from "components/Global/Footer/Footer";
@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Provider store={store}>
-        <ConfigProvider local={faIR} direction="rtl">
+        <ConfigProvider locale={faIR} direction="rtl">
           <Navbar />
           <Component {...pageProps} />
           <Footer />

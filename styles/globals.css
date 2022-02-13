@@ -86,17 +86,6 @@ a {
     cursor: pointer;
 }
 
-input::placeholder {
-    font-weight: 300;
-    font-size: 0.868rem;
-    color: var(--d-faded-text);
-}
-
-input[type='checkbox']:focus {
-    outline: 0;
-    box-shadow: none;
-}
-
 
 /* ant design */
 

@@ -17,9 +17,8 @@ import { getHomeSlides } from "redux/middlewares/home/getHomeSlides";
 
 export default function Home() {
   //states
-  const { newProducts, bestSellers, featured, slides } = useSelector(
-    (state) => state.home
-  );
+  const { newProducts, bestSellers, featured, slides, provinceList } =
+    useSelector((state) => state.home);
 
   //hooks
   const dispatch = useDispatch();

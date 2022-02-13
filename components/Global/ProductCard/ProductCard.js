@@ -30,11 +30,12 @@ const ProductCardRow = ({ info, className }) => {
 
   return (
     <div
-      className={`relative overflow-hidden group shrink-0  select-none ${className} `}
+      className={`relative overflow-hidden group shrink-0 max-w-[250px] select-none ${className} `}
     >
       <ProductCardHoverMenu info={info} setLoading={setLoading} />
-      <div className="bg-d-gray">
+      <div className=" bg-d-gray">
         <CardPicture
+          id={info.Id}
           loading={loading}
           firstImage={
             info?.DefaultPictureModel.ImageUrl &&

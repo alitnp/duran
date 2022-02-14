@@ -5,8 +5,8 @@ import routes from "utils/constants/routes";
 
 const CardPicture = ({ firstImage, secondImage, alt, loading, id }) => {
   return (
-    <Link href={`${routes.product.path}?id=${id}`}>
-      <div className="relative flex justify-center aspect-[1/1]">
+    <Link href={`${routes.product.path}?id=${id}`} passHref>
+      <a className="relative flex justify-center aspect-[1/1] cursor-pointer">
         <div className="absolute top-0 right-0 flex justify-center w-full h-full opacity-100">
           <div className="relative transition-all duration-500 opacity-0 group-hover:opacity-100">
             {secondImage && (
@@ -44,7 +44,7 @@ const CardPicture = ({ firstImage, secondImage, alt, loading, id }) => {
             </div>
           </div>
         )}
-      </div>
+      </a>
     </Link>
   );
 };

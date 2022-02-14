@@ -1,4 +1,4 @@
-const { createSlice } = require('@reduxjs/toolkit');
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isCartMenuOpen: false,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState: initialState,
   reducers: {
     setCartIsCartMenuOpen: (state, { payload }) => {

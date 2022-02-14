@@ -1,12 +1,22 @@
 import Button from "components/UI/Button/Button";
 import { Separator } from "utils/helpers/persianTools";
 import { useEffect, useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import Link from "next/link";
 import routes from "utils/constants/routes";
 import { addProductToWishlist } from "redux/middlewares/global/addProductToWishlist";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemToCart,
+  setCartIsCartMenuOpen,
+  setCartNeedAnimation,
+} from "redux/reducers/cartReducer/cartReducer";
+import Tooltip from "components/UI/Tooltip/Tooltip";
+
+import ProductCardAnimation from "components/Global/ProductCard/ProductCardAnimation";
+import { removeProductFromWishlist } from "redux/middlewares/global/removeProductFromWishlist";
+import { useRouter } from "next/router";
 
 const BuyBox = ({
   id,
@@ -17,13 +27,19 @@ const BuyBox = ({
   sizes,
   price,
   colors,
+  info,
 }) => {
   //states
   const [selectedSize, setSelectedSize] = useState();
   const [selectedColor, setSelectedColor] = useState();
+  const [showAnimation, setShowAnimation] = useState();
+  const { needAnimation, items } = useSelector((state) => state.cart);
+  const { userWishlist, loggedIn } = useSelector((state) => state.user);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   //hooks
   const dispatch = useDispatch();
+  const router = useRouter();
 
   //effects
   useEffect(() => {
@@ -32,14 +48,51 @@ const BuyBox = ({
   useEffect(() => {
     colors && setSelectedColor(colors.Values[0]);
   }, [colors]);
+  useEffect(() => {
+    if (needAnimation && needAnimation.id === info.Id) {
+      setShowAnimation({ x: needAnimation.clientX, y: needAnimation.clientY });
+      setTimeout(() => {
+        setShowAnimation(null);
+        dispatch(setCartNeedAnimation(null));
+      }, 1200);
+    }
+  }, [needAnimation]);
+  useEffect(() => {
+    userWishlist &&
+      info &&
+      setIsInWishlist(
+        userWishlist.Items.some((shoe) => shoe.ProductId === info.Id)
+      );
+  }, [userWishlist, info]);
 
   //functions
   const addToWishlist = () => {
+    if (!loggedIn) return router.push(routes.login.path);
     dispatch(addProductToWishlist(id));
   };
+  const handleAddToCart = (event) => {
+    if (!loggedIn) return router.push(routes.login.path);
+    dispatch(
+      setCartNeedAnimation({
+        ...event,
+        id: info.Id,
+      })
+    );
+    dispatch(
+      addItemToCart({
+        ...info,
+        selectedSize,
+        selectedColor,
+        quantity: 1,
+      })
+    );
+  };
+  const isInCart = () => items.some((shoe) => shoe.Id === id);
+  const openCartMenu = () => dispatch(setCartIsCartMenuOpen(true));
+  const removeFromWishList = () => dispatch(removeProductFromWishlist(id));
 
   return (
-    <div className=" flex flex-col w-full pb-4 mb-4 border-b lg:min-w-[400px] lg:min-h-[24rem]  border-d-border-gray border p-2 rounded-md ">
+    <div className="flex min-w-[300px] flex-col self-stretch sm:w-4/12 p-2 pb-4 mb-4 border border-b rounded-md sm:h-96 border-d-border-gray">
       <div className="pb-2 mb-2 border-b">
         <h1 className="mb-2 text-base font-bold">
           <Link href={routes.home.path} passHref>
@@ -100,22 +153,48 @@ const BuyBox = ({
             })}
         </div>
       </div>
-      <div className="flex items-center justify-between mt-8 lg:mt-auto gap-x-4">
+      <div className="flex items-center justify-between mt-8 md:mt-auto gap-x-4">
         <Button text="خرید محصول" />
         <div className="flex items-center text-2xl">
-          <FiShoppingCart className="ml-2" />
+          {!isInCart() ? (
+            <Tooltip title="افزودن به سبد خرید">
+              <FiShoppingCart
+                className="ml-2 cursor-pointer"
+                onClick={handleAddToCart}
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="در سبد خرید">
+              <FiShoppingCart
+                className="ml-2 cursor-pointer fill-d-secondary"
+                onClick={openCartMenu}
+              />
+            </Tooltip>
+          )}
           {/* {liked && (
             <AiOutlineHeart
               className='cursor-pointer '
               onClick={() => setLiked(true)}
             />
           )} */}
-          <AiOutlineHeart
-            className="cursor-pointer fill-red-600"
-            onClick={addToWishlist}
-          />
+          {!isInWishlist ? (
+            <Tooltip title="افزودن به لیست محبوب ها">
+              <AiOutlineHeart
+                className="cursor-pointer"
+                onClick={addToWishlist}
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="حذف از لیست محبوب ها">
+              <AiFillHeart
+                className="cursor-pointer text-d-primary"
+                onClick={removeFromWishList}
+              />
+            </Tooltip>
+          )}
         </div>
       </div>
+      <ProductCardAnimation showAnimation={showAnimation} />
     </div>
   );
 };

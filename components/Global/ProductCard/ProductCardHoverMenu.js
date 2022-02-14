@@ -1,39 +1,51 @@
 import Tooltip from "components/UI/Tooltip/Tooltip";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addProductToWishlist } from "redux/middlewares/global/addProductToWishlist";
+import { removeProductFromWishlist } from "redux/middlewares/global/removeProductFromWishlist";
 import {
   setCartIsCartMenuOpen,
   setCartTempAddToCart,
 } from "redux/reducers/cartReducer/cartReducer";
+import routes from "utils/constants/routes";
 
 const ProductCardHoverMenu = ({ info, setLoading }) => {
   //states
   const { items } = useSelector((state) => state.cart);
-  const { userWishlist } = useSelector((state) => state.user);
-  const [liked, setLiked] = useState(false);
+  const { userWishlist, loggedIn } = useSelector((state) => state.user);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   //hooks
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  //effects
+  useEffect(() => {
+    userWishlist &&
+      info &&
+      setIsInWishlist(
+        userWishlist.Items.some((shoe) => shoe.ProductId === info.Id)
+      );
+  }, [userWishlist, info]);
 
   //functions
   const addToCart = (event) => {
+    if (!loggedIn) return router.push(routes.login.path);
     dispatch(setCartTempAddToCart({ info, event }));
   };
   const isInCart = () => items.some((shoe) => shoe.Id === info.Id);
   const openCartMenu = () => dispatch(setCartIsCartMenuOpen(true));
   const addToWishlist = () => {
+    if (!loggedIn) return router.push(routes.login.path);
     dispatch(addProductToWishlist(info.Id, setLoading));
   };
-  const isInWishlist = () => {
-    if (!userWishlist) return false;
-    return false;
-    return userWishlist.some((item) => item.Id === info.Id);
-  };
   const stopClick = (e) => e.stopPropagation();
+  const removeFromWishList = () =>
+    dispatch(removeProductFromWishlist(info.Id, setLoading));
 
   return (
     <div
@@ -54,7 +66,7 @@ const ProductCardHoverMenu = ({ info, setLoading }) => {
           </Tooltip>
         )}
 
-        {!isInWishlist() ? (
+        {!isInWishlist ? (
           <Tooltip title="افزودن به لیست محبوب ها">
             <AiOutlineHeart
               className="cursor-pointer "
@@ -64,8 +76,8 @@ const ProductCardHoverMenu = ({ info, setLoading }) => {
         ) : (
           <Tooltip title="حذف از لیست محبوب ها">
             <AiFillHeart
-              className="cursor-pointer fill-red-600"
-              onClick={() => setLiked(false)}
+              className="cursor-pointer text-d-primary"
+              onClick={removeFromWishList}
             />
           </Tooltip>
         )}

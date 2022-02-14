@@ -1,11 +1,11 @@
-import ProductCardRow from 'components/Global/ProductCard/ProductCard';
-import isTouchScreen from 'utils/hooks/isTouchScreen';
-import useScreenWidth from 'utils/hooks/useScreenWidth';
-import { useEffect, useRef, useState } from 'react';
-import { MdArrowForwardIos } from 'react-icons/md';
-import Link from 'next/link';
+import ProductCardRow from "components/Global/ProductCard/ProductCard";
+import isTouchScreen from "utils/hooks/isTouchScreen";
+import useScreenWidth from "utils/hooks/useScreenWidth";
+import { useEffect, useRef, useState } from "react";
+import { MdArrowForwardIos } from "react-icons/md";
+import Link from "next/link";
 
-const ProductsRow = ({ name, className, list, allLink }) => {
+const ProductsRow = ({ name, className, list, allLink, small }) => {
   //states
   const [noRight, setNoRight] = useState(false);
   const [noLeft, setNoLeft] = useState(false);
@@ -44,24 +44,22 @@ const ProductsRow = ({ name, className, list, allLink }) => {
   return (
     <>
       <div className={`flex mb-2 ${className}`}>
-        <h4 className='ml-4 border-b-2 border-d-primary pl-4 font-semibold pb-[5px] whitespace-nowrap mb-0'>
+        <h4 className="ml-4 border-b-2 border-d-primary pl-4 font-medium pb-[5px] whitespace-nowrap mb-0 text-base">
           {name}
         </h4>
-        <div className='w-full text-left border-b cursor-pointer border-d-border-gray text-d-primary'>
+        <div className="w-full text-left border-b border-d-border-gray text-d-primary">
           {allLink && (
             <Link href={allLink} passHref>
-              <a >
-                <span className='text-d-primary'>
-                  همه
-                </span>
+              <a>
+                <span className="text-d-primary">همه</span>
               </a>
             </Link>
           )}
         </div>
       </div>
-      <div className='relative mb-16'>
+      <div className="relative mb-16">
         <div
-          className='flex mb-8 overflow-x-auto scroll-smooth snap-x horizental-scroll scrol hidden-scroll-bar'
+          className="flex mb-10 overflow-x-auto scroll-smooth snap-x horizental-scroll scrol hidden-scroll-bar"
           ref={rowRef}
           onScroll={() => setArrowKeys(rowRef)}
         >
@@ -70,13 +68,14 @@ const ProductsRow = ({ name, className, list, allLink }) => {
               <ProductCardRow
                 key={idx}
                 info={item}
-                className={`${idx !== 0 && 'mr-6'} snap-start`}
+                className={`${idx !== 0 && "mr-6"} snap-start`}
+                small={small}
               />
             ))}
           {!noRight && !hideArrows && (
             <div
               onClick={scrollRight}
-              className='absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 right-2'
+              className="absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 right-2"
             >
               <MdArrowForwardIos />
             </div>
@@ -84,9 +83,9 @@ const ProductsRow = ({ name, className, list, allLink }) => {
           {!noLeft && !hideArrows && (
             <div
               onClick={scrollLeft}
-              className='absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 left-2'
+              className="absolute flex items-center justify-center p-2 -translate-y-1/2 bg-white rounded-full shadow-md cursor-pointer top-1/2 left-2"
             >
-              <MdArrowForwardIos className='-scale-100' />
+              <MdArrowForwardIos className="-scale-100" />
             </div>
           )}
         </div>

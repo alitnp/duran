@@ -72,9 +72,7 @@ const Pagination = ({ setPage, pageIndex, totalPages }) => {
             {persian(pageIndex - 1)}
           </div>
         )}
-        <div
-          className={`${pageClasses} border border-d-border-gray bg-d-bg-color`}
-        >
+        <div className={`${pageClasses} border border-d-text bg-d-bg-color`}>
           {persian(pageIndex)}
         </div>
         {pageIndex < totalPages && (

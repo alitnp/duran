@@ -16,8 +16,6 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const { needRedirect } = useSelector((state) => state.home);
 
-  // console.log(Buffer.from('سلام').toString('base64'));
-
   //hooks
   const router = useRouter();
   const dispatch = useDispatch();

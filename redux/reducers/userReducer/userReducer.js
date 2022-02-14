@@ -1,8 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
-  name: 'user',
-  initialState: { loggedIn: false, userDetail: null, userWishlist: null, userAddresses: null },
+  name: "user",
+  initialState: {
+    loggedIn: false,
+    userDetail: null,
+    userWishlist: null,
+    userAddresses: null,
+    loading: false,
+  },
   reducers: {
     setLoggedIn: (state, { payload }) => {
       state.loggedIn = payload;
@@ -16,9 +22,17 @@ export const userSlice = createSlice({
     setUserAddresses: (state, { payload }) => {
       state.userAddresses = payload;
     },
+    setUserLoading: (state, { payload }) => {
+      state.loading = payload;
+    },
   },
 });
 
-export const { setLoggedIn, setUserDetail, setUserWishlist, setUserAddresses } =
-  userSlice.actions;
+export const {
+  setLoggedIn,
+  setUserDetail,
+  setUserWishlist,
+  setUserAddresses,
+  setUserLoading,
+} = userSlice.actions;
 export default userSlice.reducer;

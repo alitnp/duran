@@ -1,16 +1,16 @@
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import endpointUrls from 'utils/constants/endpointUrls';
-import { store } from 'redux/store';
-import { handleLogout } from 'redux/middlewares/user/handleLogout';
+import axios from "axios";
+import { toast } from "react-toastify";
+import endpointUrls from "utils/constants/endpointUrls";
+import { store } from "redux/store";
+import { handleLogout } from "redux/middlewares/user/handleLogout";
 
 const baseUrl = endpointUrls.baseUrl;
 
 const defaultHeaders = () => {
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem("accessToken");
   if (token) headers.Authorization = "Bearer " + token;
   return headers;
 };
@@ -18,7 +18,7 @@ const defaultHeaders = () => {
 const handleError = (error) => {
   if (error?.Message) return toast.warning(error.Message);
   if (error?.message) return toast.warning(error.message);
-  toast.warning('عملیات با مشکل مواجه شد. دوباره سعی کنید.');
+  toast.warning("عملیات با مشکل مواجه شد. دوباره سعی کنید.");
 };
 
 const logout = () => store.dispatch(handleLogout());
@@ -67,7 +67,6 @@ const post = async (url, params, optionalHeaders, noError) => {
       error = err.response?.data;
       !noError && handleError(error);
       err?.response?.status === 401 && logout();
-      console.log(err.response?.status);
     });
 
   return { isSuccess, data, error, status };

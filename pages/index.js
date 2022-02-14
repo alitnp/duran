@@ -7,29 +7,15 @@ import ProductLinkWrapper from "components/Home/ProductLink/ProductLinkWrapper";
 import BrandsWrapper from "components/Home/BrandsWrapper/BrandsWrapper";
 import ProductsRow from "components/Global/ProductsRow/ProductsRow";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getNewProducts } from "redux/middlewares/home/getNewProducts";
-import { getHomeBestSelleres } from "redux/middlewares/home/getHomeBestSellers";
-import { getHomeFeatured } from "redux/middlewares/home/getHomeFeatured";
 import Slider from "components/Global/Slider/Slider";
-import { getHomeSlides } from "redux/middlewares/home/getHomeSlides";
+import routes from "utils/constants/routes";
 
 export default function Home() {
   //states
-  const { newProducts, bestSellers, featured, slides, provinceList } =
-    useSelector((state) => state.home);
-
-  //hooks
-  const dispatch = useDispatch();
-
-  //effects
-  useEffect(() => {
-    !newProducts && dispatch(getNewProducts());
-    !bestSellers && dispatch(getHomeBestSelleres());
-    !featured && dispatch(getHomeFeatured());
-    !slides && dispatch(getHomeSlides());
-  }, []);
+  const { newProducts, bestSellers, categoriesProducts } = useSelector(
+    (state) => state.home
+  );
+  const { loggedIn, userWishlist } = useSelector((state) => state.user);
 
   return (
     <>
@@ -43,9 +29,28 @@ export default function Home() {
         <FeaturedWrapper />
         <ProductLinkWrapper />
         <BrandsWrapper />
-        <ProductsRow name="جدیدترین" list={newProducts || []} />
-        <ProductsRow name="پرفروش ها" list={bestSellers || []} />
+        <ProductsRow
+          name="جدیدترین"
+          list={newProducts || []}
+          allLink={routes.result.path + "?orderby=15"}
+        />
+        <ProductsRow
+          name="پرفروش ها"
+          list={bestSellers || []}
+          allLink={routes.result.path + "?orderby=20"}
+        />
         <Slider />
+        {categoriesProducts &&
+          categoriesProducts.map((item) => {
+            return (
+              <ProductsRow
+                key={item.categoryId}
+                name={item.categoryName}
+                list={item.products || []}
+                allLink={routes.result.path + "?cid=" + item.categoryId}
+              />
+            );
+          })}
       </Layout>
     </>
   );

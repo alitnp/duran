@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getHomeProvinceList } from "redux/middlewares/home/getHomeProvinceList";
 import { getUserDetail } from "redux/middlewares/user/getUSerDetail";
 import endpointUrls from "utils/constants/endpointUrls";
 import routes from "utils/constants/routes";
@@ -55,9 +54,9 @@ const DashboardEditUser = () => {
         <DFormItem label="نام خانوادگی" name="LastName">
           <DInput disabled={loading} />
         </DFormItem>
-        <DFormItem label="آدرس ایمیل" name="Email">
+        {/* <DFormItem label="آدرس ایمیل" name="Email">
           <DInput disabled={loading} />
-        </DFormItem>
+        </DFormItem> */}
         <div className="flex justify-end">
           <Button text="ثبت" type="submit" loading={loading} />
         </div>
@@ -65,7 +64,9 @@ const DashboardEditUser = () => {
       <Divider>آدرس</Divider>
       <Form>
         <DFormItem label="آدرس">
-          {userAddresses && <UserAddresses />}
+          {userAddresses && (
+            <UserAddresses className="p-2 mb-2 border rounded-md shadow-md " />
+          )}
           <p className="mb-0 cursor-pointer text-d-primary" onClick={toggle}>
             + افزودن آدرس جدید
           </p>

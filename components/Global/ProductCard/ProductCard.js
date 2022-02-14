@@ -8,7 +8,7 @@ import ProductCardInfo from "components/Global/ProductCard/ProductCardInfo";
 import ProductCardAnimation from "components/Global/ProductCard/ProductCardAnimation";
 import ProductCardHoverMenu from "components/Global/ProductCard/ProductCardHoverMenu";
 
-const ProductCardRow = ({ info, className }) => {
+const ProductCardRow = ({ info, className, small }) => {
   //states
   const [showAnimation, setShowAnimation] = useState();
   const { needAnimation } = useSelector((state) => state.cart);
@@ -30,7 +30,9 @@ const ProductCardRow = ({ info, className }) => {
 
   return (
     <div
-      className={`relative overflow-hidden group shrink-0 max-w-[250px] select-none ${className} `}
+      className={`relative overflow-hidden rounded-md border group shrink-0  m-1 shadow-md select-none ${className} ${
+        small ? "max-w-[180px]" : "max-w-[250px]"
+      }`}
     >
       <ProductCardHoverMenu info={info} setLoading={setLoading} />
       <div className=" bg-d-gray">

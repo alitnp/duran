@@ -1,7 +1,9 @@
-import { setUserLoading } from 'redux/reducers/homeReducer/homeReducer';
-import { setUserWishlist } from 'redux/reducers/userReducer/userReducer';
-import endpointUrls from 'utils/constants/endpointUrls';
-import apiServices from 'utils/services/apiServices';
+import {
+  setUserLoading,
+  setUserWishlist,
+} from "redux/reducers/userReducer/userReducer";
+import endpointUrls from "utils/constants/endpointUrls";
+import apiServices from "utils/services/apiServices";
 
 export const getUserWishlist = () => async (dispatch) => {
   dispatch(setUserLoading(true));
@@ -12,6 +14,5 @@ export const getUserWishlist = () => async (dispatch) => {
     true
   );
   dispatch(setUserLoading(false));
-  console.log(result);
   if (result.isSuccess) dispatch(setUserWishlist(result.data.Data));
 };

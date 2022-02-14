@@ -1,8 +1,5 @@
 import React, { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// import required modules
 import { Autoplay, Pagination } from "swiper";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -10,10 +7,9 @@ import { useSelector } from "react-redux";
 export default function Slider() {
   //states
   const { slides } = useSelector((state) => state.home);
-  console.log(slides);
 
   return (
-    <>
+    <div className="mb-10">
       <Swiper
         dir="rtl"
         slidesPerView={1}
@@ -45,6 +41,6 @@ export default function Slider() {
           />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }

@@ -1,17 +1,23 @@
-import { Form, Modal, Rate } from 'antd';
-import Button from 'components/UI/Button/Button';
-import DFormItem from 'components/UI/DFormItem/DFormItem';
-import DTextArea from 'components/UI/DTextArea/DTextArea';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import endpointUrls from 'utils/constants/endpointUrls';
-import apiServices from 'utils/services/apiServices';
+import { Form, Modal, Rate } from "antd";
+import Button from "components/UI/Button/Button";
+import DFormItem from "components/UI/DFormItem/DFormItem";
+import DTextArea from "components/UI/DTextArea/DTextArea";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import endpointUrls from "utils/constants/endpointUrls";
+import apiServices from "utils/services/apiServices";
 
 const SendComment = ({ show, close, id, getProduct }) => {
   //state
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const { loggedId } = useSelector((state) => state.user);
+
+  //hooks
+  const router = useRouter();
 
   //effects
   useEffect(() => {
@@ -29,7 +35,7 @@ const SendComment = ({ show, close, id, getProduct }) => {
     setLoading(false);
     if (result.isSuccess) {
       form.resetFields();
-      toast.success('نظر شما با موفقیت ثبت شد.');
+      toast.success("نظر شما با موفقیت ثبت شد.");
       getProduct();
       close();
     }
@@ -39,31 +45,31 @@ const SendComment = ({ show, close, id, getProduct }) => {
     <Modal
       visible={show}
       onCancel={close}
-      title='ارسال نظر'
+      title="ارسال نظر"
       destroyOnClose
       keyboard
       footer={false}
     >
       <Form form={form} onFinish={handleSubmit} requiredMark={false}>
         <DFormItem
-          label='امتیاز'
-          name='Rating'
-          rules={[{ required: true, message: 'امتیاز شما به این محصول.' }]}
+          label="امتیاز"
+          name="Rating"
+          rules={[{ required: true, message: "امتیاز شما به این محصول." }]}
         >
           <Rate disabled={loading} />
         </DFormItem>
-        <DFormItem label='نظر' name='ReviewText'>
+        <DFormItem label="نظر" name="ReviewText">
           <DTextArea rows={4} disabled={loading} />
         </DFormItem>
-        <div className='flex justify-end gap-x-4'>
+        <div className="flex justify-end gap-x-4">
           <Button
             key={2}
-            text='بازگشت'
+            text="بازگشت"
             onClick={close}
             back
             loading={loading}
           />
-          <Button key={1} text='ارسال' type='submit' loading={loading} />
+          <Button key={1} text="ارسال" type="submit" loading={loading} />
         </div>
       </Form>
     </Modal>

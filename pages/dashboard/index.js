@@ -11,15 +11,13 @@ const Dashboard = () => {
   const { userDetail, userAddresses } = useSelector((state) => state.user);
   const [showAddAddress, setShowAddAddress] = useState(false);
 
-  // console.log(userDetail);
-
   //functions
   const toggle = () => setShowAddAddress((prevState) => !prevState);
 
   return (
     <DashboardLayout>
       <DashboardPageTitle title="اطلاعات حساب" />
-      <Descriptions layout="vertical" bordered column={{ sm: 2, xs: 1 }}>
+      <Descriptions layout="vertical" bordered column={{ sm: 3, xs: 1 }}>
         <Descriptions.Item label="نام">
           <p className="min-h-[15px] mb-0">
             {userDetail?.FirstName || "تعیین نشده"}
@@ -30,11 +28,11 @@ const Dashboard = () => {
             {userDetail?.LastName || "تعیین نشده"}
           </p>
         </Descriptions.Item>
-        <Descriptions.Item label="آدرس ایمیل">
+        {/* <Descriptions.Item label="آدرس ایمیل">
           <p className="min-h-[15px] mb-0">
             {userDetail?.Email || "تعیین نشده"}
           </p>
-        </Descriptions.Item>
+        </Descriptions.Item> */}
         <Descriptions.Item label="شماره تلفن" span={1}>
           <p className="min-h-[15px] mb-0">
             {userDetail?.Phone || "تعیین نشده"}
@@ -43,8 +41,8 @@ const Dashboard = () => {
       </Descriptions>
       <Descriptions layout="vertical" bordered>
         <Descriptions.Item label="آدرس">
-          <UserAddresses />
-          {!userAddresses && (
+          <UserAddresses noTrash />
+          {(!userAddresses || userAddresses?.length === 0) && (
             <p className="mb-0 cursor-pointer text-d-primary" onClick={toggle}>
               + افزودن آدرس جدید
             </p>

@@ -10,6 +10,7 @@ const initialState = {
   needRedirect: null,
   slides: null,
   provinceList: null,
+  categoriesProducts: null,
 };
 
 export const homeReducer = createSlice({
@@ -43,6 +44,9 @@ export const homeReducer = createSlice({
     setHomeProvineList: (state, { payload }) => {
       state.provinceList = payload;
     },
+    setHomeCategoriesProducts: (state, { payload }) => {
+      state.categoriesProducts = payload;
+    },
   },
 });
 
@@ -56,5 +60,6 @@ export const {
   setNeedRedirect,
   setHomeSlides,
   setHomeProvineList,
+  setHomeCategoriesProducts,
 } = homeReducer.actions;
 export default homeReducer.reducer;

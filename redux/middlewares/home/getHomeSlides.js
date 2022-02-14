@@ -4,7 +4,6 @@ import apiServices from "utils/services/apiServices";
 
 export const getHomeSlides = () => async (dispatch) => {
   const result = await apiServices.get(endpointUrls.getHomeSlider, {}, true);
-  console.log(result);
   if (!result.isSuccess) return;
   dispatch(setHomeSlides(result.data.Slide));
 };

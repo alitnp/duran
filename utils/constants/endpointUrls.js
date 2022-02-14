@@ -10,7 +10,7 @@ const endpointUrls = {
   getUserDetail: "/Account/Info",
   getUserAddresses: "/Account/Addresses",
   addNewAddress: "/Account/AddressAdd",
-  deleteAddress: "/Account/AdderessDelete",
+  deleteAddress: "/Account/AddressDelete",
   editUserInfo: "/Account/Info",
 
   //requestProduct
@@ -20,11 +20,11 @@ const endpointUrls = {
 
   //wishlist
   getUserWishlist: "/Wishlist/Index",
-  deleteItemFromWishlist: "/Wishlist/DeleteItemFromWhishlist",
-  getHomeSlider: "/Component/Slider/HomePage",
+  deleteItemFromWishlist: "/Wishlist/DeleteItemFromWishlist",
 
   //home
   getNewProducts: "/Product/NewProducts",
+  getHomeSlider: "/Component/Slider/HomePage",
   // getNewProducts: '/Component/Index/HomePageNewProducts',
   getHomeCategories: "/Component/Index/HomePageCategories",
   getHomeBrands: "/Component/Index/HomePageBrands",

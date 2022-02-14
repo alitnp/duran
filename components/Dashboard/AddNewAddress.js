@@ -60,7 +60,7 @@ const AddNewAddress = ({ show, close }) => {
           name="City"
           rules={[{ required: true, message: "نام شهر را وارد کنید" }]}
         >
-          <DInput disabled={loading} />
+          <DInput disabled={loading} placeholder="تعیین شهر" />
         </DFormItem>
         <DFormItem
           label="آدرس"

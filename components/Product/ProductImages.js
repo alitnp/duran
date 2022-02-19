@@ -24,7 +24,6 @@ const ProductImages = ({ images }) => {
     // setRgb(backgroundColorTheif.getBackGroundColor(imageRef.current));
   };
   const imagesList = () => images.filter((image) => !image.IsFeaturePicture);
-  console.log(imagesList());
 
   return (
     <div className="sm:w-8/12 h-96">

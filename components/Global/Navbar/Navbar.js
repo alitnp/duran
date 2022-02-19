@@ -16,6 +16,7 @@ import { getNewProducts } from "redux/middlewares/home/getNewProducts";
 import { getUserAddresses } from "redux/middlewares/user/getUserAddresses";
 import { getUserDetail } from "redux/middlewares/user/getUSerDetail";
 import { getUserWishlist } from "redux/middlewares/user/getUserWishlist";
+import { setCartIsCartMenuOpen } from "redux/reducers/cartReducer/cartReducer";
 import { setLoggedIn } from "redux/reducers/userReducer/userReducer";
 import routes from "utils/constants/routes";
 
@@ -33,6 +34,7 @@ const Navbar = () => {
     categories,
     categoriesProducts,
   } = useSelector((state) => state.home);
+  const { isCartMenuOpen } = useSelector((state) => state.cart);
 
   //hookes
   const dispatch = useDispatch();
@@ -40,6 +42,7 @@ const Navbar = () => {
 
   //effects
   useEffect(() => {
+    isCartMenuOpen && dispatch(setCartIsCartMenuOpen(false));
     const token = localStorage.getItem("accessToken");
     if (token) dispatch(setLoggedIn(true));
     Object.keys(routes).map((item) => {

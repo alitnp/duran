@@ -44,14 +44,14 @@ const ProductsRow = ({ name, className, list, allLink, small }) => {
   return (
     <>
       <div className={`flex mb-2 ${className}`}>
-        <h4 className="ml-4 border-b-2 border-d-primary pl-4 font-medium pb-[5px] whitespace-nowrap mb-0 text-base">
+        <h4 className="ml-4 border-b-2 border-d-primary pl-4 font-bold pb-[5px] whitespace-nowrap mb-0 text-base ">
           {name}
         </h4>
         <div className="w-full text-left border-b border-d-border-gray text-d-primary">
           {allLink && (
             <Link href={allLink} passHref>
               <a>
-                <span className="text-d-primary">همه</span>
+                <span className="text-base text-d-primary">همه</span>
               </a>
             </Link>
           )}

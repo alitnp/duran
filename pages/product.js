@@ -12,83 +12,14 @@ import LoadingCover from "components/UI/LoadingSpin/LoadingCover";
 import ProductBreadCrumb from "components/Product/ProductBreadCrumb";
 import SendComment from "pages/SendComment";
 import FeaturesRow from "components/Results/FeaturedRow";
-
-const info = {
-  productId: 1,
-  persianName: "آدیداس - ریسپانس سوپر",
-  englishName: "Adidas - Response Super",
-  price: "1700000",
-  sizes: ["40", "41", "42"],
-  category: "مردانه",
-  model: "باشگاهی - دویدن",
-  color: "مشکی - سفید",
-  madeIn: "ویتنام",
-  material: "",
-  desc: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
-	طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
-	سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-	کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای
-	زیادی در شصت و سه درصد گذشته حال و آینده`,
-  comments: {
-    items: [
-      {
-        sender: "میثاق امیرفجر",
-        message: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است`,
-      },
-      {
-        sender: "یاسین حجازی",
-        message: `متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است`,
-      },
-    ],
-    totalComments: 32,
-    pageNumber: 1,
-    pageSize: 2,
-  },
-
-  images: [
-    "/image/shoes/product/1-1.jpg",
-    "/image/shoes/product/1-2.jpg",
-    "/image/shoes/product/1-3.jpg",
-    "/image/shoes/product/1-4.jpg",
-    "/image/shoes/product/1-5.jpg",
-    "/image/shoes/product/1-6.jpg",
-  ],
-  similars: [
-    {
-      id: 2,
-      firstImage: "/image/shoes/jordan-2.jpg",
-      secondImage: "/image/shoes/jordan-1.webp",
-      persianName: "نایکی - جردن ۱ رترو",
-      englishName: "NIKE - Jordan 1 Retro",
-      sizes: ["39", "40", "41", "42"],
-      categories: "مردانه",
-      price: 2200000,
-    },
-    {
-      id: 3,
-      firstImage: "/image/shoes/shoe1-1.jpg",
-      secondImage: "/image/shoes/shoe1-2.jpg",
-      persianName: "نایکی - جردن ۱ رترو",
-      englishName: "NIKE - Jordan 1 Retro",
-      sizes: ["39", "40", "41", "42"],
-      categories: "مردانه",
-      price: 2200000,
-    },
-    {
-      id: 4,
-      firstImage: "/image/shoes/shoe2-1.jpg",
-      secondImage: "/image/shoes/shoe2-2.jpg",
-      persianName: "نایکی - جردن ۱ رترو",
-      englishName: "NIKE - Jordan 1 Retro",
-      sizes: ["39", "40", "41", "42"],
-      categories: "مردانه",
-      price: 2200000,
-    },
-  ],
-};
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setNeedRedirect } from "redux/reducers/homeReducer/homeReducer";
+import routes from "utils/constants/routes";
 
 const Product = () => {
   //states
+  const { loggedIn } = useSelector((state) => state.user);
   const [productId, setProductId] = useState();
   const [productDetail, setProductDetail] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -96,7 +27,8 @@ const Product = () => {
   const [showSendComment, setShowSendComment] = useState(false);
 
   //hookes
-  const { query } = useRouter();
+  const { query, push } = useRouter();
+  const dispatch = useDispatch();
 
   //effects
   useEffect(() => {
@@ -113,6 +45,15 @@ const Product = () => {
     setProductDetail(
       await getProductDetail(productId, setLoading, setNotFound)
     );
+  };
+
+  const showCommentDialoge = () => {
+    if (!loggedIn) {
+      dispatch(setNeedRedirect(routes.product.path + "?id=" + productId));
+      push(routes.login.path);
+      return;
+    }
+    setShowSendComment(true);
   };
 
   return (
@@ -142,11 +83,11 @@ const Product = () => {
 
       <Specifications
         desc={productDetail?.FullDescription}
-        category={info.category}
-        model={info.model}
-        color={info.color}
-        madeIn={info.madeIn}
-        material={info.material}
+        // category={info.category}
+        // model={info.model}
+        // color={info.color}
+        // madeIn={info.madeIn}
+        // material={info.material}
       />
 
       <ProductsRow
@@ -158,11 +99,9 @@ const Product = () => {
       />
 
       <Comments
-        comments={info.comments.items}
-        total={info.comments.totalComments}
         overView={productDetail?.ProductReviewOverview}
         reviews={productDetail?.ProductReviews}
-        sendComment={() => setShowSendComment(true)}
+        showCommentDialoge={showCommentDialoge}
       />
 
       <SendComment

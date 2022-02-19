@@ -1,17 +1,19 @@
 import { Rate } from "antd";
 
-const Comments = ({ overView, sendComment, reviews }) => {
+const Comments = ({ overView, showCommentDialoge, reviews }) => {
+  console.log(overView);
   return (
     <div className="mb-10">
       <div className="flex items-center justify-between pb-2 mt-6 mb-2 border-b border-d-border-gray">
         <div>
           <p className="mb-0 font-semibold">
-            نظرات{" - " + overView?.TotalReviews}
+            نظرات{" - " + overView?.TotalReviews} / میانگین امتیاز
+            {" - " + (overView?.RatingSum / overView?.TotalReviews).toFixed(1)}
           </p>
         </div>
         <p
           className="mb-0 cursor-pointer hover:underline text-d-primary"
-          onClick={sendComment}
+          onClick={showCommentDialoge}
         >
           ارسال نظر / امتیاز
         </p>

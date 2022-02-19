@@ -12,8 +12,6 @@ const CardPicture = ({ firstImage, secondImage, alt, loading, id }) => {
             {secondImage && (
               <img
                 src={secondImage}
-                layout="fill"
-                objectFit="contain"
                 draggable="false"
                 className="object-contain"
                 alt={alt}
@@ -29,8 +27,6 @@ const CardPicture = ({ firstImage, secondImage, alt, loading, id }) => {
           {firstImage && (
             <img
               src={firstImage}
-              layout="fill"
-              objectFit="contain"
               draggable="false"
               className="object-contain"
               alt={alt}

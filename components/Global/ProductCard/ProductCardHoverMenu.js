@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addProductToWishlist } from "redux/middlewares/global/addProductToWishlist";
 import { removeProductFromWishlist } from "redux/middlewares/global/removeProductFromWishlist";
+import { addToShoppngCart } from "redux/middlewares/user/addToShoppingCart";
 import {
   setCartIsCartMenuOpen,
   setCartTempAddToCart,
 } from "redux/reducers/cartReducer/cartReducer";
+import { setNeedRedirect } from "redux/reducers/homeReducer/homeReducer";
 import routes from "utils/constants/routes";
 
 const ProductCardHoverMenu = ({ info, setLoading }) => {
@@ -34,7 +36,10 @@ const ProductCardHoverMenu = ({ info, setLoading }) => {
 
   //functions
   const addToCart = (event) => {
-    if (!loggedIn) return router.push(routes.login.path);
+    if (!loggedIn) {
+      dispatch(setNeedRedirect(routes.product.path + "?id=" + info.Id));
+      return router.push(routes.login.path);
+    }
     dispatch(setCartTempAddToCart({ info, event }));
   };
   const isInCart = () => items.some((shoe) => shoe.Id === info.Id);

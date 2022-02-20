@@ -9,7 +9,6 @@ export default function Slider() {
   //states
   const { slides } = useSelector((state) => state.home);
 
-  console.log(slides);
   const getSlide = (info, index) => {
     return (
       <SwiperSlide

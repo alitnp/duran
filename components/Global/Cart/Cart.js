@@ -6,10 +6,15 @@ import { RiCloseLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setCartIsCartMenuOpen } from "redux/reducers/cartReducer/cartReducer";
+import { useState } from "react";
+import LoadingSpin from "components/UI/LoadingSpin/LoadingSpin";
 
 const Cart = () => {
   //states
   const { items, isCartMenuOpen } = useSelector((state) => state.cart);
+  const { cartList } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+  console.log(cartList);
 
   //hooks
   const dispatch = useDispatch();
@@ -40,8 +45,9 @@ const Cart = () => {
             <RiCloseLine onClick={toggleCart} className="cursor-pointer" />
           </div>
           <div className="flex flex-col items-center justify-between pb-2 border-b xs:flex-row xs:items-start">
-            <p className="mb-0 text-2xl font-medium whitespace-nowrap">
+            <p className="flex items-center mb-0 text-2xl font-medium gap-x-2 whitespace-nowrap">
               سبد خرید
+              {loading && <LoadingSpin />}
             </p>
             <Button
               text="پرداخت"
@@ -52,10 +58,16 @@ const Cart = () => {
             <p>{`${items.length} محصول در سبد`}</p>
             <p>{`${Separator(totalPrice)} تومان`}</p>
           </div>
-          <div className="flex flex-col items-stretch mt-6 overflow-y-auto sm:flex-row gap-y-6 text-d-gray no-scrollbar">
-            {items.map((item, index) => (
-              <CartItem key={index} info={item} index={index} />
-            ))}
+          <div className="grid grid-cols-1 mt-6 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3 gap-y-6 text-d-gray no-scrollbar">
+            {cartList?.Items &&
+              cartList?.Items.map((item, index) => (
+                <CartItem
+                  key={index}
+                  info={item}
+                  index={index}
+                  setLoading={setLoading}
+                />
+              ))}
           </div>
         </div>
         <RedIcon onClick={toggleCart} count={items.length} />

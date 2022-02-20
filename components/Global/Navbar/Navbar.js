@@ -15,6 +15,7 @@ import { getHomeSlides } from "redux/middlewares/home/getHomeSlides";
 import { getNewProducts } from "redux/middlewares/home/getNewProducts";
 import { getUserAddresses } from "redux/middlewares/user/getUserAddresses";
 import { getUserDetail } from "redux/middlewares/user/getUSerDetail";
+import { getUserShoppingCartItems } from "redux/middlewares/user/getUserShoppingCartItems";
 import { getUserWishlist } from "redux/middlewares/user/getUserWishlist";
 import { setCartIsCartMenuOpen } from "redux/reducers/cartReducer/cartReducer";
 import { setLoggedIn } from "redux/reducers/userReducer/userReducer";
@@ -22,9 +23,8 @@ import routes from "utils/constants/routes";
 
 const Navbar = () => {
   //states
-  const { loggedIn, userDetail, userAddresses, userWishlist } = useSelector(
-    (state) => state.user
-  );
+  const { loggedIn, userDetail, userAddresses, userWishlist, cartList } =
+    useSelector((state) => state.user);
   const {
     newProducts,
     bestSellers,
@@ -58,6 +58,7 @@ const Navbar = () => {
   useEffect(() => {
     loggedIn && !userDetail && dispatch(getUserDetail());
     loggedIn && !userAddresses && dispatch(getUserAddresses());
+    loggedIn && !cartList && dispatch(getUserShoppingCartItems());
   }, [loggedIn, userDetail]);
   useEffect(() => {
     !newProducts && dispatch(getNewProducts());

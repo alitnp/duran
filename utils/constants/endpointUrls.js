@@ -12,6 +12,7 @@ const endpointUrls = {
   addNewAddress: "/Account/AddressAdd",
   deleteAddress: "/Account/AddressDelete",
   editUserInfo: "/Account/Info",
+  getUserShoppingCart: "/ShoppingCart/Cart",
 
   //requestProduct
   sendProductRequest: "/ProductRequest/Create",
@@ -37,6 +38,12 @@ const endpointUrls = {
   getproductDetail: "/Product/ProductDetails",
   sendComment: "/Product/ProductReviews",
   addToCartWishlist: "/ActionCart/AddProductCatalog",
+
+  //cart
+  addToShoppngCart: "/ActionCart/AddProductDetails",
+  changeCartItemQuantity: "/ShoppingCart/UpdateQuantity",
+  clearShoppingCart: "/ShoppingCart/ClearCart",
+  removeitemFromCart: "/ShoppingCart/DeleteCartItem",
 
   //search
   searchProducts: "/catalog/search",

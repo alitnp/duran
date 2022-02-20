@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addToShoppngCart } from "redux/middlewares/user/addToShoppingCart";
 import {
-  addItemToCart,
   setCartNeedAnimation,
   setCartTempAddToCart,
 } from "redux/reducers/cartReducer/cartReducer";
@@ -38,8 +37,6 @@ const AddToCartModal = () => {
     );
   };
   const handleAddToCart = () => {
-    console.log(selectedColor);
-    console.log(selectedSize);
     dispatch(
       addToShoppngCart(
         {

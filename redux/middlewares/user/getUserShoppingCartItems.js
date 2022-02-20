@@ -6,6 +6,7 @@ export const getUserShoppingCartItems = () => async (dispatch) => {
   const result = await apiServices.get(
     endpointUrls.getUserShoppingCart + "?checkoutAttributes=true",
     {},
+    {},
     true
   );
   console.log(result);

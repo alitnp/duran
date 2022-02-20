@@ -17,6 +17,8 @@ import Tooltip from "components/UI/Tooltip/Tooltip";
 import ProductCardAnimation from "components/Global/ProductCard/ProductCardAnimation";
 import { removeProductFromWishlist } from "redux/middlewares/global/removeProductFromWishlist";
 import { useRouter } from "next/router";
+import { setNeedRedirect } from "redux/reducers/homeReducer/homeReducer";
+import { addToShoppngCart } from "redux/middlewares/user/addToShoppingCart";
 
 const BuyBox = ({
   id,
@@ -66,25 +68,40 @@ const BuyBox = ({
   }, [userWishlist, info]);
 
   //functions
+  const getAttributes = (attribureName) =>
+    info.ProductAttributes.find((item) => item.Name === attribureName);
   const addToWishlist = () => {
     if (!loggedIn) return router.push(routes.login.path);
     dispatch(addProductToWishlist(id));
   };
-  const handleAddToCart = (event) => {
-    if (!loggedIn) return router.push(routes.login.path);
+  const handleAnimation = (event) => {
     dispatch(
       setCartNeedAnimation({
         ...event,
         id: info.Id,
       })
     );
+  };
+  const handleAddToCart = (event) => {
+    console.log(getAttributes("Color"));
+    if (!loggedIn) {
+      dispatch(setNeedRedirect(routes.product.path + "?id=" + info.Id));
+      return router.push(routes.login.path);
+    }
     dispatch(
-      addItemToCart({
-        ...info,
-        selectedSize,
-        selectedColor,
-        quantity: 1,
-      })
+      addToShoppngCart(
+        {
+          ProductId: info.Id,
+          ShoppingCartType: "ShoppingCart",
+          Quantity: 1,
+          Attributes: {
+            ["product_attribute_" + getAttributes("Color").Id]:
+              selectedColor.Id,
+            ["product_attribute_" + getAttributes("Size").Id]: selectedSize.Id,
+          },
+        },
+        () => showAnimation(event)
+      )
     );
   };
   const isInCart = () => items.some((shoe) => shoe.Id === id);

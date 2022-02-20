@@ -3,10 +3,6 @@ import Image from "next/image";
 import { HiPlus, HiMinus } from "react-icons/hi";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import {
-  decreaseCartItemQuantity,
-  increaseCartItemQuantity,
-} from "redux/reducers/cartReducer/cartReducer";
 import Tooltip2 from "components/UI/Tooltip/Tooltip";
 import endpointUrls from "utils/constants/endpointUrls";
 import Link from "next/link";

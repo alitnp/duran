@@ -8,24 +8,36 @@ import { useDispatch } from "react-redux";
 import { setCartIsCartMenuOpen } from "redux/reducers/cartReducer/cartReducer";
 import { useState } from "react";
 import LoadingSpin from "components/UI/LoadingSpin/LoadingSpin";
+import { FiTrash2 } from "react-icons/fi";
+import { clearCart } from "redux/middlewares/user/clearCart";
 
 const Cart = () => {
   //states
-  const { items, isCartMenuOpen } = useSelector((state) => state.cart);
-  const { cartList } = useSelector((state) => state.user);
+  const { isCartMenuOpen } = useSelector((state) => state.cart);
+  const { cartList, loggedIn } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   console.log(cartList);
+
+  if (!loggedIn) return null;
 
   //hooks
   const dispatch = useDispatch();
 
   //functions
   const toggleCart = () => dispatch(setCartIsCartMenuOpen(!isCartMenuOpen));
+  const removeAllItems = () => {
+    dispatch(clearCart(setLoading));
+  };
 
   //constants
-  const totalPrice = items.reduce((prev, curr) => {
-    return prev + curr?.ProductPrice?.PriceValue * curr.quantity;
-  }, 0);
+  const totalPrice = () => {
+    if (!cartList) return 0;
+    return (
+      cartList?.Items?.reduce((prev, curr) => {
+        return prev + curr?.SubTotalValue;
+      }, 0) || 0
+    );
+  };
 
   return (
     <div
@@ -55,9 +67,18 @@ const Cart = () => {
             />
           </div>
           <div className="flex justify-between mt-1 text-sm font-light">
-            <p>{`${items.length} محصول در سبد`}</p>
-            <p>{`${Separator(totalPrice)} تومان`}</p>
+            <p>{`${cartList?.Items?.length || 0} محصول در سبد`}</p>
+            <p>{`${Separator(totalPrice())} تومان`}</p>
           </div>
+          {cartList?.Items?.length > 0 && (
+            <p
+              className="flex items-center text-red-300 cursor-pointer hover:text-red-400 gap-x-2"
+              onClick={removeAllItems}
+            >
+              <FiTrash2 />
+              حذف همه
+            </p>
+          )}
           <div className="grid grid-cols-1 mt-6 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3 gap-y-6 text-d-gray no-scrollbar">
             {cartList?.Items &&
               cartList?.Items.map((item, index) => (
@@ -70,7 +91,7 @@ const Cart = () => {
               ))}
           </div>
         </div>
-        <RedIcon onClick={toggleCart} count={items.length} />
+        <RedIcon onClick={toggleCart} count={cartList?.Items?.length || 0} />
       </div>
     </div>
   );

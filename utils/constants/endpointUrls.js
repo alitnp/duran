@@ -51,6 +51,15 @@ const endpointUrls = {
   //brands
   getAllBrands: "/Catalog/BrandAll",
   getBrandProduct: "/Catalog/Brand",
+
+  //checkout
+  checkoutStart: "/Checkout/Start",
+  saveBilling: "/Checkout/SaveBilling",
+  saveShipping: "/Checkout/SaveShipping",
+  saveShippingMethod: "/Checkout/SaveShippingMethod",
+  savePaymentMethod: "/Checkout/SavePaymentMethod",
+  savePaymentInfo: "/Checkout/SavePaymentInfo",
+  confirmOrder: "/Checkout/ConfirmOrder",
 };
 
 export default endpointUrls;

@@ -10,18 +10,22 @@ import { useState } from "react";
 import LoadingSpin from "components/UI/LoadingSpin/LoadingSpin";
 import { FiTrash2 } from "react-icons/fi";
 import { clearCart } from "redux/middlewares/user/clearCart";
+import { useRouter } from "next/router";
+import routes from "utils/constants/routes";
 
 const Cart = () => {
   //states
   const { isCartMenuOpen } = useSelector((state) => state.cart);
   const { cartList, loggedIn } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
-  console.log(cartList);
 
   if (!loggedIn) return null;
 
   //hooks
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  if (router.route === routes.checkout.path) return null;
 
   //functions
   const toggleCart = () => dispatch(setCartIsCartMenuOpen(!isCartMenuOpen));
@@ -37,6 +41,18 @@ const Cart = () => {
         return prev + curr?.SubTotalValue;
       }, 0) || 0
     );
+  };
+  const getCount = () => {
+    if (!cartList) return 0;
+    return (
+      cartList?.Items?.reduce((prev, curr) => {
+        return prev + curr?.Quantity;
+      }, 0) || 0
+    );
+  };
+  const handleCheckout = () => {
+    if (!cartList || cartList?.Items?.length === 0) return;
+    router.push(routes.checkout.path);
   };
 
   return (
@@ -64,10 +80,11 @@ const Cart = () => {
             <Button
               text="پرداخت"
               className="mt-4 text-black xs:mt-0 bg-d-secondary"
+              onClick={handleCheckout}
             />
           </div>
           <div className="flex justify-between mt-1 text-sm font-light">
-            <p>{`${cartList?.Items?.length || 0} محصول در سبد`}</p>
+            <p>{`${getCount()} محصول در سبد`}</p>
             <p>{`${Separator(totalPrice())} تومان`}</p>
           </div>
           {cartList?.Items?.length > 0 && (
@@ -91,7 +108,7 @@ const Cart = () => {
               ))}
           </div>
         </div>
-        <RedIcon onClick={toggleCart} count={cartList?.Items?.length || 0} />
+        <RedIcon onClick={toggleCart} count={getCount()} />
       </div>
     </div>
   );

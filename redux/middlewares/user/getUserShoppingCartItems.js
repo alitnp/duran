@@ -9,7 +9,6 @@ export const getUserShoppingCartItems = () => async (dispatch) => {
     {},
     true
   );
-  console.log(result);
   if (result.isSuccess) dispatch(setUserCartList(result.data.Data));
   else dispatch(setUserCartList({}));
 };

@@ -7,11 +7,7 @@ import Link from "next/link";
 import routes from "utils/constants/routes";
 import { addProductToWishlist } from "redux/middlewares/global/addProductToWishlist";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addItemToCart,
-  setCartIsCartMenuOpen,
-  setCartNeedAnimation,
-} from "redux/reducers/cartReducer/cartReducer";
+import { setCartNeedAnimation } from "redux/reducers/cartReducer/cartReducer";
 import Tooltip from "components/UI/Tooltip/Tooltip";
 
 import ProductCardAnimation from "components/Global/ProductCard/ProductCardAnimation";
@@ -35,9 +31,11 @@ const BuyBox = ({
   const [selectedSize, setSelectedSize] = useState();
   const [selectedColor, setSelectedColor] = useState();
   const [showAnimation, setShowAnimation] = useState();
-  const { needAnimation, items } = useSelector((state) => state.cart);
-  const { userWishlist, loggedIn } = useSelector((state) => state.user);
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const { needAnimation } = useSelector((state) => state.cart);
+  const { userWishlist, loggedIn, cartList } = useSelector(
+    (state) => state.user
+  );
 
   //hooks
   const dispatch = useDispatch();
@@ -68,6 +66,10 @@ const BuyBox = ({
   }, [userWishlist, info]);
 
   //functions
+  const pushToLogin = () => {
+    dispatch(setNeedRedirect(routes.product.path + "?id=" + info.Id));
+    router.push(routes.login.path);
+  };
   const getAttributes = (attribureName) =>
     info.ProductAttributes.find((item) => item.Name === attribureName);
   const addToWishlist = () => {
@@ -75,6 +77,7 @@ const BuyBox = ({
     dispatch(addProductToWishlist(id));
   };
   const handleAnimation = (event) => {
+    if (!event) return;
     dispatch(
       setCartNeedAnimation({
         ...event,
@@ -84,10 +87,7 @@ const BuyBox = ({
   };
   const handleAddToCart = (event) => {
     console.log(getAttributes("Color"));
-    if (!loggedIn) {
-      dispatch(setNeedRedirect(routes.product.path + "?id=" + info.Id));
-      return router.push(routes.login.path);
-    }
+    if (!loggedIn) return pushToLogin();
     dispatch(
       addToShoppngCart(
         {
@@ -100,12 +100,10 @@ const BuyBox = ({
             ["product_attribute_" + getAttributes("Size").Id]: selectedSize.Id,
           },
         },
-        () => showAnimation(event)
+        () => handleAnimation(event)
       )
     );
   };
-  const isInCart = () => items.some((shoe) => shoe.Id === id);
-  const openCartMenu = () => dispatch(setCartIsCartMenuOpen(true));
   const removeFromWishList = () => dispatch(removeProductFromWishlist(id));
 
   return (
@@ -170,30 +168,17 @@ const BuyBox = ({
             })}
         </div>
       </div>
-      <div className="flex items-center justify-between mt-8 md:mt-auto gap-x-4">
-        <Button text="خرید محصول" />
+      <div className="flex items-center mt-8 md:mt-auto gap-x-3">
+        <Button
+          text={
+            <div className="flex items-center gap-x-2">
+              <FiShoppingCart className="text-lg" />
+              افزودن به سبد خرید
+            </div>
+          }
+          onClick={handleAddToCart}
+        />
         <div className="flex items-center text-2xl">
-          {!isInCart() ? (
-            <Tooltip title="افزودن به سبد خرید">
-              <FiShoppingCart
-                className="ml-2 cursor-pointer"
-                onClick={handleAddToCart}
-              />
-            </Tooltip>
-          ) : (
-            <Tooltip title="در سبد خرید">
-              <FiShoppingCart
-                className="ml-2 cursor-pointer fill-d-secondary"
-                onClick={openCartMenu}
-              />
-            </Tooltip>
-          )}
-          {/* {liked && (
-            <AiOutlineHeart
-              className='cursor-pointer '
-              onClick={() => setLiked(true)}
-            />
-          )} */}
           {!isInWishlist ? (
             <Tooltip title="افزودن به لیست محبوب ها">
               <AiOutlineHeart

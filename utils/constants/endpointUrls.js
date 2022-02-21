@@ -58,8 +58,10 @@ const endpointUrls = {
   saveShipping: "/Checkout/SaveShipping",
   saveShippingMethod: "/Checkout/SaveShippingMethod",
   savePaymentMethod: "/Checkout/SavePaymentMethod",
-  savePaymentInfo: "/Checkout/SavePaymentInfo",
   confirmOrder: "/Checkout/ConfirmOrder",
+
+  //orders
+  getUserOrders: "/Order/CustomerOrders",
 };
 
 export default endpointUrls;

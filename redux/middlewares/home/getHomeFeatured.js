@@ -3,9 +3,15 @@ import endpointUrls from "utils/constants/endpointUrls";
 import apiServices from "utils/services/apiServices";
 
 export const getHomeFeatured = () => async (dispatch) => {
-  const result = await apiServices.post(endpointUrls.getHomeFeatured, {}, true);
+  const result = await apiServices.post(
+    endpointUrls.getHomeFeatured,
+    {},
+    {},
+    true
+  );
   if (result.isSuccess) {
+    console.log(result.data);
     const featuredList = result.data.find((item) => item.Name === "Features");
-    dispatch(setHomeFeatured(featuredList.FeaturedProducts));
+    dispatch(setHomeFeatured(featuredList?.FeaturedProducts));
   }
 };

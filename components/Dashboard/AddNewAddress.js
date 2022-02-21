@@ -14,9 +14,8 @@ import { getUserAddresses } from "redux/middlewares/user/getUserAddresses";
 import endpointUrls from "utils/constants/endpointUrls";
 import apiServices from "utils/services/apiServices";
 
-const AddNewAddress = ({ show, close }) => {
+const AddNewAddress = ({ show, close, callAfterFinish }) => {
   //states
-  const [warning, setWarning] = useState([]);
   const [loading, setLoading] = useState(false);
   const { provinceList } = useSelector((state) => state.home);
 
@@ -30,12 +29,15 @@ const AddNewAddress = ({ show, close }) => {
 
   //functions
   const handleSubmit = async (values) => {
+    setLoading(true);
     const result = await apiServices.post(endpointUrls.addNewAddress, {
       ...values,
       CountryId: "61dc6d9e2e7daa9231e32c2c",
     });
+    setLoading(false);
     if (!result.isSuccess) return;
     dispatch(getUserAddresses());
+    callAfterFinish();
     close();
   };
 

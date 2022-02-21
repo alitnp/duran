@@ -9,6 +9,7 @@ export const userSlice = createSlice({
     userAddresses: null,
     loading: false,
     cartList: null,
+    ordersList: null,
   },
   reducers: {
     setLoggedIn: (state, { payload }) => {
@@ -29,6 +30,9 @@ export const userSlice = createSlice({
     setUserCartList: (state, { payload }) => {
       state.cartList = payload;
     },
+    setUserOrdersList: (state, { payload }) => {
+      state.ordersList = payload;
+    },
   },
 });
 
@@ -39,5 +43,6 @@ export const {
   setUserAddresses,
   setUserLoading,
   setUserCartList,
+  setUserOrdersList,
 } = userSlice.actions;
 export default userSlice.reducer;
